@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:smart_store/screens/auth/homelogin_screen.dart';
+import 'package:smart_store/screens/auth/login_screen.dart';
 import 'package:smart_store/screens/core/launch_screen.dart';
 import 'package:smart_store/screens/core/outboarding_screen.dart';
 void main(){
-  runApp(smart_store());
+  runApp(const smart_store());
 }
 
 
+// ignore: camel_case_types
 class smart_store extends StatelessWidget {
   const smart_store({Key? key}) : super(key: key);
 
@@ -13,10 +16,12 @@ class smart_store extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/onbressd_screen',
+      initialRoute: '/lunch_screen',
       routes: {
         '/lunch_screen': (context) => const lunch_screen(),
         '/onbressd_screen': (context) => const onbressd_screen(),
+        '/homelogin_screen': (context) => const homelogin_screen(),
+        '/login_screen': (context) => const login_screen(),
 
       },
     );
