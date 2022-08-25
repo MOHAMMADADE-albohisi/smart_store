@@ -22,7 +22,7 @@ class smart_store extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/lunch_screen',
+      initialRoute: '/home_screen',
       routes: {
         '/lunch_screen': (context) => const lunch_screen(),
         '/onbressd_screen': (context) => const onbressd_screen(),
