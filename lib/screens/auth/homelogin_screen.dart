@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,7 +29,7 @@ class _homelogin_screenState extends State<homelogin_screen> {
   }
 
   void createnewacountclick() {
-    print('test mohamamd');
+    Navigator.pushNamed(context, '/login_screen');
   }
 
   @override
@@ -35,7 +37,7 @@ class _homelogin_screenState extends State<homelogin_screen> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
+          SizedBox(
             width: double.infinity,
             height: double.infinity,
             child: Image.asset(
@@ -48,34 +50,34 @@ class _homelogin_screenState extends State<homelogin_screen> {
           Center(
             child: Column(
               children: [
-                SizedBox(height: 360),
+                const SizedBox(height: 360),
                 Text(
                   'SMART STORE',
                   style: GoogleFonts.montserrat(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFFFFFFF),
+                    color: const Color(0xFFFFFFFF),
                   ),
                 ),
-                SizedBox(height: 50),
+                const SizedBox(height: 50),
                 buttons(
                     name: 'Login with Apple',
                     image: 'image_7',
                     color: (0xFF121217),
                     onPressed: () {}),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 buttons(
                     name: 'Login with Facebook',
                     image: 'image_8',
                     color: (0xFF4048EF),
                     onPressed: () {}),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 buttons(
                     name: 'Login with Twitter',
                     image: 'image_9',
                     color: (0xFF5FC9E9),
                     onPressed: () {}),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 130),
                   child: Row(
@@ -83,9 +85,9 @@ class _homelogin_screenState extends State<homelogin_screen> {
                       Container(
                         width: 47.53,
                         height: 1,
-                        color: Color(0xFFFFFFFF),
+                        color: const Color(0xFFFFFFFF),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         'OR',
                         style: GoogleFonts.montserrat(
@@ -94,59 +96,59 @@ class _homelogin_screenState extends State<homelogin_screen> {
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Container(
                         width: 47.53,
                         height: 1,
-                        color: Color(0xFFFFFFFF),
+                        color: const Color(0xFFFFFFFF),
                       )
                     ],
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Container(
                   width: 327,
                   height: 58,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.grey,
                       ),
                     ],
                   ),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/register_screen');
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
                       elevation: 0,
                     ),
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(width: 15),
-                          Text(
-                            'Sign Up',
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(width: 15),
+                        Text(
+                          'Sign Up',
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(height: 25),
+                const SizedBox(height: 25),
                 Center(
                   child: RichText(
                     text: TextSpan(
                       text: 'Already have an account?  ',
                       style: GoogleFonts.nunito(
-                        color: Color(0xFFFFFFFF),
+                        color: const Color(0xFFFFFFFF),
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
@@ -157,7 +159,7 @@ class _homelogin_screenState extends State<homelogin_screen> {
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
                             fontSize: 15,
-                            color: Color(0xFFFFFFFF),
+                            color: const Color(0xFFFFFFFF),
                           ),
                         ),
                       ],

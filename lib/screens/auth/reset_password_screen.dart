@@ -3,37 +3,51 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class forgetPassword_screen extends StatefulWidget {
-  const forgetPassword_screen({Key? key}) : super(key: key);
+class resetPassword_screen extends StatefulWidget {
+  const resetPassword_screen({Key? key}) : super(key: key);
 
   @override
-  State<forgetPassword_screen> createState() => _forgetPassword_screenState();
+  State<resetPassword_screen> createState() => _resetPassword_screenState();
 }
 
-class _forgetPassword_screenState extends State<forgetPassword_screen> {
-  late TextEditingController _mobile;
-  String? _mobilError;
+class _resetPassword_screenState extends State<resetPassword_screen> {
+  late TextEditingController newPassowrd;
+  late TextEditingController newPassowrdvalidate;
+
+  String? _newPassowrd;
+  String? _newPassowrdvalidate;
 
   @override
   void initState() {
     super.initState();
-    _mobile = TextEditingController();
+    newPassowrd = TextEditingController();
+    newPassowrdvalidate = TextEditingController();
   }
 
   @override
   void dispose() {
-    _mobile.dispose();
+    newPassowrd.dispose();
+    newPassowrdvalidate.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text(
+          'Change password',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
         elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
       body: Stack(
         children: [
@@ -48,31 +62,22 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             child: Column(
               children: [
-
-                const SizedBox(height: 150),
+                const SizedBox(height: 200),
                 Text(
-                  'Forget Password?',
-                  textAlign: TextAlign.start,
-                  style: GoogleFonts.outfit(
-                    fontSize: 24,
-                    color: const Color(0xFFFFFFFF),
+                  'Please Enter new Password for your account',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 17),
-                Text(
-                  'Type your mobile number, and we\'ll send you a verification code via SMS',
-                  style: GoogleFonts.outfit(
-                    fontSize: 14,
-                    color: const Color(0xFFFFFFFF),
-                  ),
-                ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 30),
                 TextField(
                   keyboardType: TextInputType.number,
-                  controller: _mobile,
+                  controller: newPassowrd,
                   style: GoogleFonts.outfit(
                     color: const Color(0xFFFFFFFF),
                     fontSize: 16,
@@ -80,13 +85,13 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor:  Colors.grey,
+                    fillColor: Colors.grey,
                     constraints: BoxConstraints(
                       minHeight: 50,
-                      maxHeight: _mobilError == null ? 56 : 81,
+                      maxHeight: _newPassowrd == null ? 56 : 81,
                     ),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                    hintText: 'Enter your mobile number',
+                    hintText: 'New Password',
                     hintStyle:
                         GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
                     hintMaxLines: 1,
@@ -94,7 +99,7 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                       Icons.phone_android,
                       color: Color(0xFFFFFFFF),
                     ),
-                    errorText: _mobilError,
+                    errorText: _newPassowrd,
                     errorStyle: GoogleFonts.outfit(),
                     errorMaxLines: 1,
                     enabledBorder: OutlineInputBorder(
@@ -130,7 +135,68 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                   maxLines: null,
                   expands: true,
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 15),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  controller: newPassowrdvalidate,
+                  style: GoogleFonts.outfit(
+                    color: const Color(0xFFFFFFFF),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey,
+                    constraints: BoxConstraints(
+                      minHeight: 50,
+                      maxHeight: _newPassowrdvalidate == null ? 56 : 81,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+                    hintText: 'New Password confirmation',
+                    hintStyle:
+                        GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
+                    hintMaxLines: 1,
+                    prefixIcon: const Icon(
+                      Icons.phone_android,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                    errorText: _newPassowrdvalidate,
+                    errorStyle: GoogleFonts.outfit(),
+                    errorMaxLines: 1,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade700,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                  minLines: null,
+                  maxLines: null,
+                  expands: true,
+                ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => performaLogin(),
                   style: ElevatedButton.styleFrom(
@@ -143,7 +209,7 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                     ),
                   ),
                   child: Text(
-                    'Submit',
+                    'Update Password',
                     style: GoogleFonts.outfit(
                       fontSize: 16,
                     ),
@@ -151,7 +217,7 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                 ),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
@@ -164,7 +230,7 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
   }
 
   bool checkData() {
-    if (_mobile.text.isNotEmpty) {
+    if (newPassowrd.text.isNotEmpty && newPassowrdvalidate.text.isNotEmpty) {
       _controolervalue();
       return true;
     }
@@ -175,7 +241,11 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
 
   void _controolervalue() {
     setState(() {
-      _mobilError = _mobile.text.isEmpty ? 'Enter your mobile number' : null;
+      _newPassowrd =
+          newPassowrd.text.isEmpty ? 'Enter your new password' : null;
+      _newPassowrdvalidate = newPassowrdvalidate.text.isEmpty
+          ? 'Enter your new password confirmation '
+          : null;
     });
   }
 
@@ -191,19 +261,17 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
         return AlertDialog(
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 60),
-            child: Text(
-              'Verify phone number',
-              style: GoogleFonts.cairo(
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
+            child: Column(
+              children: [
+                Image.asset('images/image_11.png'),
+              ],
+            )
           ),
 
           content: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Text(
-              'A code consisting of 4 will be sent to the phone number, please do not share it with anyone. To confirm, press',
+              'A new password has been set successfully',
               style: GoogleFonts.cairo(
                 fontSize: 13,
                 color: Colors.black45,
@@ -218,12 +286,12 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                   height: 50,
                   width: 100,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
                     color: Colors.grey,
                   ),
                   child: TextButton(onPressed: (){
-                    Navigator.pushNamed(context, '/verification_forget_screen');
-                  }, child: Text('Send',style: GoogleFonts.cairo(
+                    Navigator.pushNamed(context, '/login_screen');
+                  }, child: Text('Done',style: GoogleFonts.cairo(
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
                     color: Colors.black,
@@ -240,5 +308,6 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
       //
     }
   }
+
 
 }

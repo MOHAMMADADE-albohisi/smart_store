@@ -3,14 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class forgetPassword_screen extends StatefulWidget {
-  const forgetPassword_screen({Key? key}) : super(key: key);
+class verification_forget_screen extends StatefulWidget {
+  const verification_forget_screen({Key? key}) : super(key: key);
 
   @override
-  State<forgetPassword_screen> createState() => _forgetPassword_screenState();
+  State<verification_forget_screen> createState() =>
+      _verification_forget_screenState();
 }
 
-class _forgetPassword_screenState extends State<forgetPassword_screen> {
+class _verification_forget_screenState
+    extends State<verification_forget_screen> {
   late TextEditingController _mobile;
   String? _mobilError;
 
@@ -25,15 +27,23 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
     _mobile.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'Verification Number',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+            color: Colors.grey,
+          ),
+        ),
       ),
       body: Stack(
         children: [
@@ -47,30 +57,24 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
               fit: BoxFit.cover,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-
-                const SizedBox(height: 150),
-                Text(
-                  'Forget Password?',
-                  textAlign: TextAlign.start,
-                  style: GoogleFonts.outfit(
-                    fontSize: 24,
-                    color: const Color(0xFFFFFFFF),
+          Column(
+            children: [
+              const SizedBox(height: 200),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Text(
+                  'Please enter the 4-digit verification code to be able to reset a new password',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
-                const SizedBox(height: 17),
-                Text(
-                  'Type your mobile number, and we\'ll send you a verification code via SMS',
-                  style: GoogleFonts.outfit(
-                    fontSize: 14,
-                    color: const Color(0xFFFFFFFF),
-                  ),
-                ),
-                const SizedBox(height: 48),
-                TextField(
+              ),
+              const SizedBox(height: 25),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: TextField(
                   keyboardType: TextInputType.number,
                   controller: _mobile,
                   style: GoogleFonts.outfit(
@@ -86,9 +90,9 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                       maxHeight: _mobilError == null ? 56 : 81,
                     ),
                     contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                    hintText: 'Enter your mobile number',
+                    hintText: 'Enter your 4 digit number',
                     hintStyle:
-                        GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
+                    GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
                     hintMaxLines: 1,
                     prefixIcon: const Icon(
                       Icons.phone_android,
@@ -130,32 +134,33 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
                   maxLines: null,
                   expands: true,
                 ),
-                const SizedBox(height: 48),
-                ElevatedButton(
-                  onPressed: () => performaLogin(),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    minimumSize: const Size(
-                      327,
-                      56,
-                    ),
+              ),
+              const SizedBox(height: 25),
+              ElevatedButton(
+                onPressed: () => performaLogin(),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
                   ),
-                  child: Text(
-                    'Submit',
-                    style: GoogleFonts.outfit(
-                      fontSize: 16,
-                    ),
+                  minimumSize: const Size(
+                    327,
+                    56,
                   ),
                 ),
-              ],
-            ),
+                child: Text(
+                  'Submit',
+                  style: GoogleFonts.outfit(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
+
 
   void performaLogin() {
     if (checkData()) {
@@ -180,65 +185,6 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
   }
 
   void login() {
-    _confirmeLogoute();
+  Navigator.popAndPushNamed(context, '/resetPassword_screen');
   }
-
-
-  void _confirmeLogoute() async {
-    bool? test = await showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 60),
-            child: Text(
-              'Verify phone number',
-              style: GoogleFonts.cairo(
-                fontSize: 16,
-                color: Colors.black,
-              ),
-            ),
-          ),
-
-          content: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
-              'A code consisting of 4 will be sent to the phone number, please do not share it with anyone. To confirm, press',
-              style: GoogleFonts.cairo(
-                fontSize: 13,
-                color: Colors.black45,
-              ),
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 50,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey,
-                  ),
-                  child: TextButton(onPressed: (){
-                    Navigator.pushNamed(context, '/verification_forget_screen');
-                  }, child: Text('Send',style: GoogleFonts.cairo(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.black,
-
-                  ),)),
-                ),
-              ],
-            )
-          ],
-        );
-      },
-    );
-    if (test ?? false) {
-      //
-    }
-  }
-
 }
