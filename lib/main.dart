@@ -1,7 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_store/screens/app/bottom_anvigator_screen.dart';
-import 'package:smart_store/screens/app/categories_screen.dart';
+import 'package:smart_store/screens/app/categorie/categories_screen.dart';
+import 'package:smart_store/screens/app/categorie/subcategories_screen.dart';
+import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
 import 'package:smart_store/screens/app/favorite_screen.dart';
 import 'package:smart_store/screens/app/home_screen.dart';
 import 'package:smart_store/screens/auth/forget_screen.dart';
@@ -30,7 +34,18 @@ class smart_store extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: '/lunch_screen',
+          localizationsDelegates:const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('ar'),
+            Locale('en'),
+          ],
+          locale: Locale('en'),
+
+          initialRoute: '/categories_screen',
           routes: {
             '/lunch_screen': (context) => const lunch_screen(),
             '/onbressd_screen': (context) => const onbressd_screen(),
@@ -44,7 +59,10 @@ class smart_store extends StatelessWidget {
             '/home_screen': (context) => const home_screen(),
             '/bottoma_screen': (context) => const bottomanvigator(),
             '/favorite_screen': (context) => const favorite_screen(),
+
             '/prducts_screen': (context) => const prducts_screen(),
+            '/categories_screen': (context) => const categories_screen(),
+            '/subcategories_screen': (context) => const subcategories(),
           },
         );
       },

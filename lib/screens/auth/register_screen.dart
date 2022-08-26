@@ -88,7 +88,7 @@ class _register_screenState extends State<register_screen> with Helpers {
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
                 children: [
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 150),
                   TextField(
                     controller: _name,
                     style: GoogleFonts.nunito(),
@@ -341,6 +341,7 @@ class _register_screenState extends State<register_screen> with Helpers {
                             'Female',
                             style: GoogleFonts.montserrat(
                               color: Colors.white,
+
                             ),
                           ),
                           value: 'F',
@@ -461,10 +462,11 @@ class _register_screenState extends State<register_screen> with Helpers {
                         ),
                       ),
                     ],
+
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 10),
             ],
           ),
         ],
@@ -486,6 +488,7 @@ class _register_screenState extends State<register_screen> with Helpers {
       _controolervalue();
       return true;
     }
+    _controolervalue();
     ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
     return false;
   }
