@@ -13,6 +13,7 @@ class home_screen extends StatefulWidget {
 class _home_screenState extends State<home_screen> {
   late PageController pageController;
   bool _likes = false;
+  bool _likeproduct = false;
 
   @override
   void initState() {
@@ -88,7 +89,7 @@ class _home_screenState extends State<home_screen> {
                                 width: double.infinity,
                                 height: 125,
                                 child: Image.asset(
-                                  'images/image_14.png',
+                                  'images/image_20.png',
                                   width: double.infinity,
                                   height: double.infinity,
                                 ),
@@ -100,7 +101,7 @@ class _home_screenState extends State<home_screen> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     child: Text(
-                                      'Samsung Galaxy',
+                                      'Smart Teapots',
                                       style: GoogleFonts.montserrat(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
@@ -109,7 +110,7 @@ class _home_screenState extends State<home_screen> {
                                     ),
                                   ),
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         );
@@ -168,6 +169,7 @@ class _home_screenState extends State<home_screen> {
                                             setState(() => {_likes = !_likes});
                                           },
                                           icon: Icon(
+                                            color: Colors.red,
                                             _likes
                                                 ? Icons.favorite
                                                 : Icons.favorite_border,
@@ -238,10 +240,12 @@ class _home_screenState extends State<home_screen> {
                                       const Spacer(),
                                       IconButton(
                                         onPressed: () {
-                                          setState(() => {_likes = !_likes});
+                                          setState(() =>
+                                              {_likeproduct = !_likeproduct});
                                         },
                                         icon: Icon(
-                                          _likes
+                                          color: Colors.red,
+                                          _likeproduct
                                               ? Icons.favorite
                                               : Icons.favorite_border,
                                         ),

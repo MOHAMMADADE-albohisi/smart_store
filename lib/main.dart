@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:smart_store/screens/app/bottom_anvigator_screen.dart';
+import 'package:smart_store/screens/app/categories_screen.dart';
+import 'package:smart_store/screens/app/favorite_screen.dart';
 import 'package:smart_store/screens/app/home_screen.dart';
 import 'package:smart_store/screens/auth/forget_screen.dart';
 import 'package:smart_store/screens/auth/homelogin_screen.dart';
@@ -22,7 +25,7 @@ class smart_store extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home_screen',
+      initialRoute: '/lunch_screen',
       routes: {
         '/lunch_screen': (context) => const lunch_screen(),
         '/onbressd_screen': (context) => const onbressd_screen(),
@@ -34,6 +37,10 @@ class smart_store extends StatelessWidget {
         '/resetPassword_screen': (context) => const resetPassword_screen(),
         '/registration_verification_screen': (context) => const registration_verification_screen(),
         '/home_screen': (context) => const home_screen(),
+        '/bottoma_screen' :(context)=>const bottomanvigator(),
+        '/favorite_screen' :(context)=>const favorite_screen(),
+        '/prducts_screen' :(context)=>const prducts_screen(),
+
 
       },
     );

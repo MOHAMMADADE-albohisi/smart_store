@@ -336,6 +336,6 @@ class _login_screenState extends State<login_screen> {
   }
 
   void login() {
-    Navigator.pushNamed(context, '/home_screen');
+    Navigator.pushNamed(context, '/bottoma_screen');
   }
 }
