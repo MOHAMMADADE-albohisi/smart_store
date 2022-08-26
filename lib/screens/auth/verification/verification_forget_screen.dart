@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/widgets/utils/helpers.dart';
 
 class verification_forget_screen extends StatefulWidget {
   const verification_forget_screen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class verification_forget_screen extends StatefulWidget {
 }
 
 class _verification_forget_screenState
-    extends State<verification_forget_screen> {
+    extends State<verification_forget_screen> with Helpers{
   late TextEditingController _mobile;
   String? _mobilError;
 
@@ -173,7 +174,7 @@ class _verification_forget_screenState
       _controolervalue();
       return true;
     }
-    _controolervalue();
+    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
 
     return false;
   }

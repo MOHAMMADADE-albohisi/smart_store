@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_store/widgets/seel_all.dart';
 
@@ -117,7 +118,7 @@ class _home_screenState extends State<home_screen> {
                       },
                     ),
                   ),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
                   see_all(title: 'Latest Products', onPressed: () {}),
                   SizedBox(
                     width: 50,

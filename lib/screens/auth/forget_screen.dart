@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/widgets/utils/helpers.dart';
 
 class forgetPassword_screen extends StatefulWidget {
   const forgetPassword_screen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class forgetPassword_screen extends StatefulWidget {
   State<forgetPassword_screen> createState() => _forgetPassword_screenState();
 }
 
-class _forgetPassword_screenState extends State<forgetPassword_screen> {
+class _forgetPassword_screenState extends State<forgetPassword_screen> with Helpers{
   late TextEditingController _mobile;
   String? _mobilError;
 
@@ -168,7 +169,7 @@ class _forgetPassword_screenState extends State<forgetPassword_screen> {
       _controolervalue();
       return true;
     }
-    _controolervalue();
+    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
 
     return false;
   }

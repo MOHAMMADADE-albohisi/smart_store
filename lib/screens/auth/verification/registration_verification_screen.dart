@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/widgets/utils/helpers.dart';
 
 class registration_verification_screen extends StatefulWidget {
   const registration_verification_screen({Key? key}) : super(key: key);
@@ -12,7 +13,7 @@ class registration_verification_screen extends StatefulWidget {
 }
 
 class _registration_verification_screenState
-    extends State<registration_verification_screen> {
+    extends State<registration_verification_screen> with Helpers{
   late TextEditingController _mobile;
   String? _mobilError;
 
@@ -173,7 +174,7 @@ class _registration_verification_screenState
       _controolervalue();
       return true;
     }
-    _controolervalue();
+    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
 
     return false;
   }

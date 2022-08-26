@@ -2,6 +2,7 @@
 // ignore_for_file: camel_case_types
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/widgets/utils/helpers.dart';
 
 class login_screen extends StatefulWidget {
   const login_screen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class login_screen extends StatefulWidget {
   State<login_screen> createState() => _login_screenState();
 }
 
-class _login_screenState extends State<login_screen> {
+class _login_screenState extends State<login_screen> with Helpers {
   late TextEditingController _mobile;
   late TextEditingController _password;
   bool _viewpassword = true;
@@ -314,17 +315,8 @@ class _login_screenState extends State<login_screen> {
       _controolervalue();
       return true;
     }
-    _controolervalue();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          'Error , Enter Required data',
-        ),
-        backgroundColor: Colors.red,
-        duration: Duration(seconds: 3),
-        dismissDirection: DismissDirection.horizontal,
-      ),
-    );
+
+    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
     return false;
   }
 

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/widgets/utils/helpers.dart';
 
 class resetPassword_screen extends StatefulWidget {
   const resetPassword_screen({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class resetPassword_screen extends StatefulWidget {
   State<resetPassword_screen> createState() => _resetPassword_screenState();
 }
 
-class _resetPassword_screenState extends State<resetPassword_screen> {
+class _resetPassword_screenState extends State<resetPassword_screen> with Helpers{
   late TextEditingController newPassowrd;
   late TextEditingController newPassowrdvalidate;
 
@@ -234,7 +235,7 @@ class _resetPassword_screenState extends State<resetPassword_screen> {
       _controolervalue();
       return true;
     }
-    _controolervalue();
+    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
 
     return false;
   }

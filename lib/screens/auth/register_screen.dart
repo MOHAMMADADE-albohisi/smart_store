@@ -3,6 +3,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/widgets/utils/helpers.dart';
 
 class register_screen extends StatefulWidget {
   const register_screen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class register_screen extends StatefulWidget {
   State<register_screen> createState() => _register_screenState();
 }
 
-class _register_screenState extends State<register_screen> {
+class _register_screenState extends State<register_screen> with Helpers {
   late TextEditingController _name;
   late TextEditingController _mobile;
   late TextEditingController _password;
@@ -485,17 +486,7 @@ class _register_screenState extends State<register_screen> {
       _controolervalue();
       return true;
     }
-    _controolervalue();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text(
-          'Error , Enter Required data',
-        ),
-        backgroundColor: Colors.red,
-        duration: Duration(seconds: 3),
-        dismissDirection: DismissDirection.horizontal,
-      ),
-    );
+    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
     return false;
   }
 
