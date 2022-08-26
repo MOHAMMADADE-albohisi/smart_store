@@ -12,7 +12,18 @@ class subcategories extends StatefulWidget {
 class _subcategoriesState extends State<subcategories> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'Sub Categories',
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: Colors.black,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
@@ -57,7 +68,6 @@ class _subcategoriesState extends State<subcategories> {
                               'images/image_14.png',
                             ),
                           )),
-
                     ],
                   ),
                 );

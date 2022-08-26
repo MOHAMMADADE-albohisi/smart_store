@@ -12,10 +12,19 @@ class categories_screen extends StatefulWidget {
 }
 
 class _categories_screenState extends State<categories_screen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'Categories',
+            style: GoogleFonts.montserrat(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.black,
+            ),
+          )),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
@@ -54,13 +63,13 @@ class _categories_screenState extends State<categories_screen> {
                           height: 120,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/subcategories_screen');
+                              Navigator.pushNamed(
+                                  context, '/subcategories_screen');
                             },
                             child: Image.asset(
                               'images/image_12.png',
                             ),
                           )),
-
                     ],
                   ),
                 );

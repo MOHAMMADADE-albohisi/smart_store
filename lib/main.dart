@@ -2,12 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/screens/app/addresses/address_view_screen.dart';
+import 'package:smart_store/screens/app/addresses/addresse_screen.dart';
 import 'package:smart_store/screens/app/bottom_anvigator_screen.dart';
 import 'package:smart_store/screens/app/categorie/categories_screen.dart';
 import 'package:smart_store/screens/app/categorie/subcategories_screen.dart';
 import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
 import 'package:smart_store/screens/app/favorite_screen.dart';
 import 'package:smart_store/screens/app/home_screen.dart';
+import 'package:smart_store/screens/app/settings/setting_screen.dart';
 import 'package:smart_store/screens/auth/forget_screen.dart';
 import 'package:smart_store/screens/auth/homelogin_screen.dart';
 import 'package:smart_store/screens/auth/login_screen.dart';
@@ -33,6 +37,20 @@ class smart_store extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return MaterialApp(
+          theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              centerTitle: true,
+              elevation: 0,
+              color: Colors.transparent,
+              iconTheme: const IconThemeData(color: Colors.black54),
+
+              titleTextStyle: GoogleFonts.montserrat(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
+                color: Colors.black54,
+              ),
+            ),
+          ),
           debugShowCheckedModeBanner: false,
           localizationsDelegates:const [
             GlobalMaterialLocalizations.delegate,
@@ -45,7 +63,7 @@ class smart_store extends StatelessWidget {
           ],
           locale: Locale('en'),
 
-          initialRoute: '/categories_screen',
+          initialRoute: '/lunch_screen',
           routes: {
             '/lunch_screen': (context) => const lunch_screen(),
             '/onbressd_screen': (context) => const onbressd_screen(),
@@ -60,9 +78,14 @@ class smart_store extends StatelessWidget {
             '/bottoma_screen': (context) => const bottomanvigator(),
             '/favorite_screen': (context) => const favorite_screen(),
 
-            '/prducts_screen': (context) => const prducts_screen(),
             '/categories_screen': (context) => const categories_screen(),
             '/subcategories_screen': (context) => const subcategories(),
+            '/prducts_screen': (context) => const prducts_screen(),
+            '/addresses_screen': (context) => const addresses_screen(),
+            '/view_address_screen': (context) => const view_address_screen(),
+
+            '/setting_screen': (context) => const setting_screen(),
+
           },
         );
       },

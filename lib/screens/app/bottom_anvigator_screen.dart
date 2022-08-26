@@ -36,11 +36,24 @@ class _bottomanvigatorState extends State<bottomanvigator> {
             color: Colors.black45,
           ),
         ),
+        actions: [
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 10),
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.notifications_outlined,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
+
               decoration: BoxDecoration(
                 color: Colors.blue.shade100,
               ),
@@ -71,13 +84,13 @@ class _bottomanvigatorState extends State<bottomanvigator> {
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(Duration(milliseconds: 250), () {
-                  Navigator.pushNamed(context, '/prducts_screen');
+                  Navigator.pushNamed(context, '/view_address_screen');
                 });
               },
-              leading: const Icon(Icons.category),
-              title: const Text('prducts_screen '),
+              leading: const Icon(Icons.location_on_outlined),
+              title: const Text('Addresses '),
               subtitle: Text(
-                'Go to the products page',
+                'Go to the addresses page',
                 style: GoogleFonts.montserrat(
                   fontSize: 10,
                   fontWeight: FontWeight.w400,
@@ -89,7 +102,28 @@ class _bottomanvigatorState extends State<bottomanvigator> {
                 size: 18,
               ),
             ),
-
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Future.delayed(Duration(milliseconds: 250), () {
+                  Navigator.pushNamed(context, '/setting_screen');
+                });
+              },
+              leading: const Icon(Icons.settings_outlined),
+              title: const Text('settings '),
+              subtitle: Text(
+                'Go to the settings page',
+                style: GoogleFonts.montserrat(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
+              ),
+            )
           ],
         ),
       ),
@@ -114,7 +148,6 @@ class _bottomanvigatorState extends State<bottomanvigator> {
                 activeIcon: Icon(Icons.home),
                 icon: Icon(Icons.home_outlined),
                 label: ''),
-
             BottomNavigationBarItem(
                 activeIcon: Icon(Icons.shopping_cart),
                 icon: Icon(Icons.shopping_cart_outlined),

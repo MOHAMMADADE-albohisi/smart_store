@@ -58,7 +58,7 @@ class _home_screenState extends State<home_screen> {
                           margin: EdgeInsetsDirectional.only(
                               end: index != 2 ? 10 : 0),
                           child: Image.asset(
-                            'images/image_12.png',
+                            'images/image_17.png',
                             width: double.infinity,
                             height: double.infinity,
                           ),
@@ -66,9 +66,11 @@ class _home_screenState extends State<home_screen> {
                       },
                     ),
                   ),
-                  see_all(title: 'Categories', onPressed: () {
-                    Navigator.pushNamed(context, '/categories_screen');
-                  }),
+                  see_all(
+                      title: 'Categories',
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/categories_screen');
+                      }),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxHeight: 180),
                     child: GridView.builder(
@@ -89,14 +91,18 @@ class _home_screenState extends State<home_screen> {
                             children: [
                               const SizedBox(height: 15),
                               SizedBox(
-                                width: double.infinity,
-                                height: 125,
-                                child: Image.asset(
-                                  'images/image_13.png',
                                   width: double.infinity,
-                                  height: double.infinity,
-                                ),
-                              ),
+                                  height: 125,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/subcategories_screen');
+                                    },
+                                    child: Image.asset(
+                                      'images/image_13.png',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                    ),
+                                  )),
                               const SizedBox(height: 10),
                               Row(
                                 children: [
@@ -120,10 +126,12 @@ class _home_screenState extends State<home_screen> {
                       },
                     ),
                   ),
-                   SizedBox(height: 20.h),
-                  see_all(title: 'Latest Products', onPressed: () {
-                    Navigator.pushNamed(context, '/prducts_screen');
-                  }),
+                  SizedBox(height: 20.h),
+                  see_all(
+                      title: 'Latest Products',
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/categories_screen');
+                      }),
                   SizedBox(
                     width: 50,
                     height: 350,
@@ -151,9 +159,11 @@ class _home_screenState extends State<home_screen> {
                                   SizedBox(
                                     width: double.infinity,
                                     height: 120,
-                                    child: Image.asset(
-                                      'images/image_13.png',
-                                    ),
+                                    child: TextButton(onPressed: (){
+                                      Navigator.pushNamed(context, '/categories_screen');
+                                    }, child: Image.asset(
+                                      'images/image_20.png',
+                                    ),),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -200,7 +210,9 @@ class _home_screenState extends State<home_screen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  see_all(title: 'Products you may like', onPressed: () {}),
+                  see_all(title: 'Products you may like', onPressed: () {
+                    Navigator.pushNamed(context, '/favorite_screen');
+                  }),
                   SizedBox(
                     width: 50,
                     height: 200,
