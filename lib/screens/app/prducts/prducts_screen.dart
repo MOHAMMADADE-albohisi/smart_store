@@ -108,7 +108,7 @@ class _prducts_screenState extends State<prducts_screen> {
                                   ),
                                   child: TextButton(
                                     onPressed: () {
-
+                                      Navigator.pushNamed(context, '/carts_screen');
                                     },
                                     child: Text(
                                       'Add to cart',

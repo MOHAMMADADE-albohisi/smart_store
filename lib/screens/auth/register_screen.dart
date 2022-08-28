@@ -25,7 +25,7 @@ class _register_screenState extends State<register_screen> with Helpers {
   String? _mobilError;
   String? _passwordError;
   String? _cityError;
-  String? _gender ='M';
+  String? _gender = 'M';
 
   @override
   void initState() {
@@ -318,15 +318,20 @@ class _register_screenState extends State<register_screen> with Helpers {
                       ),
                     ],
                   ),
+                  SizedBox(height: 10),
                   Row(
                     children: [
-                      Expanded(
+                      Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey.shade300,
+                        ),
                         child: RadioListTile<String>(
                           title: Text(
                             'Male',
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                            ),
+                            style: GoogleFonts.cairo(),
                           ),
                           value: 'M',
                           groupValue: _gender,
@@ -335,12 +340,18 @@ class _register_screenState extends State<register_screen> with Helpers {
                           },
                         ),
                       ),
-                      Expanded(
+                      Spacer(),
+                      Container(
+                        width: 150,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey.shade300,
+                        ),
                         child: RadioListTile<String>(
                           title: Text(
                             'Female',
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
+                            style: GoogleFonts.cairo(
 
                             ),
                           ),
@@ -462,7 +473,6 @@ class _register_screenState extends State<register_screen> with Helpers {
                         ),
                       ),
                     ],
-
                   ),
                 ),
               ),
@@ -534,7 +544,8 @@ class _register_screenState extends State<register_screen> with Helpers {
                   ),
                   child: TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, '/registration_verification_screen');
+                        Navigator.pushNamed(
+                            context, '/registration_verification_screen');
                       },
                       child: Text(
                         'Done',

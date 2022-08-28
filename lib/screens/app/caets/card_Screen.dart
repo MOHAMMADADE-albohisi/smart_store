@@ -37,7 +37,7 @@ class CreditCard_screenState extends State<CreditCard_screen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('ONLINE PAYMENT CARDS'),
+        title: Text('ADD NEW  CARDS'),
       ),
       body: Scaffold(
         resizeToAvoidBottomInset: false,

@@ -38,9 +38,11 @@ class _bottomanvigatorState extends State<bottomanvigator> {
         ),
         actions: [
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/notifications_screen');
+              },
               icon: Icon(
                 Icons.notifications_outlined,
                 color: Colors.black,
@@ -53,7 +55,6 @@ class _bottomanvigatorState extends State<bottomanvigator> {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-
               decoration: BoxDecoration(
                 color: Colors.blue.shade100,
               ),
@@ -78,6 +79,28 @@ class _bottomanvigatorState extends State<bottomanvigator> {
                   fontWeight: FontWeight.w600,
                   color: Colors.black45,
                 ),
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Future.delayed(Duration(milliseconds: 250), () {
+                  Navigator.pushNamed(context, '/bottoma_screen');
+                });
+              },
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              subtitle: Text(
+                'Go to the Home view',
+                style: GoogleFonts.montserrat(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
               ),
             ),
             ListTile(
@@ -123,7 +146,29 @@ class _bottomanvigatorState extends State<bottomanvigator> {
                 Icons.arrow_forward_ios,
                 size: 18,
               ),
-            )
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Future.delayed(Duration(milliseconds: 250), () {
+                  Navigator.pushNamed(context, '/order_screen');
+                });
+              },
+              leading: const Icon(Icons.local_shipping),
+              title: const Text('My Orders'),
+              subtitle: Text(
+                'Go to the Orders page',
+                style: GoogleFonts.montserrat(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
+              ),
+            ),
           ],
         ),
       ),

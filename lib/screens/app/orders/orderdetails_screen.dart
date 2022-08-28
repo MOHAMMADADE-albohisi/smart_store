@@ -4,25 +4,55 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Productdetails_screen extends StatefulWidget {
-  const Productdetails_screen({Key? key}) : super(key: key);
+class orderdetails_screen extends StatefulWidget {
+  const orderdetails_screen({Key? key}) : super(key: key);
 
   @override
-  State<Productdetails_screen> createState() => _Productdetails_screenState();
+  State<orderdetails_screen> createState() => _orderdetails_screenState();
 }
 
-class _Productdetails_screenState extends State<Productdetails_screen> {
+class _orderdetails_screenState extends State<orderdetails_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Product Details'),
+          title: const Text('Order Details'),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: ListView(
             children: [
-              const SizedBox(height: 15),
+              const SizedBox(height: 25),
+              Row(
+                children: [
+                  Text(
+                    'Oreder ID: ',
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Color(0xFF8B8B97),
+                    ),
+                  ),
+                  Text(
+                    '2324252627',
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Color(0xFF16162E),
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    '25 Nov',
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Color(0xFF8B8B97),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 50),
               Container(
                 height: 250,
                 decoration: BoxDecoration(
@@ -33,7 +63,7 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                   child: CarouselSlider(
                     options: CarouselOptions(height: 400.0),
                     items: [1, 2, 3, 4, 5].map(
-                      (i) {
+                          (i) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
@@ -75,13 +105,6 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                     height: 70,
                     child: Row(
                       children: [
-                        Text('30\$',
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: const Color(0xFF16162E),
-                            )),
-                        const Spacer(),
                         Text(
                           '20\$',
                           style: GoogleFonts.montserrat(
@@ -151,95 +174,8 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                   )
                 ],
               ),
-              const SizedBox(height: 18),
-              Text(
-                'Product Details',
-                style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: const Color(0xFF16162E),
-                ),
-              ),
-              const SizedBox(height: 7),
-              SizedBox(
-                width: 50,
-                height: 100,
-                child: ListView(
-                  children: [
-                    Text(
-                      'AirPods are wireless headphones made by Apple marketed as of December 19, 2016.',
-                      style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: const Color(0xFF16162E),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Text(
-                    'Review',
-                    style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      color: const Color(0xFF16162E),
-                    ),
-                  ),
-                  const Spacer(),
-                  Image.asset('images/image_19.png')
-                ],
-              ),
-              const Divider(),
-              const SizedBox(height: 30),
-              Row(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFEBF0F7),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/carts_screen');
-                      },
-                      icon: const Icon(
-                        Icons.shopping_cart_sharp,
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/mycards_screen');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      primary: const Color(0xFFD5F0DB),
-                    ),
-                    child: Container(
-                      width: 280,
-                      height: 60,
-                      color: const Color(0xFFD5F0DB),
-                      child: Center(
-                        child: Text(
-                          'Buy Now',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )
+
+
             ],
           ),
         ));

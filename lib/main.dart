@@ -7,8 +7,13 @@ import 'package:smart_store/screens/app/addresses/address_view_screen.dart';
 import 'package:smart_store/screens/app/addresses/addresse_screen.dart';
 import 'package:smart_store/screens/app/bottom_anvigator_screen.dart';
 import 'package:smart_store/screens/app/caets/card_Screen.dart';
+import 'package:smart_store/screens/app/caets/mycards_screen.dart';
+import 'package:smart_store/screens/app/cards/cards_screen.dart';
 import 'package:smart_store/screens/app/categorie/categories_screen.dart';
 import 'package:smart_store/screens/app/categorie/subcategories_screen.dart';
+import 'package:smart_store/screens/app/notifications/notifications_screen.dart';
+import 'package:smart_store/screens/app/orders/orderdetails_screen.dart';
+import 'package:smart_store/screens/app/orders/orders%20_screen.dart';
 import 'package:smart_store/screens/app/prducts/Product_details_screen.dart';
 import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
 import 'package:smart_store/screens/app/favorite_screen.dart';
@@ -19,6 +24,7 @@ import 'package:smart_store/screens/auth/homelogin_screen.dart';
 import 'package:smart_store/screens/auth/login_screen.dart';
 import 'package:smart_store/screens/auth/register_screen.dart';
 import 'package:smart_store/screens/auth/reset_password_screen.dart';
+import 'package:smart_store/screens/auth/verification/change_password.dart';
 import 'package:smart_store/screens/auth/verification/registration_verification_screen.dart';
 import 'package:smart_store/screens/auth/verification/verification_forget_screen.dart';
 import 'package:smart_store/screens/core/launch_screen.dart';
@@ -85,8 +91,13 @@ class smart_store extends StatelessWidget {
             '/Productdetails_screen': (context) => const Productdetails_screen(),
             '/addresses_screen': (context) => const addresses_screen(),
             '/view_address_screen': (context) => const view_address_screen(),
+            '/order_screen': (context) => const order_screen(),
+            '/orderdetails_screen': (context) => const orderdetails_screen(),
+            '/carts_screen': (context) => const carts_screen(),
+            '/notifications_screen': (context) => const notifications_screen(),
+            '/change_password': (context) => const change_password(),
             '/card_screen': (context) =>  CreditCard_screen(),
-
+            '/mycards_screen': (context) =>  mycards_screen(),
             '/setting_screen': (context) => const setting_screen(),
 
           },
