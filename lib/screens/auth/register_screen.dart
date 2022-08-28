@@ -25,7 +25,7 @@ class _register_screenState extends State<register_screen> with Helpers {
   String? _mobilError;
   String? _passwordError;
   String? _cityError;
-  String? _gender;
+  String? _gender ='M';
 
   @override
   void initState() {

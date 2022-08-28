@@ -128,7 +128,6 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
                   borderRadius: BorderRadius.circular(20),
                   dropdownColor: Colors.grey,
                   icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                  //للتحكم بحجم القائمة
                   itemHeight: 48,
                   menuMaxHeight: 250,
                   underline: const Divider(
@@ -214,6 +213,6 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
   void _controolervalue() {}
 
   void login() {
-    Navigator.pushNamed(context, '/bottoma_screen');
+    Navigator.pushNamed(context, '/view_address_screen');
   }
 }

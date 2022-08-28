@@ -10,6 +10,8 @@ class prducts_screen extends StatefulWidget {
   State<prducts_screen> createState() => _prducts_screenState();
 }
 
+bool _likeproduct = true;
+
 class _prducts_screenState extends State<prducts_screen> {
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,8 @@ class _prducts_screenState extends State<prducts_screen> {
                               borderRadius: BorderRadius.circular(15)),
                           child: TextButton(
                             onPressed: () {
-
+                              Navigator.pushNamed(
+                                  context, '/Productdetails_screen');
                             },
                             child: Image.asset('images/image_15.png'),
                           ),
@@ -90,10 +93,6 @@ class _prducts_screenState extends State<prducts_screen> {
                             children: [
                               const Text('\$239.96'),
                               const SizedBox(width: 9),
-                              SizedBox(
-                                  width: 100,
-                                  height: 25,
-                                  child: Image.asset('images/image_19.png')),
                             ],
                           ),
                           const SizedBox(height: 10),
@@ -108,23 +107,32 @@ class _prducts_screenState extends State<prducts_screen> {
                                     borderRadius: BorderRadius.circular(50),
                                   ),
                                   child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'Add to cart',
-                                        style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 15,
-                                          color: Colors.white54,
-                                        ),
-                                      )),
+                                    onPressed: () {
+
+                                    },
+                                    child: Text(
+                                      'Add to cart',
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15,
+                                        color: Colors.white54,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 const SizedBox(width: 15),
                                 CircleAvatar(
                                   backgroundColor: const Color(0xFFEBF0F7),
                                   child: IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.favorite_border,
+                                    onPressed: () {
+                                      setState(
+                                          () => {_likeproduct = !_likeproduct});
+                                    },
+                                    icon: Icon(
+                                      color: Colors.red,
+                                      _likeproduct
+                                          ? Icons.favorite_border
+                                          : Icons.favorite,
                                     ),
                                   ),
                                 ),

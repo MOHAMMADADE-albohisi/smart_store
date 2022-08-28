@@ -1,4 +1,5 @@
 // ignore_for_file: camel_case_types
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,13 +15,13 @@ class home_screen extends StatefulWidget {
 class _home_screenState extends State<home_screen> {
   late PageController pageController;
   bool _likes = false;
-  bool _likeproduct = false;
+  bool _likeproduct = true;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    pageController = PageController(viewportFraction: 0.7, initialPage: 1);
+    pageController = PageController(viewportFraction: 0.7, initialPage: 2);
   }
 
   @override
@@ -37,34 +38,36 @@ class _home_screenState extends State<home_screen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
-          children: [
+          children: <Widget>[
             Expanded(
               child: ListView(
                 shrinkWrap: true,
                 children: [
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxHeight: 150),
-                    child: PageView.builder(
-                      controller: pageController,
-                      itemCount: 3,
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (int pageIndex) {},
-                      itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFEBF0F7),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          margin: EdgeInsetsDirectional.only(
-                              end: index != 2 ? 10 : 0),
-                          child: Image.asset(
-                            'images/image_17.png',
-                            width: double.infinity,
-                            height: double.infinity,
-                          ),
+                    child:CarouselSlider(
+                      options: CarouselOptions(height: 400.0),
+                      items: [1,2,3,4,5].map((i) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: EdgeInsets.symmetric(horizontal: 7),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Color(0xFFEBF0F7),
+                                  ),
+                                  child: Image.asset('images/image_20.png',),
+
+                                )
+                            );
+                          },
                         );
-                      },
-                    ),
+                      }).toList(),
+                    )
                   ),
                   see_all(
                       title: 'Categories',
@@ -263,8 +266,8 @@ class _home_screenState extends State<home_screen> {
                                         icon: Icon(
                                           color: Colors.red,
                                           _likeproduct
-                                              ? Icons.favorite
-                                              : Icons.favorite_border,
+                                              ? Icons.favorite_border
+                                              : Icons.favorite,
                                         ),
                                       ),
                                     ],

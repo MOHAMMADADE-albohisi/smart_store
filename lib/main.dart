@@ -6,8 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_store/screens/app/addresses/address_view_screen.dart';
 import 'package:smart_store/screens/app/addresses/addresse_screen.dart';
 import 'package:smart_store/screens/app/bottom_anvigator_screen.dart';
+import 'package:smart_store/screens/app/caets/card_Screen.dart';
 import 'package:smart_store/screens/app/categorie/categories_screen.dart';
 import 'package:smart_store/screens/app/categorie/subcategories_screen.dart';
+import 'package:smart_store/screens/app/prducts/Product_details_screen.dart';
 import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
 import 'package:smart_store/screens/app/favorite_screen.dart';
 import 'package:smart_store/screens/app/home_screen.dart';
@@ -77,12 +79,13 @@ class smart_store extends StatelessWidget {
             '/home_screen': (context) => const home_screen(),
             '/bottoma_screen': (context) => const bottomanvigator(),
             '/favorite_screen': (context) => const favorite_screen(),
-
             '/categories_screen': (context) => const categories_screen(),
             '/subcategories_screen': (context) => const subcategories(),
             '/prducts_screen': (context) => const prducts_screen(),
+            '/Productdetails_screen': (context) => const Productdetails_screen(),
             '/addresses_screen': (context) => const addresses_screen(),
             '/view_address_screen': (context) => const view_address_screen(),
+            '/card_screen': (context) =>  CreditCard_screen(),
 
             '/setting_screen': (context) => const setting_screen(),
 
