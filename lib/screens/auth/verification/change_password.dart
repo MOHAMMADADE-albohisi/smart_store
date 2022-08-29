@@ -19,6 +19,9 @@ class _change_passwordState extends State<change_password> with Helpers {
   String? _oldepassword;
   String? _newPassowrd;
   String? _newPassowrdvalidate;
+  bool _viewpassword1 = true;
+  bool _viewpassword2 = true;
+  bool _viewpassword3 = true;
 
   @override
   void initState() {
@@ -39,224 +42,210 @@ class _change_passwordState extends State<change_password> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Change password',
-          style: GoogleFonts.montserrat(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(title: const Text('Change password')),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50),
-        child: Column(
-          children: [
-            const SizedBox(height: 200),
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: oldepassword,
-              style: GoogleFonts.outfit(
-                color: const Color(0xFFFFFFFF),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey,
-                constraints: BoxConstraints(
-                  minHeight: 50,
-                  maxHeight: _oldepassword == null ? 56 : 81,
+        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.grey,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: ListView(
+              children: [
+                const SizedBox(height: 200),
+                TextField(
+                  controller: oldepassword,
+                  obscureText: _viewpassword1,
+                  style: GoogleFonts.nunito(),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade300,
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() => {_viewpassword1 = !_viewpassword1});
+                      },
+                      icon: Icon(
+                          _viewpassword1 ? Icons.visibility_off : Icons.visibility),
+                    ),
+                    hintText: 'Password',
+                    labelStyle: GoogleFonts.nunito(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade700,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    constraints: BoxConstraints(
+                      maxHeight: _oldepassword == null ? 50 : 75,
+                      minHeight: 50,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                    errorText: _oldepassword,
+                    errorStyle: GoogleFonts.nunito(),
+                    errorMaxLines: 1,
+                  ),
+                  maxLines: 1,
+                  minLines: 1,
+                  expands: false,
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                hintText: 'Old Passowrd',
-                hintStyle: GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
-                hintMaxLines: 1,
-                prefixIcon: const Icon(
-                  Icons.phone_android,
-                  color: Color(0xFFFFFFFF),
+                const SizedBox(height: 15),
+                TextField(
+                  controller: newPassowrd,
+                  obscureText: _viewpassword2,
+                  style: GoogleFonts.nunito(),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade300,
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() => {_viewpassword2 = !_viewpassword2});
+                      },
+                      icon: Icon(
+                          _viewpassword2 ? Icons.visibility_off : Icons.visibility),
+                    ),
+                    hintText: 'Password',
+                    labelStyle: GoogleFonts.nunito(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade700,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    constraints: BoxConstraints(
+                      maxHeight: _newPassowrd == null ? 50 : 75,
+                      minHeight: 50,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                    errorText: _newPassowrd,
+                    errorStyle: GoogleFonts.nunito(),
+                    errorMaxLines: 1,
+                  ),
+                  maxLines: 1,
+                  minLines: 1,
+                  expands: false,
                 ),
-                errorText: _oldepassword,
-                errorStyle: GoogleFonts.outfit(),
-                errorMaxLines: 1,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade700,
-                    width: 1,
+                const SizedBox(height: 15),
+                TextField(
+                  controller: newPassowrdvalidate,
+                  obscureText: _viewpassword3,
+                  style: GoogleFonts.nunito(),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.grey.shade300,
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() => {_viewpassword3 = !_viewpassword3});
+                      },
+                      icon: Icon(
+                          _viewpassword3 ? Icons.visibility_off : Icons.visibility),
+                    ),
+                    hintText: 'Password',
+                    labelStyle: GoogleFonts.nunito(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade700),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey.shade700,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.red.shade700,
+                        width: 1,
+                      ),
+                    ),
+                    constraints: BoxConstraints(
+                      maxHeight: _newPassowrdvalidate == null ? 50 : 75,
+                      minHeight: 50,
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                    errorText: _newPassowrdvalidate,
+                    errorStyle: GoogleFonts.nunito(),
+                    errorMaxLines: 1,
+                  ),
+                  maxLines: 1,
+                  minLines: 1,
+                  expands: false,
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => performaLogin(),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    minimumSize: const Size(
+                      327,
+                      56,
+                    ),
+                  ),
+                  child: Text(
+                    'Update Password',
+                    style: GoogleFonts.outfit(
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade700,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.red.shade700,
-                    width: 1,
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.red.shade700,
-                    width: 1,
-                  ),
-                ),
-              ),
-              minLines: null,
-              maxLines: null,
-              expands: true,
+              ],
             ),
-            const SizedBox(height: 15),
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: newPassowrd,
-              style: GoogleFonts.outfit(
-                color: const Color(0xFFFFFFFF),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey,
-                constraints: BoxConstraints(
-                  minHeight: 50,
-                  maxHeight: _newPassowrd == null ? 56 : 81,
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                hintText: 'New Password',
-                hintStyle: GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
-                hintMaxLines: 1,
-                prefixIcon: const Icon(
-                  Icons.phone_android,
-                  color: Color(0xFFFFFFFF),
-                ),
-                errorText: _newPassowrd,
-                errorStyle: GoogleFonts.outfit(),
-                errorMaxLines: 1,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade700,
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade700,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.red.shade700,
-                    width: 1,
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.red.shade700,
-                    width: 1,
-                  ),
-                ),
-              ),
-              minLines: null,
-              maxLines: null,
-              expands: true,
-            ),
-            const SizedBox(height: 15),
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: newPassowrdvalidate,
-              style: GoogleFonts.outfit(
-                color: const Color(0xFFFFFFFF),
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey,
-                constraints: BoxConstraints(
-                  minHeight: 50,
-                  maxHeight: _newPassowrdvalidate == null ? 56 : 81,
-                ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                hintText: 'New Password confirmation',
-                hintStyle: GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
-                hintMaxLines: 1,
-                prefixIcon: const Icon(
-                  Icons.phone_android,
-                  color: Color(0xFFFFFFFF),
-                ),
-                errorText: _newPassowrdvalidate,
-                errorStyle: GoogleFonts.outfit(),
-                errorMaxLines: 1,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade700,
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade700,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.red.shade700,
-                    width: 1,
-                  ),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
-                    color: Colors.red.shade700,
-                    width: 1,
-                  ),
-                ),
-              ),
-              minLines: null,
-              maxLines: null,
-              expands: true,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => performaLogin(),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                minimumSize: const Size(
-                  327,
-                  56,
-                ),
-              ),
-              child: Text(
-                'Update Password',
-                style: GoogleFonts.outfit(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -272,22 +261,11 @@ class _change_passwordState extends State<change_password> with Helpers {
     if (newPassowrd.text.isNotEmpty &&
         newPassowrdvalidate.text.isNotEmpty &&
         oldepassword.text.isNotEmpty) {
-      _controolervalue();
       return true;
     }
     ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
 
     return false;
-  }
-
-  void _controolervalue() {
-    setState(() {
-      _newPassowrd =
-          newPassowrd.text.isEmpty ? 'Enter your new password' : null;
-      _newPassowrdvalidate = newPassowrdvalidate.text.isEmpty
-          ? 'Enter your new password confirmation '
-          : null;
-    });
   }
 
   void login() {

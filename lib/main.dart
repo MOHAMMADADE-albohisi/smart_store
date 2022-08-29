@@ -71,7 +71,7 @@ class smart_store extends StatelessWidget {
           ],
           locale: Locale('en'),
 
-          initialRoute: '/lunch_screen',
+          initialRoute: '/bottoma_screen',
           routes: {
             '/lunch_screen': (context) => const lunch_screen(),
             '/onbressd_screen': (context) => const onbressd_screen(),

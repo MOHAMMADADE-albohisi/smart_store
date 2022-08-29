@@ -14,7 +14,6 @@ class _favorite_screenState extends State<favorite_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Favorite'),),
       body: ListView(
         children: [
           SizedBox(height: 20),

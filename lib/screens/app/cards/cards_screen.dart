@@ -13,17 +13,6 @@ class _carts_screenState extends State<carts_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cart Page'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.delete_outline,
-            ),
-          ),
-        ],
-      ),
       body: Column(
         children: [
           Expanded(

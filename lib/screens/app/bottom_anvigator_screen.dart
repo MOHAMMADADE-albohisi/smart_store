@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/screens/app/cards/cards_screen.dart';
 import 'package:smart_store/screens/app/favorite_screen.dart';
 import 'package:smart_store/screens/app/home_screen.dart';
 import 'package:smart_store/screens/model_ui/bnscreen.dart';
@@ -17,7 +18,7 @@ class _bottomanvigatorState extends State<bottomanvigator> {
   int pageindex = 0;
   final List<Bnscreen> screen = <Bnscreen>[
     Bnscreen(title: 'SMART STORE', widget: const home_screen()),
-    Bnscreen(title: 'SMART STORE', widget: const home_screen()),
+    Bnscreen(title: 'My Carts', widget: const carts_screen()),
     Bnscreen(title: 'Favorites Products', widget: const favorite_screen()),
     Bnscreen(title: 'SMART STORE', widget: const home_screen()),
   ];
@@ -158,6 +159,28 @@ class _bottomanvigatorState extends State<bottomanvigator> {
               title: const Text('My Orders'),
               subtitle: Text(
                 'Go to the Orders page',
+                style: GoogleFonts.montserrat(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey,
+                ),
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward_ios,
+                size: 18,
+              ),
+            ),
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+                Future.delayed(Duration(milliseconds: 250), () {
+                  Navigator.pushNamed(context, '/change_password');
+                });
+              },
+              leading: const Icon(Icons.edit),
+              title: const Text('Change Password'),
+              subtitle: Text(
+                'Go to the change password page',
                 style: GoogleFonts.montserrat(
                   fontSize: 10,
                   fontWeight: FontWeight.w400,
