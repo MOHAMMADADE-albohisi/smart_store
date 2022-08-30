@@ -1,4 +1,5 @@
-import 'dart:ui';
+
+// ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,12 +40,12 @@ class _bottomanvigatorState extends State<bottomanvigator> {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/notifications_screen');
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.notifications_outlined,
                 color: Colors.black,
               ),
@@ -59,10 +60,9 @@ class _bottomanvigatorState extends State<bottomanvigator> {
               decoration: BoxDecoration(
                 color: Colors.blue.shade100,
               ),
-              currentAccountPicture: CircleAvatar(
-                radius: 35,
-                backgroundImage: NetworkImage(
-                  'https://media-exp1.licdn.com/dms/image/C4E03AQE8nRDY5HftVA/profile-displayphoto-shrink_800_800/0/1652103720104?e=1665014400&v=beta&t=5zINtHo2n3qYFWkrCdbCiXz6bffUeGliJGKOT2NEk88',
+              currentAccountPicture: const CircleAvatar(
+                backgroundImage: AssetImage(
+                'images/image_18.png'
                 ),
               ),
               accountName: Text(
@@ -85,7 +85,7 @@ class _bottomanvigatorState extends State<bottomanvigator> {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Future.delayed(Duration(milliseconds: 250), () {
+                Future.delayed(const Duration(milliseconds: 250), () {
                   Navigator.pushNamed(context, '/bottoma_screen');
                 });
               },
@@ -107,7 +107,7 @@ class _bottomanvigatorState extends State<bottomanvigator> {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Future.delayed(Duration(milliseconds: 250), () {
+                Future.delayed(const Duration(milliseconds: 250), () {
                   Navigator.pushNamed(context, '/view_address_screen');
                 });
               },
@@ -129,7 +129,7 @@ class _bottomanvigatorState extends State<bottomanvigator> {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Future.delayed(Duration(milliseconds: 250), () {
+                Future.delayed(const Duration(milliseconds: 250), () {
                   Navigator.pushNamed(context, '/setting_screen');
                 });
               },
@@ -151,7 +151,7 @@ class _bottomanvigatorState extends State<bottomanvigator> {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Future.delayed(Duration(milliseconds: 250), () {
+                Future.delayed(const Duration(milliseconds: 250), () {
                   Navigator.pushNamed(context, '/order_screen');
                 });
               },
@@ -173,7 +173,7 @@ class _bottomanvigatorState extends State<bottomanvigator> {
             ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Future.delayed(Duration(milliseconds: 250), () {
+                Future.delayed(const Duration(milliseconds: 250), () {
                   Navigator.pushNamed(context, '/change_password');
                 });
               },
@@ -212,15 +212,15 @@ class _bottomanvigatorState extends State<bottomanvigator> {
           ),
           elevation: 50,
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 activeIcon: Icon(Icons.home),
                 icon: Icon(Icons.home_outlined),
                 label: ''),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 activeIcon: Icon(Icons.shopping_cart),
                 icon: Icon(Icons.shopping_cart_outlined),
                 label: ''),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 activeIcon: Icon(Icons.favorite),
                 icon: Icon(Icons.favorite_border),
                 label: ''),

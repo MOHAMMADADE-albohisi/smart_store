@@ -328,6 +328,6 @@ class _login_screenState extends State<login_screen> with Helpers {
   }
 
   void login() {
-    Navigator.pushNamed(context, '/bottoma_screen');
+    Navigator.pushNamed(context, '/bottomed_screen');
   }
 }

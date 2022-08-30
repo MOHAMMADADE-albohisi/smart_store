@@ -107,7 +107,6 @@ class smart_store extends StatelessWidget {
             '/ChangePasswordScreen': (context) => const ChangePasswordScreen(),
             '/EditeMobileScreen': (context) => const EditeMobileScreen(),
             '/about_screen': (context) => const bioscreen(),
-
             '/saqs_screen': (context) => const faqsscreen(),
 
           },

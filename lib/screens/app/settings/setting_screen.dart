@@ -163,7 +163,7 @@ class _setting_screenState extends State<setting_screen> {
             height: 60,
             child: TextButton(
               onPressed: () {
-                //
+                _confirmeLogoute();
               },
               child: Row(
                 children: [
@@ -256,4 +256,59 @@ class _setting_screenState extends State<setting_screen> {
       },
     );
   }
+
+  void _confirmeLogoute() async {
+    bool? test = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Conform Logout',
+            style: GoogleFonts.cairo(
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          content: Text(
+            'Are you suer?',
+            style: GoogleFonts.cairo(
+              fontSize: 13,
+              color: Colors.black45,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              child: Text(
+                'Conform',
+                style: GoogleFonts.cairo(
+                  fontSize: 12,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context, false);
+              },
+              child: Text(
+                'Cancel',
+                style: GoogleFonts.cairo(
+                  fontSize: 12,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+    if (test ?? false) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacementNamed(context, '/login_screen');
+    }
+  }
+
 }
