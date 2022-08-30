@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/screens/app/Profile/Profile_screen.dart';
 import 'package:smart_store/screens/app/addresses/address_view_screen.dart';
 import 'package:smart_store/screens/app/addresses/addresse_screen.dart';
 import 'package:smart_store/screens/app/bottom_anvigator_screen.dart';
@@ -18,6 +18,10 @@ import 'package:smart_store/screens/app/prducts/Product_details_screen.dart';
 import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
 import 'package:smart_store/screens/app/favorite_screen.dart';
 import 'package:smart_store/screens/app/home_screen.dart';
+import 'package:smart_store/screens/app/settings/about_screen.dart';
+import 'package:smart_store/screens/app/settings/change_password.dart';
+import 'package:smart_store/screens/app/settings/edit_mobile.dart';
+import 'package:smart_store/screens/app/settings/saqs_screen.dart';
 import 'package:smart_store/screens/app/settings/setting_screen.dart';
 import 'package:smart_store/screens/auth/forget_screen.dart';
 import 'package:smart_store/screens/auth/homelogin_screen.dart';
@@ -65,13 +69,13 @@ class smart_store extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          supportedLocales: [
+          supportedLocales: const [
             Locale('ar'),
             Locale('en'),
           ],
-          locale: Locale('en'),
+          locale: const Locale('en'),
 
-          initialRoute: '/bottoma_screen',
+          initialRoute: '/lunch_screen',
           routes: {
             '/lunch_screen': (context) => const lunch_screen(),
             '/onbressd_screen': (context) => const onbressd_screen(),
@@ -83,7 +87,7 @@ class smart_store extends StatelessWidget {
             '/resetPassword_screen': (context) => const resetPassword_screen(),
             '/registration_verification_screen': (context) => const registration_verification_screen(),
             '/home_screen': (context) => const home_screen(),
-            '/bottoma_screen': (context) => const bottomanvigator(),
+            '/bottomed_screen': (context) => const bottomanvigator(),
             '/favorite_screen': (context) => const favorite_screen(),
             '/categories_screen': (context) => const categories_screen(),
             '/subcategories_screen': (context) => const subcategories(),
@@ -97,8 +101,14 @@ class smart_store extends StatelessWidget {
             '/notifications_screen': (context) => const notifications_screen(),
             '/change_password': (context) => const change_password(),
             '/card_screen': (context) =>  CreditCard_screen(),
-            '/mycards_screen': (context) =>  mycards_screen(),
+            '/mycards_screen': (context) =>  const mycards_screen(),
             '/setting_screen': (context) => const setting_screen(),
+            '/EditProfileScreen': (context) => const EditProfileScreen(),
+            '/ChangePasswordScreen': (context) => const ChangePasswordScreen(),
+            '/EditeMobileScreen': (context) => const EditeMobileScreen(),
+            '/about_screen': (context) => const bioscreen(),
+
+            '/saqs_screen': (context) => const faqsscreen(),
 
           },
         );

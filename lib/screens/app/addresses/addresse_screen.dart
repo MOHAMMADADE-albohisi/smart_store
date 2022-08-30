@@ -46,10 +46,10 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
     Country(id: 3, title: 'Egypt'),
     Country(id: 4, title: 'Morocco'),
     Country(id: 5, title: 'Rafa'),
-    Country(id: 6, title: 'Dair Al Balah'),
+    Country(id: 6, title: 'Dairy Al Blah'),
     Country(id: 7, title: 'Khan Younes'),
-    Country(id: 8, title: 'Beit Lahia'),
-    Country(id: 9, title: 'Jabalia'),
+    Country(id: 8, title: 'Bit Laia'),
+    Country(id: 9, title: 'Jambalaya'),
   ];
 
   @override

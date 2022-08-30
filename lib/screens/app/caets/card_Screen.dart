@@ -1,9 +1,13 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 
 class CreditCard_screen extends StatefulWidget {
+  const CreditCard_screen({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return CreditCard_screenState();
@@ -37,7 +41,7 @@ class CreditCard_screenState extends State<CreditCard_screen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('ADD NEW  CARDS'),
+        title: const Text('ADD NEW  CARDS'),
       ),
       body: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -49,7 +53,7 @@ class CreditCard_screenState extends State<CreditCard_screen> {
               fit: BoxFit.fill,
             )
                 : null,
-            color: Color(0xFF607EAA),
+            color: const Color(0xFF607EAA),
           ),
           child: SafeArea(
             child: Column(
@@ -69,7 +73,7 @@ class CreditCard_screenState extends State<CreditCard_screen> {
                   obscureCardNumber: true,
                   obscureCardCvv: true,
                   isHolderNameVisible: true,
-                  cardBgColor: Color(0xFF8FE3CF),
+                  cardBgColor: const Color(0xFF8FE3CF),
                   backgroundImage:
                   useBackgroundImage ? 'images/image_12.png' : null,
                   isSwipeGestureEnabled: true,
@@ -143,7 +147,7 @@ class CreditCard_screenState extends State<CreditCard_screen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             const Text(
-                              'Glassmorphism',
+                              'Isomorphism',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -205,9 +209,9 @@ class CreditCard_screenState extends State<CreditCard_screen> {
                           ),
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              print('valid!');
+                              //
                             } else {
-                              print('invalid!');
+                              //
                             }
                           },
                         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,36 +12,18 @@ class setting_screen extends StatefulWidget {
 }
 
 class _setting_screenState extends State<setting_screen> {
-  bool _notifications = true;
-  late String _language='en';
-
+  late String _language = 'en';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('settings'),
+        title: const Text('settings'),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         children: [
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            inactiveThumbColor: Colors.grey,
-            title: Text(
-              'Notifications',
-              style: GoogleFonts.montserrat(),
-            ),
-            subtitle: Text(
-              'Turn Notifications On/Off',
-              style: GoogleFonts.montserrat(),
-            ),
-            value: _notifications,
-            onChanged: (bool value) {
-              setState(() => _notifications = value);
-            },
-          ),
-          Container(
+          SizedBox(
             height: 60,
             child: TextButton(
               onPressed: () {
@@ -55,41 +39,41 @@ class _setting_screenState extends State<setting_screen> {
                       color: Colors.black45,
                     ),
                   ),
-                  Spacer(),
-                  Icon(Icons.language),
+                  const Spacer(),
+                  const Icon(Icons.language),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 15),
-          Container(
+          const SizedBox(height: 15),
+          SizedBox(
             height: 60,
             child: TextButton(
               onPressed: () {
-               //
+                Navigator.pushNamed(context, '/EditProfileScreen');
               },
               child: Row(
                 children: [
                   Text(
-                    'Edit Profile',
+                    'Profile',
                     style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       color: Colors.black45,
                     ),
                   ),
-                  Spacer(),
-                  Icon(Icons.person_outlined),
+                  const Spacer(),
+                  const Icon(Icons.person_outlined),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 15),
-          Container(
+          const SizedBox(height: 15),
+          SizedBox(
             height: 60,
             child: TextButton(
               onPressed: () {
-               //
+                Navigator.pushNamed(context, '/EditeMobileScreen');
               },
               child: Row(
                 children: [
@@ -101,18 +85,18 @@ class _setting_screenState extends State<setting_screen> {
                       color: Colors.black45,
                     ),
                   ),
-                  Spacer(),
-                  Icon(Icons.phone_rounded),
+                  const Spacer(),
+                  const Icon(Icons.phone_rounded),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 15),
-          Container(
+          const SizedBox(height: 15),
+          SizedBox(
             height: 60,
             child: TextButton(
               onPressed: () {
-               //
+                Navigator.pushNamed(context, '/ChangePasswordScreen');
               },
               child: Row(
                 children: [
@@ -124,18 +108,18 @@ class _setting_screenState extends State<setting_screen> {
                       color: Colors.black45,
                     ),
                   ),
-                  Spacer(),
-                  Icon(Icons.lock),
+                  const Spacer(),
+                  const Icon(Icons.lock),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 15),
-          Container(
+          const SizedBox(height: 15),
+          SizedBox(
             height: 60,
             child: TextButton(
               onPressed: () {
-               //
+                Navigator.pushNamed(context, '/saqs_screen');
               },
               child: Row(
                 children: [
@@ -147,41 +131,18 @@ class _setting_screenState extends State<setting_screen> {
                       color: Colors.black45,
                     ),
                   ),
-                  Spacer(),
-                  Icon(Icons.question_answer),
+                  const Spacer(),
+                  const Icon(Icons.question_answer),
                 ],
               ),
             ),
           ),
-          SizedBox(height: 15),
-          Container(
+          const SizedBox(height: 15),
+          SizedBox(
             height: 60,
             child: TextButton(
               onPressed: () {
-               //
-              },
-              child: Row(
-                children: [
-                  Text(
-                    'Addresses',
-                    style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Colors.black45,
-                    ),
-                  ),
-                  Spacer(),
-                  Icon(Icons.location_on_outlined),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 15),
-          Container(
-            height: 60,
-            child: TextButton(
-              onPressed: () {
-               //
+                Navigator.pushNamed(context, '/about_screen');
               },
               child: Row(
                 children: [
@@ -197,8 +158,8 @@ class _setting_screenState extends State<setting_screen> {
               ),
             ),
           ),
-          SizedBox(height: 15),
-          Container(
+          const SizedBox(height: 15),
+          SizedBox(
             height: 60,
             child: TextButton(
               onPressed: () {
@@ -214,22 +175,18 @@ class _setting_screenState extends State<setting_screen> {
                       color: Colors.black45,
                     ),
                   ),
-                  Spacer(),
-                  Icon(Icons.logout),
+                  const Spacer(),
+                  const Icon(Icons.logout),
                 ],
               ),
             ),
           ),
-
-
-
-
         ],
       ),
     );
   }
 
-  void _showLanguage()  {
+  void _showLanguage() {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -244,8 +201,7 @@ class _setting_screenState extends State<setting_screen> {
           onClosing: () {},
           builder: (context) {
             return Padding(
-              padding:
-              EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
+              padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 15.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -292,7 +248,6 @@ class _setting_screenState extends State<setting_screen> {
                       }
                     },
                   ),
-
                 ],
               ),
             );

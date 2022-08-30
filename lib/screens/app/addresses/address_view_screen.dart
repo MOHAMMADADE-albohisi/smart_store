@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,7 +74,7 @@ class _view_address_screenState extends State<view_address_screen> {
                                   ),
                                   SizedBox(height: 10.h),
                                   Text(
-                                    'California Street, Blok 4F No.9',
+                                    'California Street, Block 4F No.9',
                                     style: GoogleFonts.montserrat(
                                       fontWeight: FontWeight.w300,
                                       fontSize: 12.sp,

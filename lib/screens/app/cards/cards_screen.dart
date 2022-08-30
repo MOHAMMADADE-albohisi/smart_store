@@ -44,11 +44,11 @@ class _carts_screenState extends State<carts_screen> {
                           height: 100,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFFEBF0F7),
+                            color: const Color(0xFFEBF0F7),
                           ),
                           child: Image.asset('images/image_15.png'),
                         ),
-                        SizedBox(width: 33),
+                        const SizedBox(width: 33),
                         Column(
                           children: [
                             Text(
@@ -56,10 +56,10 @@ class _carts_screenState extends State<carts_screen> {
                               style: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
-                                color: Color(0xFF16162E),
+                                color: const Color(0xFF16162E),
                               ),
                             ),
-                            SizedBox(height: 27),
+                            const SizedBox(height: 27),
                             Container(
                               width: 115,
                               height: 34,
@@ -83,7 +83,7 @@ class _carts_screenState extends State<carts_screen> {
                                       ),
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Text(
                                     '2',
                                     style: GoogleFonts.montserrat(
@@ -94,7 +94,7 @@ class _carts_screenState extends State<carts_screen> {
                                       ),
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Container(
                                     width: 40,
                                     height: 40,
@@ -118,22 +118,22 @@ class _carts_screenState extends State<carts_screen> {
                             ),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Column(
                           children: [
                             IconButton(
                               onPressed: () {},
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.delete_outline,
                               ),
                             ),
-                            SizedBox(height: 28),
+                            const SizedBox(height: 28),
                             Text(
                               '20\$',
                               style: GoogleFonts.montserrat(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xFF16162E),
+                                color: const Color(0xFF16162E),
                               ),
                             ),
                           ],
