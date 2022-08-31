@@ -100,7 +100,7 @@ class smart_store extends StatelessWidget {
             '/carts_screen': (context) => const carts_screen(),
             '/notifications_screen': (context) => const notifications_screen(),
             '/change_password': (context) => const change_password(),
-            '/card_screen': (context) =>  CreditCard_screen(),
+            '/card_screen': (context) =>  const CreditCard_screen(),
             '/mycards_screen': (context) =>  const mycards_screen(),
             '/setting_screen': (context) => const setting_screen(),
             '/EditProfileScreen': (context) => const EditProfileScreen(),
