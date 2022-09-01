@@ -1,8 +1,9 @@
 // ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/widgets/AppTextField.dart';
 import 'package:smart_store/widgets/utils/helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class verification_forget_screen extends StatefulWidget {
   const verification_forget_screen({Key? key}) : super(key: key);
@@ -12,10 +13,9 @@ class verification_forget_screen extends StatefulWidget {
       _verification_forget_screenState();
 }
 
-class _verification_forget_screenState
-    extends State<verification_forget_screen> with Helpers{
+class _verification_forget_screenState extends State<verification_forget_screen>
+    with Helpers {
   late TextEditingController _mobile;
-  String? _mobilError;
 
   @override
   void initState() {
@@ -28,6 +28,7 @@ class _verification_forget_screenState
     _mobile.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +39,8 @@ class _verification_forget_screenState
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'Verification Number',
-          style: GoogleFonts.montserrat(
+          AppLocalizations.of(context)!.forgetpassword,
+          style: GoogleFonts.nunitoSans(
             fontWeight: FontWeight.w500,
             fontSize: 20,
             color: Colors.grey,
@@ -48,100 +49,35 @@ class _verification_forget_screenState
       ),
       body: Stack(
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Image.asset(
-              'images/image_10.png',
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            ),
-          ),
           Column(
             children: [
               const SizedBox(height: 200),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Text(
-                  'Please enter the 4-digit verification code to be able to reset a new password',
+                  AppLocalizations.of(context)!.verificationamaseegforget,
                   style: GoogleFonts.montserrat(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
               const SizedBox(height: 25),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: _mobile,
-                  style: GoogleFonts.outfit(
-                    color: const Color(0xFFFFFFFF),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor:  Colors.grey,
-                    constraints: BoxConstraints(
-                      minHeight: 50,
-                      maxHeight: _mobilError == null ? 56 : 81,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                    hintText: 'Enter your 4 digit number',
-                    hintStyle:
-                    GoogleFonts.nunito(color: const Color(0xFFFFFFFF)),
-                    hintMaxLines: 1,
-                    prefixIcon: const Icon(
-                      Icons.phone_android,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                    errorText: _mobilError,
-                    errorStyle: GoogleFonts.outfit(),
-                    errorMaxLines: 1,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: Colors.grey.shade700,
-                        width: 1,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey.shade700,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: Colors.red.shade700,
-                        width: 1,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(
-                        color: Colors.red.shade700,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                  minLines: null,
-                  maxLines: null,
-                  expands: true,
-                ),
-              ),
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: AppTextField(
+                    hint: AppLocalizations.of(context)!.hinttext,
+                    prefixIcon: (Icons.phone_android_rounded),
+                    keyboardType: TextInputType.number,
+                    controller: _mobile,
+                  )),
               const SizedBox(height: 25),
               ElevatedButton(
                 onPressed: () => performaLogin(),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   minimumSize: const Size(
                     327,
@@ -149,7 +85,7 @@ class _verification_forget_screenState
                   ),
                 ),
                 child: Text(
-                  'Submit',
+                  AppLocalizations.of(context)!.resetpasswrd,
                   style: GoogleFonts.outfit(
                     fontSize: 16,
                   ),
@@ -162,7 +98,6 @@ class _verification_forget_screenState
     );
   }
 
-
   void performaLogin() {
     if (checkData()) {
       login();
@@ -171,21 +106,72 @@ class _verification_forget_screenState
 
   bool checkData() {
     if (_mobile.text.isNotEmpty) {
-      _controolervalue();
       return true;
     }
-    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
+    ShowSnakBar(context,
+        messageerroe: AppLocalizations.of(context)!.error_data, error: true);
 
     return false;
   }
 
-  void _controolervalue() {
-    setState(() {
-      _mobilError = _mobile.text.isEmpty ? 'Enter your mobile number' : null;
-    });
+  void login() {
+    _confirmeLogoute();
   }
 
-  void login() {
-  Navigator.popAndPushNamed(context, '/resetPassword_screen');
+  void _confirmeLogoute() async {
+    bool? test = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 60),
+              child: Column(
+                children: [
+                  Image.asset('images/image_11.png'),
+                ],
+              )),
+          content: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              AppLocalizations.of(context)!.verificatinsuccfordet,
+              style: GoogleFonts.cairo(
+                fontSize: 13,
+                color: Colors.black45,
+              ),
+            ),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 50,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.grey,
+                  ),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/resetPassword_screen');
+                      },
+                      child: Text(
+                        AppLocalizations.of(context)!.done,
+                        style: GoogleFonts.cairo(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
+                      )),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+    if (test ?? false) {
+      //
+    }
   }
 }

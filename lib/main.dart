@@ -24,7 +24,6 @@ import 'package:smart_store/screens/app/settings/edit_mobile.dart';
 import 'package:smart_store/screens/app/settings/saqs_screen.dart';
 import 'package:smart_store/screens/app/settings/setting_screen.dart';
 import 'package:smart_store/screens/auth/forget_screen.dart';
-import 'package:smart_store/screens/auth/homelogin_screen.dart';
 import 'package:smart_store/screens/auth/login_screen.dart';
 import 'package:smart_store/screens/auth/register_screen.dart';
 import 'package:smart_store/screens/auth/reset_password_screen.dart';
@@ -74,28 +73,29 @@ class smart_store extends StatelessWidget {
             Locale('ar'),
             Locale('en'),
           ],
-          locale: const Locale('en'),
-          initialRoute: '/onbressd_screen',
+          locale: const Locale('ar'),
+          initialRoute: '/lunch_screen',
           routes: {
             '/lunch_screen': (context) => const lunch_screen(),
             '/onbressd_screen': (context) => const OnBordings_screen(),
-            '/homelogin_screen': (context) => const homelogin_screen(),
             '/login_screen': (context) => const login_screen(),
             '/register_screen': (context) => const register_screen(),
+            '/activate_the_account': (context) =>const registration_verification_screen(),
+
             '/forget_screen': (context) => const forgetPassword_screen(),
-            '/verification_forget_screen': (context) =>
-                const verification_forget_screen(),
+            '/verification_forget_screen': (context) => const verification_forget_screen(),
             '/resetPassword_screen': (context) => const resetPassword_screen(),
-            '/registration_verification_screen': (context) =>
-                const registration_verification_screen(),
+
+
+
+
             '/home_screen': (context) => const home_screen(),
             '/bottomed_screen': (context) => const bottomanvigator(),
             '/favorite_screen': (context) => const favorite_screen(),
             '/categories_screen': (context) => const categories_screen(),
             '/subcategories_screen': (context) => const subcategories(),
             '/prducts_screen': (context) => const prducts_screen(),
-            '/Productdetails_screen': (context) =>
-                const Productdetails_screen(),
+            '/Productdetails_screen': (context) =>  const Productdetails_screen(),
             '/addresses_screen': (context) => const addresses_screen(),
             '/view_address_screen': (context) => const view_address_screen(),
             '/order_screen': (context) => const order_screen(),

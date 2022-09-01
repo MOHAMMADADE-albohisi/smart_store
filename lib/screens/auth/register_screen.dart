@@ -1,9 +1,12 @@
-// ignore_for_file: camel_case_types
-
+// ignore_for_file: camel_case_types, non_constant_identifier_names, duplicate_ignore
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/screens/model_ui/country.dart';
+import 'package:smart_store/widgets/AppTextField.dart';
 import 'package:smart_store/widgets/utils/helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class register_screen extends StatefulWidget {
   const register_screen({Key? key}) : super(key: key);
@@ -16,15 +19,10 @@ class _register_screenState extends State<register_screen> with Helpers {
   late TextEditingController _name;
   late TextEditingController _mobile;
   late TextEditingController _password;
-  late TextEditingController _city;
   late TapGestureRecognizer _click;
 
   bool _viewpassword = true;
-
-  String? _nameError;
-  String? _mobilError;
-  String? _passwordError;
-  String? _cityError;
+  int? _selectedcountryid;
   String? _gender = 'M';
 
   @override
@@ -33,7 +31,6 @@ class _register_screenState extends State<register_screen> with Helpers {
     _name = TextEditingController();
     _mobile = TextEditingController();
     _password = TextEditingController();
-    _city = TextEditingController();
     _click = TapGestureRecognizer();
     _click.onTap = createnewacountclick;
   }
@@ -43,10 +40,21 @@ class _register_screenState extends State<register_screen> with Helpers {
     _name.dispose();
     _mobile.dispose();
     _password.dispose();
-    _city.dispose();
     _click.dispose();
     super.dispose();
   }
+
+  final List<Country> _Countryss = <Country>[
+    Country(id: 1, title: 'palestine'),
+    Country(id: 2, title: 'Gaza'),
+    Country(id: 3, title: 'Egypt'),
+    Country(id: 4, title: 'Morocco'),
+    Country(id: 5, title: 'Rafa'),
+    Country(id: 6, title: 'Dairy Al Blah'),
+    Country(id: 7, title: 'Khan Younes'),
+    Country(id: 8, title: 'Bit Laia'),
+    Country(id: 9, title: 'Jambalaya'),
+  ];
 
   void createnewacountclick() {
     Navigator.pushNamed(context, '/login_screen');
@@ -55,321 +63,203 @@ class _register_screenState extends State<register_screen> with Helpers {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        excludeHeaderSemantics: true,
-        title: Text(
-          'SMART Register',
-          style: GoogleFonts.montserrat(
-            fontWeight: FontWeight.w500,
-            fontSize: 25,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      body: Stack(
+      body: ListView(
         children: [
-          SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Image.asset(
-              'images/image_10.png',
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
+          Container(
+            width: 375.w,
+            height: 100.h,
+            decoration: const BoxDecoration(
+              color: Color(0xFF96E5D1),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              ),
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login_screen');
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: Color(0xFFFFFFFF),
+                  ),
+                ),
+                SizedBox(width: 60.w),
+                Text(
+                  AppLocalizations.of(context)!.register,
+                  style: GoogleFonts.nunitoSans(
+                    fontSize: 17.h,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFFFFFFFF),
+                  ),
+                )
+              ],
             ),
           ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                children: [
-                  const SizedBox(height: 150),
-                  TextField(
-                    controller: _name,
-                    style: GoogleFonts.nunito(),
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade300,
-                      constraints: BoxConstraints(
-                        minHeight: 50,
-                        maxHeight: _nameError == null ? 50 : 75,
-                      ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 15),
-                      hintText: 'Name',
-                      labelStyle: GoogleFonts.nunito(),
-                      prefixIcon: const Icon(Icons.person_outlined),
-                      errorText: _mobilError,
-                      errorStyle: GoogleFonts.nunito(),
-                      errorMaxLines: 1,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade700,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                    minLines: null,
-                    maxLines: null,
-                    expands: true,
+          SizedBox(height: 30.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(AppLocalizations.of(context)!.nameregester),
+                AppTextField(
+                  hint: AppLocalizations.of(context)!.number,
+                  obscureText: false,
+                  prefixIcon: Icons.person_outlined,
+                  keyboardType: TextInputType.text,
+                  controller: _name,
+                ),
+                SizedBox(height: 20.h),
+                Text(AppLocalizations.of(context)!.mobilregister),
+                AppTextField(
+                  hint: AppLocalizations.of(context)!.number,
+                  obscureText: false,
+                  prefixIcon: Icons.phone_android_rounded,
+                  keyboardType: TextInputType.number,
+                  controller: _mobile,
+                ),
+                SizedBox(height: 20.h),
+                Text(AppLocalizations.of(context)!.password),
+                AppTextField(
+                  hint: AppLocalizations.of(context)!.password,
+                  obscureText: true,
+                  prefixIcon: Icons.lock,
+                  keyboardType: TextInputType.text,
+                  controller: _password,
+                  sufficIcon: IconButton(
+                    onPressed: () {
+                      setState(() => {_viewpassword = !_viewpassword});
+                    },
+                    icon: Icon(_viewpassword
+                        ? Icons.visibility_off
+                        : Icons.visibility),
                   ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _mobile,
-                    style: GoogleFonts.nunito(),
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade300,
-                      constraints: BoxConstraints(
-                        minHeight: 50,
-                        maxHeight: _mobilError == null ? 50 : 75,
-                      ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 15),
-                      hintText: 'Mobile',
-                      labelStyle: GoogleFonts.nunito(),
-                      prefixIcon: const Icon(Icons.phone_android),
-                      errorText: _mobilError,
-                      errorStyle: GoogleFonts.nunito(),
-                      errorMaxLines: 1,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade700,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                    minLines: null,
-                    maxLines: null,
-                    expands: true,
+                ),
+                SizedBox(height: 20.h),
+                Text(AppLocalizations.of(context)!.city),
+                Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _password,
-                    obscureText: _viewpassword,
-                    style: GoogleFonts.nunito(),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade300,
-                      prefixIcon: const Icon(Icons.lock),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() => {_viewpassword = !_viewpassword});
-                        },
-                        icon: Icon(_viewpassword
-                            ? Icons.visibility_off
-                            : Icons.visibility),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 20),
+                    child: DropdownButton<int>(
+                      isExpanded: true,
+                      hint: Text(
+                        AppLocalizations.of(context)!.selectcountry,
                       ),
-                      hintText: 'Password',
-                      labelStyle: GoogleFonts.nunito(),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade700),
-                        borderRadius: BorderRadius.circular(10),
+                      style: GoogleFonts.montserrat(
+                        color: Colors.black,
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade700,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
+                      onChanged: (int? value) {
+                        setState(() => _selectedcountryid = value);
+                      },
+                      borderRadius: BorderRadius.circular(20),
+                      dropdownColor: Colors.grey.shade200,
+                      icon: const Icon(Icons.keyboard_arrow_down_sharp),
+                      itemHeight: 48,
+                      menuMaxHeight: 250,
+                      underline: const Divider(
+                        color: Colors.transparent,
                       ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      constraints: BoxConstraints(
-                        maxHeight: _passwordError == null ? 50 : 75,
-                        minHeight: 50,
-                      ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 15),
-                      errorText: _passwordError,
-                      errorStyle: GoogleFonts.nunito(),
-                      errorMaxLines: 1,
-                    ),
-                    maxLines: 1,
-                    minLines: 1,
-                    expands: false,
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: _city,
-                    style: GoogleFonts.nunito(),
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.grey.shade300,
-                      constraints: BoxConstraints(
-                        minHeight: 50,
-                        maxHeight: _cityError == null ? 50 : 75,
-                      ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 15),
-                      hintText: 'City',
-                      labelStyle: GoogleFonts.nunito(),
-                      prefixIcon: const Icon(Icons.maps_home_work_rounded),
-                      errorText: _cityError,
-                      errorStyle: GoogleFonts.nunito(),
-                      errorMaxLines: 1,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.grey.shade700,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade700,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                    minLines: null,
-                    maxLines: null,
-                    expands: true,
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Text(
-                        'Gender',
-                        style: GoogleFonts.montserrat(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFFFFFFFF),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Container(
-                        width: 150,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey.shade300,
-                        ),
-                        child: RadioListTile<String>(
-                          title: Text(
-                            'Male',
-                            style: GoogleFonts.cairo(),
-                          ),
-                          value: 'M',
-                          groupValue: _gender,
-                          onChanged: (String? value) {
-                            setState(() => _gender = value);
-                          },
-                        ),
-                      ),
-                      Spacer(),
-                      Container(
-                        width: 150,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey.shade300,
-                        ),
-                        child: RadioListTile<String>(
-                          title: Text(
-                            'Female',
-                            style: GoogleFonts.cairo(
-
+                      value: _selectedcountryid,
+                      selectedItemBuilder: (BuildContext cotext) {
+                        return _selectedcountryid != null
+                            ? _Countryss.map(
+                                (e) => Align(
+                                  alignment: AlignmentDirectional.centerStart,
+                                  child: Text(
+                                    _Countryss.firstWhere((element) =>
+                                        element.id == _selectedcountryid).title,
+                                    style: GoogleFonts.montserrat(
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ).toList()
+                            : [];
+                      },
+                      items: _Countryss.map(
+                        // ignore: non_constant_identifier_names
+                        (Countrysss) {
+                          return DropdownMenuItem<int>(
+                            value: Countrysss.id,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(Countrysss.title),
+                                const Divider(
+                                  thickness: 0.8,
+                                  color: Colors.black,
+                                )
+                              ],
                             ),
-                          ),
-                          value: 'F',
-                          groupValue: _gender,
-                          onChanged: (String? value) {
-                            setState(() => _gender = value);
-                          },
-                        ),
-                      )
-                    ],
+                          );
+                        },
+                      ).toList(),
+                    ),
                   ),
-                  const SizedBox(height: 25),
-                  ElevatedButton(
+                ),
+                SizedBox(height: 20.h),
+                Text(AppLocalizations.of(context)!.gender),
+                SizedBox(height: 20.h),
+                Row(
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey.shade300,
+                      ),
+                      child: RadioListTile<String>(
+                        title: Text(
+                          AppLocalizations.of(context)!.male,
+                          style: GoogleFonts.cairo(),
+                        ),
+                        value: 'M',
+                        groupValue: _gender,
+                        onChanged: (String? value) {
+                          setState(() => _gender = value);
+                        },
+                      ),
+                    ),
+                    const Spacer(),
+                    Container(
+                      width: 150,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey.shade300,
+                      ),
+                      child: RadioListTile<String>(
+                        title: Text(
+                          AppLocalizations.of(context)!.female,
+                          style: GoogleFonts.cairo(),
+                        ),
+                        value: 'F',
+                        groupValue: _gender,
+                        onChanged: (String? value) {
+                          setState(() => _gender = value);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 53.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 40.h),
+                  child: ElevatedButton(
                     onPressed: () => performaLogin(),
                     style: ElevatedButton.styleFrom(
+                      primary: const Color(0xFF96E5D1),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       minimumSize: const Size(
                         double.infinity,
@@ -377,107 +267,38 @@ class _register_screenState extends State<register_screen> with Helpers {
                       ),
                     ),
                     child: Text(
-                      'Sign In',
-                      style: GoogleFonts.montserrat(
+                      AppLocalizations.of(context)!.register,
+                      style: GoogleFonts.nunitoSans(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 35),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 100),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 47.53,
-                          height: 1,
-                          color: Colors.grey,
+                ),
+                SizedBox(height: 53.h),
+                Center(
+                  child: RichText(
+                    text: TextSpan(
+                        text: AppLocalizations.of(context)!.register_login,
+                        style: GoogleFonts.nunitoSans(
+                          fontSize: 13.h,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF8D9AC9),
                         ),
-                        const SizedBox(width: 10),
-                        Text(
-                          'OR',
-                          style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Container(
-                          width: 47.53,
-                          height: 1,
-                          color: Colors.grey,
-                        )
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    width: 327,
-                    height: 58,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.shade400,
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.transparent,
-                        elevation: 0,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'images/image_8.png',
-                            width: 10,
-                          ),
-                          const SizedBox(width: 15),
-                          Text(
-                            'Login with Facebook',
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Center(
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Do you already have an account?  ',
-                    style: GoogleFonts.nunito(
-                      color: Colors.white,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'sign in!',
-                        recognizer: _click,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          decorationStyle: TextDecorationStyle.solid,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ],
+                          TextSpan(
+                              text: AppLocalizations.of(context)!.sing_in,
+                              recognizer: _click,
+                              style: GoogleFonts.nunitoSans(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13.h,
+                                color: const Color(0xFF2FA9FF),
+                              ))
+                        ]),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -493,23 +314,13 @@ class _register_screenState extends State<register_screen> with Helpers {
   bool checkData() {
     if (_name.text.isNotEmpty &&
         _mobile.text.isNotEmpty &&
-        _password.text.isNotEmpty &&
-        _city.text.isNotEmpty) {
-      _controolervalue();
+        _password.text.isNotEmpty) {
       return true;
     }
-    _controolervalue();
-    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
-    return false;
-  }
 
-  void _controolervalue() {
-    setState(() {
-      _nameError = _password.text.isEmpty ? 'Enter name' : null;
-      _mobilError = _mobile.text.isEmpty ? 'Enter Email address' : null;
-      _passwordError = _password.text.isEmpty ? 'Enter password' : null;
-      _cityError = _password.text.isEmpty ? 'Enter city' : null;
-    });
+    ShowSnakBar(context,
+        messageerroe: AppLocalizations.of(context)!.snacks, error: true);
+    return false;
   }
 
   void login() {
@@ -521,17 +332,33 @@ class _register_screenState extends State<register_screen> with Helpers {
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+          title: Center(
             child: Text(
-              'A text message containing 4 characters has been sent to your number',
-              style: GoogleFonts.cairo(
-                fontSize: 13,
-                color: Colors.black45,
+             AppLocalizations.of(context)!.sentcodenumber,
+              style: GoogleFonts.nunitoSans(
+                fontWeight: FontWeight.bold,
+                fontSize: 17.h,
+                color: Color(0xFF43538D),
               ),
             ),
           ),
+          content: Container(
+            width: 50.w,
+            height: 80.h,
+            child: Image.asset('images/image_10.png'),
+          ),
           actions: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.h),
+              child: Text(
+                AppLocalizations.of(context)!.verifednumberregister,
+                style: GoogleFonts.nunitoSans(
+                  fontSize: 14.h,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF6072B3),
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -540,15 +367,15 @@ class _register_screenState extends State<register_screen> with Helpers {
                   width: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey,
+                    color: Color(0xFF2FA9FF),
                   ),
                   child: TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, '/registration_verification_screen');
+                        Navigator.pushReplacementNamed(
+                            context, '/activate_the_account');
                       },
                       child: Text(
-                        'Done',
+                       AppLocalizations.of(context)!.done,
                         style: GoogleFonts.cairo(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,

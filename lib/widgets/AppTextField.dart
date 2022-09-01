@@ -9,18 +9,22 @@ class AppTextField extends StatelessWidget {
     required this.prefixIcon,
     required this.keyboardType,
     required this.controller,
+    this.color = Colors.black,
     this.focuseBorderdColor = Colors.blue,
     this.sufficIcon,
     this.obscureText = false,
+
   }) : super(key: key);
 
   final String hint;
-  final IconData prefixIcon ;
+  final IconData prefixIcon;
+
   final TextInputType keyboardType;
   final TextEditingController controller;
   final Color focuseBorderdColor;
   final Widget? sufficIcon;
   final bool obscureText;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +35,22 @@ class AppTextField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: GoogleFonts.cairo(fontSize: 13.sp,color: Colors.white),
+        hintStyle: GoogleFonts.nunitoSans(fontSize: 14.sp,
+            color: Color(0xFFD2D7E9),
+            fontWeight: FontWeight.w400),
         hintMaxLines: 1,
         suffixIcon: sufficIcon,
-        prefixIcon: Icon(prefixIcon,color: Colors.white,),
+        suffixIconColor: color,
+        prefixIcon: Icon(prefixIcon, color: Colors.blueGrey,),
         enabledBorder: buildOutlineInputBorder(),
         contentPadding: EdgeInsets.zero,
-        focusedBorder: buildOutlineInputBorder(color : focuseBorderdColor),
+        focusedBorder: buildOutlineInputBorder(color: focuseBorderdColor),
 
       ),
     );
   }
 
-  OutlineInputBorder buildOutlineInputBorder({Color color  = Colors.white}) {
+  OutlineInputBorder buildOutlineInputBorder({Color color = Colors.grey}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(10.r),
       borderSide: BorderSide(
