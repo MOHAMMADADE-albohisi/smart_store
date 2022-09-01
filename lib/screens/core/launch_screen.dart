@@ -1,15 +1,19 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class lunch_screen extends StatefulWidget {
   const lunch_screen({Key? key}) : super(key: key);
+
   @override
   State<lunch_screen> createState() => _lunch_screenState();
 }
-class _lunch_screenState extends State<lunch_screen> {
 
+class _lunch_screenState extends State<lunch_screen> {
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -17,12 +21,13 @@ class _lunch_screenState extends State<lunch_screen> {
       Navigator.pushReplacementNamed(context, '/onbressd_screen');
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
+        height: double.infinity.h,
+        width: double.infinity.w,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: AlignmentDirectional.bottomStart,
@@ -38,12 +43,15 @@ class _lunch_screenState extends State<lunch_screen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('images/image_1.png'),
-            SizedBox(height: 20),
-            Text('SMART STORE',style: GoogleFonts.openSans(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.black54,
-            ),)
+            SizedBox(height: 20.h),
+            Text(
+              AppLocalizations.of(context)!.smart_store,
+              style: GoogleFonts.openSans(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.h,
+                color: Colors.black54,
+              ),
+            )
           ],
         ),
       ),

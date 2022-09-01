@@ -1,0 +1,39 @@
+{
+"login_title": "Welcome to back....",
+"login_subtitle": "Enter Email & Password",
+"login": "Login",
+"email" : "email",
+"password" : "Passsword",
+"error" : "Entar required Data! ",
+"logut" : "Confarm Logout ",
+"sublogute" : "Are you suar",
+"confarm" : "Confarm",
+"cancel" : "Cancel",
+"home" : "Home",
+"language_title" : "Change Language",
+"languagesub_title" : "Choos suitable Language",
+"name" : "name",
+
+"register" : "Register",
+"register_title" : "Create Account new...",
+"regester_subtitle": "Enter info below",
+
+"new_account": "Donut have a account ?",
+"products" : "Products",
+"create_products" : "Create Products",
+"update_products" : "Update Products",
+"ifo": "Info",
+"price": "Price",
+"quantity": "Quantity",
+"save": "Save",
+"error_data" : "Enter required Data",
+"smart_store" : "Smart Store",
+"teat1": "Lots of new products here and decide which product is best for you",
+"test2": "Discover a New For You",
+"skip": "Skip",
+"start":"START"
+
+
+
+
+}

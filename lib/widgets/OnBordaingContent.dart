@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OnBordaingContent extends StatelessWidget {
-  const OnBordaingContent({
+class outbording extends StatelessWidget {
+  const outbording({
     Key? key,
     required this.image,
     required this.title,
@@ -15,40 +16,35 @@ class OnBordaingContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 34),
-          child: Column(
-            children: [
-              Image.asset(
-                'images/$image.png',
-                height: 317,
-              ),
-              const SizedBox(height: 19),
-              Text(
-                title,
-                style: GoogleFonts.nunito(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color:  Colors.black,
-                ),
-              ),
-              const SizedBox(
-                height: 20.8,
-              ),
-              Text(
-                subtitle,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.openSans(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w300,
-                  color:  Colors.black45,
-                ),
-              ),
-            ],
+        Container(
+          width: 375.w,
+          height: 474.h,
+          child: Image.asset(
+            'images/$image.png',
+            fit: BoxFit.cover,
           ),
         ),
+        Text(
+          title,
+          style: GoogleFonts.nunitoSans(
+            fontWeight: FontWeight.bold,
+            fontSize: 22.h,
+            color: Color(0xFF3E3E3E),
+          ),
+        ),
+        SizedBox(height: 24.9.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 53.h),
+          child: Text(
+            subtitle,
+            style: GoogleFonts.nunitoSans(
+              fontSize: 16.h,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF3E3E3E),
+            ),
+          ),
+        )
       ],
     );
   }

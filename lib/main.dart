@@ -33,6 +33,7 @@ import 'package:smart_store/screens/auth/verification/registration_verification_
 import 'package:smart_store/screens/auth/verification/verification_forget_screen.dart';
 import 'package:smart_store/screens/core/launch_screen.dart';
 import 'package:smart_store/screens/core/outboarding_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const smart_store());
@@ -55,7 +56,6 @@ class smart_store extends StatelessWidget {
               elevation: 0,
               color: Colors.transparent,
               iconTheme: const IconThemeData(color: Colors.black54),
-
               titleTextStyle: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
                 fontSize: 20.sp,
@@ -64,7 +64,8 @@ class smart_store extends StatelessWidget {
             ),
           ),
           debugShowCheckedModeBanner: false,
-          localizationsDelegates:const [
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
@@ -74,25 +75,27 @@ class smart_store extends StatelessWidget {
             Locale('en'),
           ],
           locale: const Locale('en'),
-
-          initialRoute: '/lunch_screen',
+          initialRoute: '/onbressd_screen',
           routes: {
             '/lunch_screen': (context) => const lunch_screen(),
-            '/onbressd_screen': (context) => const onbressd_screen(),
+            '/onbressd_screen': (context) => const OnBordings_screen(),
             '/homelogin_screen': (context) => const homelogin_screen(),
             '/login_screen': (context) => const login_screen(),
             '/register_screen': (context) => const register_screen(),
             '/forget_screen': (context) => const forgetPassword_screen(),
-            '/verification_forget_screen': (context) => const verification_forget_screen(),
+            '/verification_forget_screen': (context) =>
+                const verification_forget_screen(),
             '/resetPassword_screen': (context) => const resetPassword_screen(),
-            '/registration_verification_screen': (context) => const registration_verification_screen(),
+            '/registration_verification_screen': (context) =>
+                const registration_verification_screen(),
             '/home_screen': (context) => const home_screen(),
             '/bottomed_screen': (context) => const bottomanvigator(),
             '/favorite_screen': (context) => const favorite_screen(),
             '/categories_screen': (context) => const categories_screen(),
             '/subcategories_screen': (context) => const subcategories(),
             '/prducts_screen': (context) => const prducts_screen(),
-            '/Productdetails_screen': (context) => const Productdetails_screen(),
+            '/Productdetails_screen': (context) =>
+                const Productdetails_screen(),
             '/addresses_screen': (context) => const addresses_screen(),
             '/view_address_screen': (context) => const view_address_screen(),
             '/order_screen': (context) => const order_screen(),
@@ -100,15 +103,14 @@ class smart_store extends StatelessWidget {
             '/carts_screen': (context) => const carts_screen(),
             '/notifications_screen': (context) => const notifications_screen(),
             '/change_password': (context) => const change_password(),
-            '/card_screen': (context) =>  const CreditCard_screen(),
-            '/mycards_screen': (context) =>  const mycards_screen(),
+            '/card_screen': (context) => const CreditCard_screen(),
+            '/mycards_screen': (context) => const mycards_screen(),
             '/setting_screen': (context) => const setting_screen(),
             '/EditProfileScreen': (context) => const EditProfileScreen(),
             '/ChangePasswordScreen': (context) => const ChangePasswordScreen(),
             '/EditeMobileScreen': (context) => const EditeMobileScreen(),
             '/about_screen': (context) => const bioscreen(),
             '/saqs_screen': (context) => const faqsscreen(),
-
           },
         );
       },
