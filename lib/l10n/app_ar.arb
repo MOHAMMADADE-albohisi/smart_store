@@ -70,7 +70,14 @@
 "massegforget": "سيتم إرسال رمز يتكون من 4 إلى رقم الهاتف ، من فضلك لا تشاركه مع أي شخص. للتأكيد ، اضغط على إرسال",
 "sentcodenumber": "تم إرسال الرمز",
 "verifednumberregister": "سيصلك قريبًا رقمًا به رمز لتفعيل حسابك الشخصي",
-"newpasswordsuccessfully": "تم تعيين كلمة مرور جديدة بنجاح"
+"newpasswordsuccessfully": "تم تعيين كلمة مرور جديدة بنجاح",
+"category": "الفئات",
+"namecategory": "Ayurveda",
+"see_all": "عرض الكل",
+"latestproducts": "أحدث المنتجات",
+"maylike": "المنتجات التي قد أعجبتك"
+
+
 
 
 

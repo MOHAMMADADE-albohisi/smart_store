@@ -73,7 +73,14 @@
 "massegforget": "A code consisting of 4 will be sent to the phone number, please do not share it with anyone. To confirm, press on sent",
 "sentcodenumber": "Code has been sent",
 "verifednumberregister": "Soon you will receive a number with a code to activate your personal account",
-"newpasswordsuccessfully": "A new password has been set successfully"
+"newpasswordsuccessfully": "A new password has been set successfully",
+"category": "Category",
+"namecategory": "Ayurveda",
+"see_all": "See All",
+"latestproducts": "Latest Products",
+"maylike": "Products you may like"
+
+
 
 
 
