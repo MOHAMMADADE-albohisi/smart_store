@@ -81,21 +81,19 @@ class smart_store extends StatelessWidget {
             '/login_screen': (context) => const login_screen(),
             '/register_screen': (context) => const register_screen(),
             '/activate_the_account': (context) =>const registration_verification_screen(),
-
             '/forget_screen': (context) => const forgetPassword_screen(),
             '/verification_forget_screen': (context) => const verification_forget_screen(),
             '/resetPassword_screen': (context) => const resetPassword_screen(),
-
-
-
-
             '/home_screen': (context) => const home_screen(),
-            '/bottomed_screen': (context) => const bottomanvigator(),
-            '/favorite_screen': (context) => const favorite_screen(),
             '/categories_screen': (context) => const categories_screen(),
             '/subcategories_screen': (context) => const subcategories(),
-            '/prducts_screen': (context) => const prducts_screen(),
+            '/bottomed_screen': (context) => const bottomanvigator(),
             '/Productdetails_screen': (context) =>  const Productdetails_screen(),
+
+
+
+            '/favorite_screen': (context) => const favorite_screen(),
+            '/prducts_screen': (context) => const prducts_screen(),
             '/addresses_screen': (context) => const addresses_screen(),
             '/view_address_screen': (context) => const view_address_screen(),
             '/order_screen': (context) => const order_screen(),
