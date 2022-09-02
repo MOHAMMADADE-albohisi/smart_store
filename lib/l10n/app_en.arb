@@ -75,10 +75,13 @@
 "verifednumberregister": "Soon you will receive a number with a code to activate your personal account",
 "newpasswordsuccessfully": "A new password has been set successfully",
 "category": "Category",
+"categoryname": "boiler",
 "namecategory": "Ayurveda",
 "see_all": "See All",
 "latestproducts": "Latest Products",
-"maylike": "Products you may like"
+"maylike": "Products you may like",
+"viewsupcategory": "sup Category"
+
 
 
 

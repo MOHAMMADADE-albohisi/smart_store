@@ -35,7 +35,7 @@ class _home_screenState extends State<home_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F5F7),
+      backgroundColor: const Color(0xFFBCBDBF),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Column(
@@ -105,38 +105,43 @@ class _home_screenState extends State<home_screen> {
                               childAspectRatio: 158 / 158,
                             ),
                             itemBuilder: (context, index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: const Color(0xFFEBF0F7),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 28.4),
-                                  child: Column(
-                                    children: [
-                                      const SizedBox(height: 10),
-                                      Image.asset('images/image_20.png'),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        AppLocalizations.of(context)!
-                                            .namecategory,
-                                        style: GoogleFonts.nunitoSans(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color(0xFF192F39),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
+                              return TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, '/subcategories_screen');
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: const Color(0xFFEBF0F7),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 28.4),
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 10),
+                                          Image.asset('images/image_20.png'),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            AppLocalizations.of(context)!
+                                                .namecategory,
+                                            style: GoogleFonts.nunitoSans(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFF192F39),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ));
                             },
                           ),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            //
+                            Navigator.pushNamed(context, '/categories_screen');
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.transparent,
