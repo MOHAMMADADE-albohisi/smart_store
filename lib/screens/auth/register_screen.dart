@@ -347,7 +347,7 @@ class _register_screenState extends State<register_screen> with Helpers {
     login.name = _name.text;
     login.mobile = _mobile.text;
     login.gender = _gender!;
-    login.cityId = cityId!;
+    login.cityId = cityId.toString();
     login.password = _password.text;
     return login;
   }

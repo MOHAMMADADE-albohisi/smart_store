@@ -6,7 +6,7 @@ class  Login {
   late String gender;
   late bool active;
   late bool verified;
-  late int cityId;
+  late String cityId;
   late String storeId;
   String? fcmToken;
   late String token;
@@ -36,8 +36,8 @@ class  Login {
     token = json['token'];
     tokenType = json['token_type'];
     refreshToken = json['refresh_token'];
-    city = json['city'] != null ? City.fromJson(json['city']) : null;
-    store = json['store'] != null ? Store.fromJson(json['store']) : null;
+    city = json['city'] != null ? new City.fromJson(json['city']) : null;
+    store = json['store'] != null ? new Store.fromJson(json['store']) : null;
   }
 }
 
