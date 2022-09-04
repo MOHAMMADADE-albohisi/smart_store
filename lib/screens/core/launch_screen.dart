@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_store/prefs/shared_pref_controller.dart';
 
 class lunch_screen extends StatefulWidget {
   const lunch_screen({Key? key}) : super(key: key);
@@ -17,8 +18,10 @@ class _lunch_screenState extends State<lunch_screen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/onbressd_screen');
+    Future.delayed( Duration(seconds: 3), () {
+      bool loggedIn = SharedPrefController().getValueFor<bool>(key: PrefKeys.loggedIn.name)?? false;
+      String route = loggedIn ? '/bottomed_screen' : '/login_screen' ;
+      Navigator.pushReplacementNamed(context, route);
     });
   }
 

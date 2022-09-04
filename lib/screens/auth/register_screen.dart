@@ -3,6 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/api/auth_api_controller.dart';
+import 'package:smart_store/helpers/contexe_extenssion.dart';
+import 'package:smart_store/model_api/api_response.dart';
+import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/screens/model_ui/country.dart';
 import 'package:smart_store/widgets/AppTextField.dart';
 import 'package:smart_store/widgets/utils/helpers.dart';
@@ -20,9 +24,9 @@ class _register_screenState extends State<register_screen> with Helpers {
   late TextEditingController _mobile;
   late TextEditingController _password;
   late TapGestureRecognizer _click;
-
   bool _viewpassword = true;
-  int? _selectedcountryid;
+  int? cityId;
+
   String? _gender = 'M';
 
   @override
@@ -158,7 +162,7 @@ class _register_screenState extends State<register_screen> with Helpers {
                         color: Colors.black,
                       ),
                       onChanged: (int? value) {
-                        setState(() => _selectedcountryid = value);
+                        setState(() => cityId = value);
                       },
                       borderRadius: BorderRadius.circular(20),
                       dropdownColor: Colors.grey.shade200,
@@ -168,15 +172,16 @@ class _register_screenState extends State<register_screen> with Helpers {
                       underline: const Divider(
                         color: Colors.transparent,
                       ),
-                      value: _selectedcountryid,
+                      value: cityId,
                       selectedItemBuilder: (BuildContext cotext) {
-                        return _selectedcountryid != null
+                        return cityId != null
                             ? _Countryss.map(
                                 (e) => Align(
                                   alignment: AlignmentDirectional.centerStart,
                                   child: Text(
-                                    _Countryss.firstWhere((element) =>
-                                        element.id == _selectedcountryid).title,
+                                    _Countryss.firstWhere(
+                                            (element) => element.id == cityId)
+                                        .title,
                                     style: GoogleFonts.montserrat(
                                         color: Colors.black),
                                   ),
@@ -205,6 +210,7 @@ class _register_screenState extends State<register_screen> with Helpers {
                     ),
                   ),
                 ),
+                SizedBox(height: 20.h),
                 SizedBox(height: 20.h),
                 Text(AppLocalizations.of(context)!.gender),
                 SizedBox(height: 20.h),
@@ -279,22 +285,24 @@ class _register_screenState extends State<register_screen> with Helpers {
                 Center(
                   child: RichText(
                     text: TextSpan(
-                        text: AppLocalizations.of(context)!.register_login,
-                        style: GoogleFonts.nunitoSans(
-                          fontSize: 13.h,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF8D9AC9),
+                      text: AppLocalizations.of(context)!.register_login,
+                      style: GoogleFonts.nunitoSans(
+                        fontSize: 13.h,
+                        fontWeight: FontWeight.w400,
+                        color: const Color(0xFF8D9AC9),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: AppLocalizations.of(context)!.sing_in,
+                          recognizer: _click,
+                          style: GoogleFonts.nunitoSans(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13.h,
+                            color: const Color(0xFF2FA9FF),
+                          ),
                         ),
-                        children: [
-                          TextSpan(
-                              text: AppLocalizations.of(context)!.sing_in,
-                              recognizer: _click,
-                              style: GoogleFonts.nunitoSans(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13.h,
-                                color: const Color(0xFF2FA9FF),
-                              ))
-                        ]),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -307,7 +315,7 @@ class _register_screenState extends State<register_screen> with Helpers {
 
   void performaLogin() {
     if (checkData()) {
-      login();
+      register();
     }
   }
 
@@ -318,13 +326,30 @@ class _register_screenState extends State<register_screen> with Helpers {
       return true;
     }
 
-    ShowSnakBar(context,
-        messageerroe: AppLocalizations.of(context)!.snacks, error: true);
+    context.ShowSnakBar(
+        message: AppLocalizations.of(context)!.snacks, error: true);
     return false;
   }
 
-  void login() {
-    _confirmeLogoute();
+  Future<void> register() async {
+    ApiResponse apiResponse = await AuthApiController().register(login);
+    if (apiResponse.success) {
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+    }
+    // ignore: use_build_context_synchronously
+    context.ShowSnakBar(
+        message: apiResponse.message, error: !apiResponse.success);
+  }
+
+  Login get login {
+    Login login = Login();
+    login.name = _name.text;
+    login.mobile = _mobile.text;
+    login.gender = _gender!;
+    login.cityId = cityId!;
+    login.password = _password.text;
+    return login;
   }
 
   void _confirmeLogoute() async {
@@ -334,15 +359,15 @@ class _register_screenState extends State<register_screen> with Helpers {
         return AlertDialog(
           title: Center(
             child: Text(
-             AppLocalizations.of(context)!.sentcodenumber,
+              AppLocalizations.of(context)!.sentcodenumber,
               style: GoogleFonts.nunitoSans(
                 fontWeight: FontWeight.bold,
                 fontSize: 17.h,
-                color: Color(0xFF43538D),
+                color: const Color(0xFF43538D),
               ),
             ),
           ),
-          content: Container(
+          content: SizedBox(
             width: 50.w,
             height: 80.h,
             child: Image.asset('images/image_10.png'),
@@ -355,7 +380,7 @@ class _register_screenState extends State<register_screen> with Helpers {
                 style: GoogleFonts.nunitoSans(
                   fontSize: 14.h,
                   fontWeight: FontWeight.w400,
-                  color: Color(0xFF6072B3),
+                  color: const Color(0xFF6072B3),
                 ),
               ),
             ),
@@ -367,21 +392,19 @@ class _register_screenState extends State<register_screen> with Helpers {
                   width: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Color(0xFF2FA9FF),
+                    color: const Color(0xFF2FA9FF),
                   ),
                   child: TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/activate_the_account');
-                      },
-                      child: Text(
-                       AppLocalizations.of(context)!.done,
-                        style: GoogleFonts.cairo(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      )),
+                    onPressed: () {},
+                    child: Text(
+                      AppLocalizations.of(context)!.done,
+                      style: GoogleFonts.cairo(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             )

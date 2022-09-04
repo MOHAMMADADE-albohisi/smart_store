@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/api/auth_api_controller.dart';
+import 'package:smart_store/model_api/api_response.dart';
 
 class setting_screen extends StatefulWidget {
   const setting_screen({Key? key}) : super(key: key);
@@ -306,9 +308,10 @@ class _setting_screenState extends State<setting_screen> {
       },
     );
     if (test ?? false) {
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacementNamed(context, '/login_screen');
+      ApiResponse apiResponse = await AuthApiController().logout();
+      if (apiResponse.success) {
+        Navigator.pushReplacementNamed(context, '/login_screen');
+      }
     }
   }
-
 }

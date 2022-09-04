@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/prefs/shared_pref_controller.dart';
 import 'package:smart_store/screens/app/Profile/Profile_screen.dart';
 import 'package:smart_store/screens/app/addresses/address_view_screen.dart';
 import 'package:smart_store/screens/app/addresses/addresse_screen.dart';
@@ -34,7 +35,9 @@ import 'package:smart_store/screens/core/launch_screen.dart';
 import 'package:smart_store/screens/core/outboarding_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefController().initPref();
   runApp(const smart_store());
 }
 
@@ -76,10 +79,13 @@ class smart_store extends StatelessWidget {
           locale: const Locale('ar'),
           initialRoute: '/lunch_screen',
           routes: {
+
             '/lunch_screen': (context) => const lunch_screen(),
             '/onbressd_screen': (context) => const OnBordings_screen(),
+
             '/login_screen': (context) => const login_screen(),
             '/register_screen': (context) => const register_screen(),
+
             '/activate_the_account': (context) =>const registration_verification_screen(),
             '/forget_screen': (context) => const forgetPassword_screen(),
             '/verification_forget_screen': (context) => const verification_forget_screen(),
