@@ -29,7 +29,6 @@ import 'package:smart_store/screens/auth/login_screen.dart';
 import 'package:smart_store/screens/auth/register_screen.dart';
 import 'package:smart_store/screens/auth/reset_password_screen.dart';
 import 'package:smart_store/screens/auth/verification/change_password.dart';
-import 'package:smart_store/screens/auth/verification/registration_verification_screen.dart';
 import 'package:smart_store/screens/auth/verification/verification_forget_screen.dart';
 import 'package:smart_store/screens/core/launch_screen.dart';
 import 'package:smart_store/screens/core/outboarding_screen.dart';
@@ -77,7 +76,7 @@ class smart_store extends StatelessWidget {
             Locale('en'),
           ],
           locale: const Locale('ar'),
-          initialRoute: '/subcategories_screen',
+          initialRoute: '/lunch_screen',
           routes: {
 
             '/lunch_screen': (context) => const lunch_screen(),
