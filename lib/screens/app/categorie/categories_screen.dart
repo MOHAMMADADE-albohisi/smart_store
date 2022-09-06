@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:smart_store/api/categories_api_controller.dart';
+import 'package:smart_store/model_api/login.dart';
+import 'package:smart_store/prefs/shared_pref_controller.dart';
 
 class categories_screen extends StatefulWidget {
   const categories_screen({Key? key}) : super(key: key);
@@ -13,6 +16,20 @@ class categories_screen extends StatefulWidget {
 
 class _categories_screenState extends State<categories_screen> {
   late bool _likeproduct = false;
+  List<CategoryApi> list = [];
+
+  void _getCategory() async {
+    var apiResponse = await CategoreApiContloller().getCategory();
+    setState(() => list = apiResponse.data == null ? [] : apiResponse.data!);
+    print("test size ${list.length}");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getCategory();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +83,9 @@ class _categories_screenState extends State<categories_screen> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 10,
+                    itemCount: list.length,
                     itemBuilder: (context, index) {
+                      var category = list.elementAt(index);
                       return Container(
                         height: 114.h,
                         margin: EdgeInsetsDirectional.only(
@@ -95,7 +113,7 @@ class _categories_screenState extends State<categories_screen> {
                                   color: Colors.grey.shade300,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Image.asset('images/image_20.png'),
+                                child: Image.network(category.imageUrl),
                               ),
                             ),
                             SizedBox(width: 15.w),
@@ -105,7 +123,7 @@ class _categories_screenState extends State<categories_screen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    AppLocalizations.of(context)!.categoryname,
+                                    category.nameAr,
                                     style: GoogleFonts.nunitoSans(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16.sp,
@@ -121,13 +139,14 @@ class _categories_screenState extends State<categories_screen> {
                                           height: 30.h,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                               color: Colors.grey.shade100),
                                           child: IconButton(
                                             onPressed: () {
-                                              setState(() => {
-                                                    _likeproduct = !_likeproduct
-                                                  });
+                                              setState(() =>
+                                              {
+                                                _likeproduct = !_likeproduct
+                                              });
                                             },
                                             icon: Icon(
                                               color: Colors.red,
@@ -141,14 +160,17 @@ class _categories_screenState extends State<categories_screen> {
                                       SizedBox(width: 9.w),
                                       TextButton(
                                         onPressed: () {
-                                          Navigator.pushNamed(context, '/subcategories_screen');
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //       builder: (context) => ),);
                                         },
                                         child: Container(
                                           width: 100.w,
                                           height: 50.h,
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                               color: Colors.blueAccent),
                                           child: Center(
                                             child: Text(

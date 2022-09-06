@@ -1,16 +1,23 @@
 // ignore_for_file: camel_case_types
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/api/auth_api_controller.dart';
+import 'package:smart_store/helpers/contexe_extenssion.dart';
+import 'package:smart_store/model_api/api_response.dart';
 import 'package:smart_store/widgets/AppTextField.dart';
 import 'package:smart_store/widgets/utils/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class registration_verification_screen extends StatefulWidget {
-  const registration_verification_screen({Key? key}) : super(key: key);
+  registration_verification_screen(
+      {Key? key, required this.mobile, required this.code})
+      : super(key: key);
 
   @override
   State<registration_verification_screen> createState() =>
       _registration_verification_screenState();
+  final String mobile;
+  final int code;
 }
 
 class _registration_verification_screenState
@@ -20,7 +27,7 @@ class _registration_verification_screenState
   @override
   void initState() {
     super.initState();
-    _mobile = TextEditingController();
+    _mobile = TextEditingController()..text = widget.code.toString();
   }
 
   @override
@@ -39,13 +46,12 @@ class _registration_verification_screenState
         elevation: 0,
         centerTitle: true,
         title: Text(
-         AppLocalizations.of(context)!.verification ,
+          AppLocalizations.of(context)!.verification,
           style: GoogleFonts.nunitoSans(
             fontWeight: FontWeight.w500,
             fontSize: 20,
             color: Colors.grey,
           ),
-
         ),
       ),
       body: Stack(
@@ -66,7 +72,7 @@ class _registration_verification_screenState
               ),
               const SizedBox(height: 25),
               Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 24),
+                  padding: EdgeInsets.symmetric(horizontal: 24),
                   child: AppTextField(
                     hint: AppLocalizations.of(context)!.hinttext,
                     prefixIcon: (Icons.phone_android_rounded),
@@ -101,7 +107,7 @@ class _registration_verification_screenState
 
   void performaLogin() {
     if (checkData()) {
-      login();
+      activate();
     }
   }
 
@@ -109,69 +115,77 @@ class _registration_verification_screenState
     if (_mobile.text.isNotEmpty) {
       return true;
     }
-    ShowSnakBar(context, messageerroe: AppLocalizations.of(context)!.error_data, error: true);
+    ShowSnakBar(context,
+        messageerroe: AppLocalizations.of(context)!.error_data, error: true);
 
     return false;
   }
 
-  void login() {
-    _confirmeLogoute();
+  Future<void> activate() async {
+    ApiResponse apiResponse =
+        await AuthApiController().activate(widget.mobile, widget.code);
+    if (apiResponse.success) {
+      Navigator.pushReplacementNamed(context, '/login_screen');
+    }
+    // ignore: use_build_context_synchronously
+    context.ShowSnakBar(
+        message: "${apiResponse.message}", error: !apiResponse.success);
   }
 
-  void _confirmeLogoute() async {
-    bool? test = await showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 60),
-              child: Column(
-                children: [
-                  Image.asset('images/image_11.png'),
-                ],
-              )),
-          content: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
-              AppLocalizations.of(context)!.verificatinsucc,
-              style: GoogleFonts.cairo(
-                fontSize: 13,
-                color: Colors.black45,
-              ),
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 50,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey,
-                  ),
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/login_screen');
-                      },
-                      child: Text(
-                        'Done',
-                        style: GoogleFonts.cairo(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.black,
-                        ),
-                      )),
-                ),
-              ],
-            )
-          ],
-        );
-      },
-    );
-    if (test ?? false) {
-      //
-    }
-  }
+// void _confirmeLogoute() async {
+//   bool? test = await showDialog<bool>(
+//     context: context,
+//     builder: (context) {
+//       return AlertDialog(
+//         title: Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 60),
+//             child: Column(
+//               children: [
+//                 Image.asset('images/image_11.png'),
+//               ],
+//             )),
+//         content: Padding(
+//           padding: const EdgeInsets.symmetric(horizontal: 15),
+//           child: Text(
+//             AppLocalizations.of(context)!.verificatinsucc,
+//             style: GoogleFonts.cairo(
+//               fontSize: 13,
+//               color: Colors.black45,
+//             ),
+//           ),
+//         ),
+//         actions: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Container(
+//                 height: 50,
+//                 width: 100,
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(20),
+//                   color: Colors.grey,
+//                 ),
+//                 child: TextButton(
+//                     onPressed: () {
+//                       Navigator.pushNamed(context, '/login_screen');
+//                     },
+//                     child: Text(
+//                       'Done',
+//                       style: GoogleFonts.cairo(
+//                         fontWeight: FontWeight.bold,
+//                         fontSize: 15,
+//                         color: Colors.black,
+//                       ),
+//                     )),
+//               ),
+//             ],
+//           )
+//         ],
+//       );
+//     },
+//   );
+//   if (test ?? false) {
+//     //
+//   }
+// }
 }

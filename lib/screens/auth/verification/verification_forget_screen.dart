@@ -6,7 +6,8 @@ import 'package:smart_store/widgets/utils/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class verification_forget_screen extends StatefulWidget {
-  const verification_forget_screen({Key? key}) : super(key: key);
+  verification_forget_screen({Key? key})
+      : super(key: key);
 
   @override
   State<verification_forget_screen> createState() =>
@@ -65,13 +66,14 @@ class _verification_forget_screenState extends State<verification_forget_screen>
               ),
               const SizedBox(height: 25),
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: AppTextField(
-                    hint: AppLocalizations.of(context)!.hinttext,
-                    prefixIcon: (Icons.phone_android_rounded),
-                    keyboardType: TextInputType.number,
-                    controller: _mobile,
-                  )),
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: AppTextField(
+                  hint: AppLocalizations.of(context)!.hinttext,
+                  prefixIcon: (Icons.phone_android_rounded),
+                  keyboardType: TextInputType.number,
+                  controller: _mobile,
+                ),
+              ),
               const SizedBox(height: 25),
               ElevatedButton(
                 onPressed: () => performaLogin(),

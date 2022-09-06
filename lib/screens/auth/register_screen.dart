@@ -7,7 +7,8 @@ import 'package:smart_store/api/auth_api_controller.dart';
 import 'package:smart_store/helpers/contexe_extenssion.dart';
 import 'package:smart_store/model_api/api_response.dart';
 import 'package:smart_store/model_api/login.dart';
-import 'package:smart_store/screens/model_ui/country.dart';
+import 'package:smart_store/screens/auth/verification/registration_verification_screen.dart';
+import 'package:smart_store/screens/auth/verification/verification_forget_screen.dart';
 import 'package:smart_store/widgets/AppTextField.dart';
 import 'package:smart_store/widgets/utils/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,14 +30,23 @@ class _register_screenState extends State<register_screen> with Helpers {
 
   String? _gender = 'M';
 
+  List<City> list = [];
+
   @override
   void initState() {
     super.initState();
+    _getCities();
     _name = TextEditingController();
     _mobile = TextEditingController();
     _password = TextEditingController();
     _click = TapGestureRecognizer();
     _click.onTap = createnewacountclick;
+  }
+
+  void _getCities() async {
+    var apiResponse = await AuthApiController().getCities();
+    setState(() => list = apiResponse.data == null ? [] : apiResponse.data!);
+    print("test size ${list.length}");
   }
 
   @override
@@ -47,18 +57,6 @@ class _register_screenState extends State<register_screen> with Helpers {
     _click.dispose();
     super.dispose();
   }
-
-  final List<Country> _Countryss = <Country>[
-    Country(id: 1, title: 'palestine'),
-    Country(id: 2, title: 'Gaza'),
-    Country(id: 3, title: 'Egypt'),
-    Country(id: 4, title: 'Morocco'),
-    Country(id: 5, title: 'Rafa'),
-    Country(id: 6, title: 'Dairy Al Blah'),
-    Country(id: 7, title: 'Khan Younes'),
-    Country(id: 8, title: 'Bit Laia'),
-    Country(id: 9, title: 'Jambalaya'),
-  ];
 
   void createnewacountclick() {
     Navigator.pushNamed(context, '/login_screen');
@@ -155,9 +153,7 @@ class _register_screenState extends State<register_screen> with Helpers {
                         horizontal: 15, vertical: 20),
                     child: DropdownButton<int>(
                       isExpanded: true,
-                      hint: Text(
-                        AppLocalizations.of(context)!.selectcountry,
-                      ),
+                      hint: Text(AppLocalizations.of(context)!.selectcountry),
                       style: GoogleFonts.montserrat(
                         color: Colors.black,
                       ),
@@ -174,22 +170,17 @@ class _register_screenState extends State<register_screen> with Helpers {
                       ),
                       value: cityId,
                       selectedItemBuilder: (BuildContext cotext) {
-                        return cityId != null
-                            ? _Countryss.map(
-                                (e) => Align(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  child: Text(
-                                    _Countryss.firstWhere(
-                                            (element) => element.id == cityId)
-                                        .title,
-                                    style: GoogleFonts.montserrat(
-                                        color: Colors.black),
+                        return cityId != null? list.map((e) => Align(alignment: AlignmentDirectional.centerStart,
+                                    child: Text( list.firstWhere((element) => element.id == cityId).nameAr,
+                                      style: GoogleFonts.montserrat(
+                                          color: Colors.black),
+                                    ),
                                   ),
-                                ),
-                              ).toList()
+                                )
+                                .toList()
                             : [];
                       },
-                      items: _Countryss.map(
+                      items: list.map(
                         // ignore: non_constant_identifier_names
                         (Countrysss) {
                           return DropdownMenuItem<int>(
@@ -197,10 +188,10 @@ class _register_screenState extends State<register_screen> with Helpers {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(Countrysss.title),
+                                Text(Countrysss.nameAr),
                                 const Divider(
-                                  thickness: 0.8,
-                                  color: Colors.black,
+                                  thickness: 0.5,
+                                  color: Colors.grey,
                                 )
                               ],
                             ),
@@ -332,14 +323,23 @@ class _register_screenState extends State<register_screen> with Helpers {
   }
 
   Future<void> register() async {
-    ApiResponse apiResponse = await AuthApiController().register(login);
+    ApiResponse<int> apiResponse = await AuthApiController().register(login);
     if (apiResponse.success) {
       // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => registration_verification_screen(
+            mobile: _mobile.text,
+            code: apiResponse.data!,
+          ),
+        ),
+      );
     }
     // ignore: use_build_context_synchronously
     context.ShowSnakBar(
-        message: apiResponse.message, error: !apiResponse.success);
+        message: "${apiResponse.message} ${apiResponse.data.toString()}",
+        error: !apiResponse.success);
   }
 
   Login get login {
@@ -350,70 +350,5 @@ class _register_screenState extends State<register_screen> with Helpers {
     login.cityId = cityId.toString();
     login.password = _password.text;
     return login;
-  }
-
-  void _confirmeLogoute() async {
-    bool? test = await showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Center(
-            child: Text(
-              AppLocalizations.of(context)!.sentcodenumber,
-              style: GoogleFonts.nunitoSans(
-                fontWeight: FontWeight.bold,
-                fontSize: 17.h,
-                color: const Color(0xFF43538D),
-              ),
-            ),
-          ),
-          content: SizedBox(
-            width: 50.w,
-            height: 80.h,
-            child: Image.asset('images/image_10.png'),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40.h),
-              child: Text(
-                AppLocalizations.of(context)!.verifednumberregister,
-                style: GoogleFonts.nunitoSans(
-                  fontSize: 14.h,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFF6072B3),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 50,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color(0xFF2FA9FF),
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      AppLocalizations.of(context)!.done,
-                      style: GoogleFonts.cairo(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        );
-      },
-    );
-    if (test ?? false) {
-      //
-    }
   }
 }

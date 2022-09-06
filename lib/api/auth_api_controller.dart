@@ -7,19 +7,22 @@ import 'package:smart_store/model_api/api_response.dart';
 import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/prefs/shared_pref_controller.dart';
 
+//**********************************************************
+///  New Api Request:
+///  1) Convert UPI in APISettings from String to URI.
+///  2) Detect request method (Get, Post, Put/Patch, Delete).
+///  3) Crate new api request using http.method(uri).
+///     => In case the request must have a body, set request body using body param in http.method function.
+///     => body will request a map of key: value
+///     => kes are defined by web developer, must be same ase defined in postman
+///     => values are the data entered from UI.
+///  4) The created request is async future<Response> that returns a response object.
+///  5) Ensure that the request completed successfully by checking the status code.
+///  6) If successfully executed, get the Response body:
+///     => Covert response body from string to JSON using decode
+//**********************************************************
+
 class AuthApiController with ApiHelper {
-  ///  New Api Request:
-  ///  1) Convert UPI in APISettings from String to URI.
-  ///  2) Detect request method (Get, Post, Put/Patch, Delete).
-  ///  3) Crate new api request using http.method(uri).
-  ///     => In case the request must have a body, set request body using body param in http.method function.
-  ///     => body will request a map of key: value
-  ///     => kes are defined by web developer, must be same ase defined in postman
-  ///     => values are the data entered from UI.
-  ///  4) The created request is async future<Response> that returns a response object.
-  ///  5) Ensure that the request completed successfully by checking the status code.
-  ///  6) If successfully executed, get the Response body:
-  ///     => Covert response body from string to JSON using decode
   Future<ApiResponse> login(
       {required String mobile, required String password}) async {
     Uri uri = Uri.parse(ApiSettings.login);
@@ -39,7 +42,7 @@ class AuthApiController with ApiHelper {
     return errorResponse;
   }
 
-  Future<ApiResponse> register(Login login) async {
+  Future<ApiResponse<int>> register(Login login) async {
     print('mohamad : ${login.cityId}');
     Uri uri = Uri.parse(ApiSettings.register);
     var response = await http.post(uri, body: {
@@ -47,16 +50,15 @@ class AuthApiController with ApiHelper {
       'mobile': login.mobile,
       "password": login.password,
       "gender": login.gender,
-
       "STORE_API_KEY": ApiSettings.STORE_API_KEY,
       "city_id": login.cityId.toString(),
     });
 
     if (response.statusCode == 201 || response.statusCode == 400) {
       var json = jsonDecode(response.body);
-      return ApiResponse(json['message'], json['status']);
+      return ApiResponse<int>(json['message'], json['status'], json['code']);
     }
-    return errorResponse;
+    return ApiResponse('Something went wrong,try again!', false);
   }
 
   Future<ApiResponse> logout() async {
@@ -72,5 +74,34 @@ class AuthApiController with ApiHelper {
       return ApiResponse('Logged out successfully', true);
     }
     return errorResponse;
+  }
+
+  Future<ApiResponse<List<City>>> getCities() async {
+    Uri uri = Uri.parse(ApiSettings.cities);
+
+    var response = await http.get(uri, headers: {
+      HttpHeaders.acceptHeader: "application/json",
+    });
+
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      var jsonList = json["list"] as List;
+      List<City> list = jsonList.map((e) => City.fromJson(e)).toList();
+      return ApiResponse<List<City>>(json["message"], json["status"], list);
+    }
+    return ApiResponse('Something went wrong,try again!', false);
+  }
+
+  Future<ApiResponse> activate(String mobile, int code) async {
+    Uri uri = Uri.parse(ApiSettings.activate);
+    var response = await http.post(uri, body: {
+      'mobile': mobile,
+      'code': code.toString(),
+    });
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      var json = jsonDecode(response.body);
+      return ApiResponse(json['message'], json['status']);
+    }
+    return ApiResponse('Something went wrong,try again!', false);
   }
 }

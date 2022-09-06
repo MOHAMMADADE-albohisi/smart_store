@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/widgets/seel_all.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -17,6 +18,7 @@ class _home_screenState extends State<home_screen> {
   late PageController pageController;
   bool _likes = false;
   late bool _likeproduct = true;
+
 
   @override
   void initState() {
@@ -96,7 +98,7 @@ class _home_screenState extends State<home_screen> {
                         ConstrainedBox(
                           constraints: const BoxConstraints(maxHeight: 158),
                           child: GridView.builder(
-                            itemCount: 4,
+                            itemCount: 5,
                             scrollDirection: Axis.horizontal,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
@@ -105,6 +107,7 @@ class _home_screenState extends State<home_screen> {
                               childAspectRatio: 158 / 158,
                             ),
                             itemBuilder: (context, index) {
+                              // var category = data.elementAt(index);
                               return TextButton(
                                   onPressed: () {
                                     Navigator.pushNamed(
@@ -124,8 +127,7 @@ class _home_screenState extends State<home_screen> {
                                           Image.asset('images/image_20.png'),
                                           const SizedBox(height: 8),
                                           Text(
-                                            AppLocalizations.of(context)!
-                                                .namecategory,
+                                           AppLocalizations.of(context)!.categoryname,
                                             style: GoogleFonts.nunitoSans(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.bold,
@@ -312,7 +314,7 @@ class _home_screenState extends State<home_screen> {
                                       child: TextButton(
                                         onPressed: () {
                                           Navigator.pushNamed(
-                                              context, '/categories_screen');
+                                              context, '/favorite_screen');
                                         },
                                         child: Image.asset(
                                           'images/image_20.png',
@@ -365,7 +367,7 @@ class _home_screenState extends State<home_screen> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            //
+                            Navigator.pushNamed(context, '/favorite_screen');
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.transparent,

@@ -77,7 +77,7 @@ class smart_store extends StatelessWidget {
             Locale('en'),
           ],
           locale: const Locale('ar'),
-          initialRoute: '/lunch_screen',
+          initialRoute: '/subcategories_screen',
           routes: {
 
             '/lunch_screen': (context) => const lunch_screen(),
@@ -85,10 +85,8 @@ class smart_store extends StatelessWidget {
 
             '/login_screen': (context) => const login_screen(),
             '/register_screen': (context) => const register_screen(),
-
-            '/activate_the_account': (context) =>const registration_verification_screen(),
             '/forget_screen': (context) => const forgetPassword_screen(),
-            '/verification_forget_screen': (context) => const verification_forget_screen(),
+            '/verification_forget_screen': (context) =>  verification_forget_screen(),
             '/resetPassword_screen': (context) => const resetPassword_screen(),
             '/home_screen': (context) => const home_screen(),
             '/categories_screen': (context) => const categories_screen(),
