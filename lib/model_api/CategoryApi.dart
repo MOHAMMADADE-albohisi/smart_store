@@ -1,6 +1,4 @@
-
-
-class CategoryApi {
+class Categories {
   late int id;
   late String nameEn;
   late String nameAr;
@@ -9,9 +7,9 @@ class CategoryApi {
   late String subCategoriesCount;
   late String imageUrl;
 
-  CategoryApi();
 
-  CategoryApi.fromJson(Map<String, dynamic> json) {
+
+  Categories.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nameEn = json['name_en'];
     nameAr = json['name_ar'];
@@ -20,4 +18,13 @@ class CategoryApi {
     subCategoriesCount = json['sub_categories_count'];
     imageUrl = json['image_url'];
   }
+
+  Categories.fromHomeJson(Map<String, dynamic> json) {
+    id = json['id'];
+    nameEn = json['name_en'];
+    nameAr = json['name_ar'];
+    image = json['image'];
+    imageUrl = json['image_url'];
+  }
+
 }

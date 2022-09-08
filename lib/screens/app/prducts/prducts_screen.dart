@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_store/api/categories_api_controller.dart';
 import 'package:smart_store/model_api/api_response.dart';
-import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/model_api/products.dart';
 
 class prducts_screen extends StatefulWidget {
@@ -34,7 +33,7 @@ class _prducts_screenState extends State<prducts_screen> {
           ),
         ),
       ),
-      body: FutureBuilder<ApiResponse<List<products>>>(
+      body: FutureBuilder<ApiResponse<List<Products>>>(
         future: CategoreApiContloller().getproducts(SubCategorieId: widget.id!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_store/api/categories_api_controller.dart';
 import 'package:smart_store/model_api/api_response.dart';
-import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/model_api/CategoryApi.dart';
 import 'package:smart_store/screens/app/categorie/subcategories_screen.dart';
 
@@ -29,7 +28,7 @@ class _categories_screenState extends State<categories_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<ApiResponse<List<CategoryApi>>>(
+      body: FutureBuilder<ApiResponse<List<Categories>>>(
         future: CategoreApiContloller().getCategory(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
