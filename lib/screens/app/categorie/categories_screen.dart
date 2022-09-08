@@ -32,7 +32,6 @@ class _categories_screenState extends State<categories_screen> {
         future: CategoreApiContloller().getCategory(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData && snapshot.data!.data!.isNotEmpty) {
             return Column(

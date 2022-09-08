@@ -12,16 +12,22 @@ class Home {
   Home.fromJson(Map<String, dynamic> json) {
     var sliderJson = json['slider'] as List;
     slider = sliderJson.map((e) => Slider.fromJson(e)).toList();
+
+
     var categoriesJson = json['categories'] as List;
     categories = categoriesJson.map((e) => Categories.fromHomeJson(e)).toList();
+
+
     var latestProductsJson = json['latest_products'] as List;
     latestProducts =
         latestProductsJson.map((e) => Products.fromJson(e)).toList();
+
+
     var famousProductsJson = json['famous_products'] as List;
     latestProducts =
         famousProductsJson.map((e) => Products.fromJson(e)).toList();
 
-    print("slider list ${slider.length}");
+
   }
 }
 
