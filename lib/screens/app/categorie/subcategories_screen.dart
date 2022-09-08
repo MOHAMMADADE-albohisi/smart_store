@@ -4,9 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_store/api/categories_api_controller.dart';
 import 'package:smart_store/model_api/login.dart';
+import 'package:smart_store/model_api/DataSubCategore.dart';
+import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
+
+import '../../../model_api/api_response.dart';
 
 class subcategories extends StatefulWidget {
-  const subcategories({Key? key}) : super(key: key);
+  subcategories({Key? key, this.id}) : super(key: key);
+  String? id;
 
   @override
   State<subcategories> createState() => _subcategoriesState();
@@ -16,13 +21,13 @@ class _subcategoriesState extends State<subcategories> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<DataSubCategore>>(
-        future: SubCategoryController().getSubCategory(),
+      body: FutureBuilder<ApiResponse<List<DataSubCategore>>>(
+        future: CategoreApiContloller().getSubCategories(categoryId: widget.id!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            print('mohammad: ${snapshot.data}');
+            print('mohammadE: ${snapshot.data}');
             return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          } else if (snapshot.hasData && snapshot.data!.data!.isNotEmpty) {
             return Column(
               children: [
                 Container(
@@ -83,7 +88,7 @@ class _subcategoriesState extends State<subcategories> {
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
-                                  itemCount: 10,
+                                  itemCount: snapshot.data!.data!.length,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
@@ -91,6 +96,8 @@ class _subcategoriesState extends State<subcategories> {
                                     crossAxisSpacing: 10,
                                   ),
                                   itemBuilder: (context, index) {
+                                    var DataSubCategore =
+                                    snapshot.data!.data!.elementAt(index);
                                     return Container(
                                       decoration: BoxDecoration(
                                         color: const Color(0xFFEBF0F7),
@@ -108,7 +115,8 @@ class _subcategoriesState extends State<subcategories> {
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                             child: Image.network(
-                                              snapshot.data![index].imageUrl,
+                                              snapshot
+                                                  .data!.data![index].imageUrl,
                                               width: double.infinity,
                                               height: double.infinity,
                                               fit: BoxFit.cover,
@@ -119,7 +127,8 @@ class _subcategoriesState extends State<subcategories> {
                                                 horizontal: 10.w,
                                                 vertical: 5.h),
                                             child: Text(
-                                              snapshot.data![index].nameAr,
+                                              snapshot
+                                                  .data!.data![index].nameAr,
                                               style: GoogleFonts.nunitoSans(
                                                   fontWeight: FontWeight.w700,
                                                   fontSize: 15.sp,
@@ -129,8 +138,16 @@ class _subcategoriesState extends State<subcategories> {
                                           Center(
                                             child: TextButton(
                                               onPressed: () {
-                                                Navigator.pushNamed(
-                                                    context, '/prducts_screen');
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        prducts_screen(
+                                                          id: DataSubCategore.id
+                                                              .toString(),
+                                                        ),
+                                                  ),
+                                                );
                                               },
                                               child: Container(
                                                 width: 100.w,
@@ -142,8 +159,8 @@ class _subcategoriesState extends State<subcategories> {
                                                     color: Colors.blueAccent),
                                                 child: Center(
                                                   child: Text(
-                                                    snapshot
-                                                        .data![index].nameEn,
+                                                    snapshot.data!.data![index]
+                                                        .nameEn,
                                                     style:
                                                         GoogleFonts.nunitoSans(
                                                       fontSize: 13.sp,

@@ -86,7 +86,7 @@ class _bottomanvigatorState extends State<bottomanvigator> {
               onTap: () {
                 Navigator.pop(context);
                 Future.delayed(const Duration(milliseconds: 250), () {
-                  Navigator.pushNamed(context, '/bottoma_screen');
+                  Navigator.pushNamed(context, '/bottomed_screen');
                 });
               },
               leading: const Icon(Icons.home),

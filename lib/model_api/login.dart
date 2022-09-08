@@ -64,23 +64,23 @@ class City {
 
 class Store {
   late int id;
-  late String name;
-  late String storeName;
-  late String email;
-  String? emailVerifiedAt;
-  late String mobile;
-  late String storeUuid;
-  late String cityId;
-  String? verificationCode;
-  late String active;
-  late String verified;
-  late String firebaseKey;
-  String? image;
-  late String address;
-  String? facebook;
-  String? instagram;
-  late String createdAt;
-  late String updatedAt;
+  late dynamic name;
+  late dynamic storeName;
+  late dynamic email;
+  dynamic? emailVerifiedAt;
+  late dynamic mobile;
+  late dynamic storeUuid;
+  late dynamic cityId;
+  dynamic? verificationCode;
+  late dynamic active;
+  late dynamic verified;
+  late dynamic firebaseKey;
+  dynamic? image;
+  late dynamic address;
+  dynamic? facebook;
+  dynamic? instagram;
+  late dynamic createdAt;
+  late dynamic updatedAt;
 
   Store();
 
@@ -106,59 +106,7 @@ class Store {
   }
 }
 
-class CategoryApi {
-  late int id;
-  late String nameEn;
-  late String nameAr;
-  late String image;
-  late String productsCount;
-  late String subCategoriesCount;
-  late String imageUrl;
-
-  CategoryApi();
-
-  CategoryApi.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nameEn = json['name_en'];
-    nameAr = json['name_ar'];
-    image = json['image'];
-    productsCount = json['products_count'];
-    subCategoriesCount = json['sub_categories_count'];
-    imageUrl = json['image_url'];
-  }
-}
 
 
-class DataSubCategore {
-  late int id;
-  late String nameEn;
-  late String nameAr;
-  late String categoryId;
-  late String image;
-  late String productsCount;
-  late String imageUrl;
 
-  DataSubCategore();
 
-  DataSubCategore.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    nameEn = json['name_en'];
-    nameAr = json['name_ar'];
-    categoryId = json['category_id'];
-    image = json['image'];
-    productsCount = json['products_count'];
-    imageUrl = json['image_url'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name_en'] = this.nameEn;
-    data['name_ar'] = this.nameAr;
-    data['category_id'] = this.categoryId;
-    data['image'] = this.image;
-    data['products_count'] = this.productsCount;
-    data['image_url'] = this.imageUrl;
-    return data;
-  }
-}
