@@ -59,33 +59,27 @@ class _home_screenState extends State<home_screen> {
                     child: ListView(
                       shrinkWrap: true,
                       children: [
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(maxHeight: 150),
-                          child: CarouselSlider(
-                            options: CarouselOptions(height: 400.0),
-                            items: [home.slider.length].map((index) {
-                              print('sliders count ${home.slider.length}');
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 7),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: const Color(0xFFEBF0F7),
+                        Container(
+                          height: 180.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Container(
+                            height: 180.w,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: PageView(
+                                controller: _pageViewController,
+                                children: home.slider
+                                    .map(
+                                      (e) => Image.network(
+                                        e.imageUrl,
+                                        fit: BoxFit.fill,
                                       ),
-                                      child: Image.network(
-                                        home.slider[index].imageUrl,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            }).toList(),
+                                    )
+                                    .toList()),
                           ),
                         ),
                         SizedBox(height: 16.h),
@@ -267,16 +261,10 @@ class _home_screenState extends State<home_screen> {
                                                   const Spacer(),
                                                   IconButton(
                                                     onPressed: () {
-                                                      setState(() =>
-                                                          {_likes = !_likes});
+                                                      print('object');
                                                     },
-                                                    icon: Icon(
-                                                      color: Colors.red,
-                                                      _likes
-                                                          ? Icons.favorite
-                                                          : Icons
-                                                              .favorite_border,
-                                                    ),
+                                                    icon: const Icon(Icons
+                                                        .add_shopping_cart_outlined),
                                                   ),
                                                 ],
                                               ),
@@ -435,16 +423,7 @@ class _home_screenState extends State<home_screen> {
               ),
             );
           } else {
-            return Container(
-                child: Center(
-              child: Text(
-                'NO DATA',
-                style: GoogleFonts.poppins(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-            ));
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

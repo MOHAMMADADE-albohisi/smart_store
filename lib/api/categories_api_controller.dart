@@ -71,10 +71,9 @@ class CategoreApiContloller {
     return ApiResponse('Something went wrong,try again!', false);
   }
 
-  Future<ApiResponse<List<productsDetails>>> productsDeta(
-      {required String productsDetaId}) async {
-    Uri uri = Uri.parse(ApiSettings.productsDeta
-        .replaceFirst('{id}', productsDetaId.toString()));
+  Future<ApiResponse<productsDetails>> getproductsDetiles(
+      {required String productsDeta}) async {
+    Uri uri = Uri.parse(ApiSettings.productsDeta.replaceFirst('{id}', productsDeta.toString()));
     var response = await http.get(uri, headers: {
       HttpHeaders.authorizationHeader:
           SharedPrefController().getValueFor(key: PrefKeys.token.name),
@@ -82,13 +81,8 @@ class CategoreApiContloller {
     });
     if (response.statusCode == 200 || response.statusCode == 401) {
       var json = jsonDecode(response.body);
-      var jsonObj = json["list"] as List;
-
-      List<productsDetails> object =
-          jsonObj.map((e) => productsDetails.fromJson(e)).toList();
-
-      return ApiResponse<List<productsDetails>>(
-          json["message"], json["status"], json["object"]);
+      return ApiResponse<productsDetails>(
+          json["message"], json["status"], productsDetails.fromJson(json["object"]));
     }
     return ApiResponse('Something went wrong,try again!', false);
   }

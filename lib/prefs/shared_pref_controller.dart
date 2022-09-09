@@ -44,6 +44,13 @@ class SharedPrefController {
     return null;
   }
 
+  T? getValuefor<T>(String key) {
+    if (_sharedPreferences.containsKey(key)) {
+      return _sharedPreferences.get(key) as T;
+    }
+    return null;
+  }
+
   void clear() async {
     _sharedPreferences.clear();
   }

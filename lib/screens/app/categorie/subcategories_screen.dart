@@ -25,7 +25,6 @@ class _subcategoriesState extends State<subcategories> {
         future: CategoreApiContloller().getSubCategories(categoryId: widget.id!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            print('mohammadE: ${snapshot.data}');
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData && snapshot.data!.data!.isNotEmpty) {
             return Column(
@@ -98,6 +97,7 @@ class _subcategoriesState extends State<subcategories> {
                                   itemBuilder: (context, index) {
                                     var DataSubCategore =
                                     snapshot.data!.data!.elementAt(index);
+                                    print('Test20: ${snapshot.data!.data!.length}');
                                     return Container(
                                       decoration: BoxDecoration(
                                         color: const Color(0xFFEBF0F7),

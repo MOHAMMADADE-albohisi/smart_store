@@ -11,4 +11,7 @@ class ApiSettings {
   static const String sub_categories = '${_baseUrl}categories/{id}';
   static const String products = '${_baseUrl}sub-categories/{id}';
   static const String productsDeta = '${_baseUrl}products/{id}';
+  static const addresses = "${_baseUrl}addresses/{id}";
+
+
 }

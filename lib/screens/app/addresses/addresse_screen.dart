@@ -3,9 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smart_store/screens/model_ui/country.dart';
+import 'package:smart_store/api/auth_api_controller.dart';
+import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/widgets/textfilde.dart';
 import 'package:smart_store/widgets/utils/helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class addresses_screen extends StatefulWidget {
   const addresses_screen({Key? key}) : super(key: key);
@@ -15,10 +17,10 @@ class addresses_screen extends StatefulWidget {
 }
 
 class _addresses_screenState extends State<addresses_screen> with Helpers {
-  int? _selectedcountryid;
   late TextEditingController name;
   late TextEditingController info;
   late TextEditingController contact;
+  int? cityId;
 
   @override
   void initState() {
@@ -27,6 +29,7 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
     name = TextEditingController();
     info = TextEditingController();
     contact = TextEditingController();
+    _getCities();
   }
 
   @override
@@ -39,18 +42,12 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
     super.dispose();
   }
 
-  // ignore: non_constant_identifier_names
-  final List<Country> _Countryss = <Country>[
-    Country(id: 1, title: 'palestine'),
-    Country(id: 2, title: 'Gaza'),
-    Country(id: 3, title: 'Egypt'),
-    Country(id: 4, title: 'Morocco'),
-    Country(id: 5, title: 'Rafa'),
-    Country(id: 6, title: 'Dairy Al Blah'),
-    Country(id: 7, title: 'Khan Younes'),
-    Country(id: 8, title: 'Bit Laia'),
-    Country(id: 9, title: 'Jambalaya'),
-  ];
+  List<City> list = [];
+
+  void _getCities() async {
+    var apiResponse = await AuthApiController().getCities();
+    setState(() => list = apiResponse.data == null ? [] : apiResponse.data!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,41 +113,42 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: DropdownButton<int>(
                   isExpanded: true,
-                  hint: const Text(
-                    'Select Country',
-                  ),
+                  hint: Text(AppLocalizations.of(context)!.selectcountry),
                   style: GoogleFonts.montserrat(
                     color: Colors.black,
                   ),
                   onChanged: (int? value) {
-                    setState(() => _selectedcountryid = value);
+                    setState(() => cityId = value);
                   },
                   borderRadius: BorderRadius.circular(20),
-                  dropdownColor: Colors.grey,
+                  dropdownColor: Colors.grey.shade200,
                   icon: const Icon(Icons.keyboard_arrow_down_sharp),
                   itemHeight: 48,
                   menuMaxHeight: 250,
                   underline: const Divider(
                     color: Colors.transparent,
                   ),
-                  value: _selectedcountryid,
+                  value: cityId,
                   selectedItemBuilder: (BuildContext cotext) {
-                    return _selectedcountryid != null
-                        ? _Countryss.map(
-                            (e) => Align(
-                              alignment: AlignmentDirectional.centerStart,
-                              child: Text(
-                                _Countryss.firstWhere((element) =>
-                                    element.id == _selectedcountryid).title,
-                                style:
-                                    GoogleFonts.montserrat(color: Colors.black),
+                    return cityId != null
+                        ? list
+                            .map(
+                              (e) => Align(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: Text(
+                                  list
+                                      .firstWhere(
+                                          (element) => element.id == cityId)
+                                      .nameAr,
+                                  style: GoogleFonts.montserrat(
+                                      color: Colors.black),
+                                ),
                               ),
-                            ),
-                          ).toList()
+                            )
+                            .toList()
                         : [];
                   },
-
-                  items: _Countryss.map(
+                  items: list.map(
                     // ignore: non_constant_identifier_names
                     (Countrysss) {
                       return DropdownMenuItem<int>(
@@ -158,10 +156,10 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(Countrysss.title),
+                            Text(Countrysss.nameAr),
                             const Divider(
-                              thickness: 0.8,
-                              color: Colors.black,
+                              thickness: 0.5,
+                              color: Colors.grey,
                             )
                           ],
                         ),

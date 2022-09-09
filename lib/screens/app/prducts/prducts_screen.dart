@@ -7,6 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_store/api/categories_api_controller.dart';
 import 'package:smart_store/model_api/api_response.dart';
 import 'package:smart_store/model_api/products.dart';
+import 'package:smart_store/model_api/productsDetails.dart';
+import 'package:smart_store/screens/app/prducts/Product_details_screen.dart';
 
 class prducts_screen extends StatefulWidget {
   prducts_screen({Key? key, this.id}) : super(key: key);
@@ -37,7 +39,6 @@ class _prducts_screenState extends State<prducts_screen> {
         future: CategoreApiContloller().getproducts(SubCategorieId: widget.id!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            print('prodict: ${snapshot.data}');
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData && snapshot.data!.data!.isNotEmpty) {
             return Padding(
@@ -50,6 +51,8 @@ class _prducts_screenState extends State<prducts_screen> {
                     shrinkWrap: true,
                     itemCount: snapshot.data!.data!.length,
                     itemBuilder: (context, index) {
+                      var productsDetails =
+                          snapshot.data!.data!.elementAt(index);
                       return Container(
                         height: 200,
                         margin: EdgeInsetsDirectional.only(
@@ -62,7 +65,7 @@ class _prducts_screenState extends State<prducts_screen> {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: Container(
                                 width: 150,
                                 height: 150,
@@ -71,10 +74,18 @@ class _prducts_screenState extends State<prducts_screen> {
                                     borderRadius: BorderRadius.circular(15)),
                                 child: TextButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, '/Productdetails_screen');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Productdetails_screen(
+                                          id: productsDetails.id.toString(),
+                                        ),
+                                      ),
+                                    );
                                   },
-                                  child: Image.network(snapshot.data!.data![index].imageUrl),
+                                  child: Image.network(
+                                      snapshot.data!.data![index].imageUrl),
                                 ),
                               ),
                             ),
@@ -82,8 +93,7 @@ class _prducts_screenState extends State<prducts_screen> {
                               children: [
                                 const SizedBox(height: 30),
                                 Text(
-                                  snapshot.data!.data![index]
-                                      .nameEn,
+                                  snapshot.data!.data![index].nameEn,
                                   style: GoogleFonts.montserrat(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -106,7 +116,7 @@ class _prducts_screenState extends State<prducts_screen> {
                                 const SizedBox(height: 10),
                                 Row(
                                   children: [
-                                     Text(snapshot.data!.data![index].price),
+                                    Text(snapshot.data!.data![index].price),
                                     const SizedBox(width: 9),
                                   ],
                                 ),
@@ -172,45 +182,6 @@ class _prducts_screenState extends State<prducts_screen> {
             return Container(
                 child: Column(
               children: [
-                Container(
-                  width: 375.w,
-                  height: 100.h,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF96E5D1),
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(30.r),
-                      bottomLeft: Radius.circular(30.r),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 50.h),
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/bottomed_screen');
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(width: 15.w),
-                          Text(
-                            AppLocalizations.of(context)!.viewsupcategory,
-                            style: GoogleFonts.nunitoSans(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.h,
-                              color: const Color(0xFFFFFFFF),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
                 Center(
                   child: Text(
                     'NO DATA',

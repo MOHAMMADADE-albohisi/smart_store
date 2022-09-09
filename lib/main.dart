@@ -11,12 +11,9 @@ import 'package:smart_store/screens/app/caets/card_Screen.dart';
 import 'package:smart_store/screens/app/caets/mycards_screen.dart';
 import 'package:smart_store/screens/app/cards/cards_screen.dart';
 import 'package:smart_store/screens/app/categorie/categories_screen.dart';
-import 'package:smart_store/screens/app/categorie/subcategories_screen.dart';
 import 'package:smart_store/screens/app/notifications/notifications_screen.dart';
 import 'package:smart_store/screens/app/orders/orderdetails_screen.dart';
 import 'package:smart_store/screens/app/orders/orders%20_screen.dart';
-import 'package:smart_store/screens/app/prducts/Product_details_screen.dart';
-import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
 import 'package:smart_store/screens/app/favorite_screen.dart';
 import 'package:smart_store/screens/app/home_screen.dart';
 import 'package:smart_store/screens/app/settings/about_screen.dart';
@@ -84,14 +81,16 @@ class smart_store extends StatelessWidget {
 
             '/login_screen': (context) => const login_screen(),
             '/register_screen': (context) => const register_screen(),
+
+
             '/forget_screen': (context) => const forgetPassword_screen(),
             '/verification_forget_screen': (context) =>  verification_forget_screen(),
+
+
             '/resetPassword_screen': (context) => const resetPassword_screen(),
             '/home_screen': (context) => const home_screen(),
             '/categories_screen': (context) => const categories_screen(),
             '/bottomed_screen': (context) => const bottomanvigator(),
-            '/Productdetails_screen': (context) =>  const Productdetails_screen(),
-
 
 
             '/favorite_screen': (context) => const favorite_screen(),

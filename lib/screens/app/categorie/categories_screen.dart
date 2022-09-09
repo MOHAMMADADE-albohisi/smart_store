@@ -85,8 +85,7 @@ class _categories_screenState extends State<categories_screen> {
                           shrinkWrap: true,
                           itemCount: snapshot.data!.data!.length,
                           itemBuilder: (context, index) {
-                            var category =
-                                snapshot.data!.data!.elementAt(index);
+                            var category = snapshot.data!.data!.elementAt(index);
                             return Container(
                               height: 114.h,
                               margin: EdgeInsetsDirectional.only(

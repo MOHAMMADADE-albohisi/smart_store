@@ -11,8 +11,8 @@ import 'package:smart_store/prefs/shared_pref_controller.dart';
 class ProductsApiController with ApiHelper {
   Future<void> product() async {
     Future<List<Products>> getProducts({required int subCategoryId}) async {
-      String token = SharedPrefController().getValueFor<String>(
-          key: PrefKeys.token.name)!;
+      String token =
+          SharedPrefController().getValueFor<String>(key: PrefKeys.token.name)!;
       Uri uri = Uri.parse(
           ApiSettings.home.replaceFirst('{id}', subCategoryId.toString()));
       var response = await http.get(uri, headers: {
@@ -29,14 +29,33 @@ class ProductsApiController with ApiHelper {
       return [];
     }
   }
-  Future<Home> getHomeData() async {
-    Uri uri = Uri.parse(ApiSettings.home);
-    var response = await http.get(uri,headers: {
-      HttpHeaders.acceptHeader : "application/json",
-      HttpHeaders.authorizationHeader : SharedPrefController().getValueFor(key: PrefKeys.token.name),
+
+  Future<Products> getProductDetails({required String productId}) async {
+    Uri uri =
+        Uri.parse(ApiSettings.productsDeta.replaceFirst('{id}', productId));
+    var response = await http.get(uri, headers: {
+      HttpHeaders.authorizationHeader:
+          SharedPrefController().getValueFor(key: PrefKeys.token.name),
     });
 
-    if(response.statusCode == 200 || response.statusCode == 400){
+    if (response.statusCode == 200 || response.statusCode == 401) {
+      var json = jsonDecode(response.body);
+      var jsonObj = json["object"] as Map<String, dynamic>;
+      Products product = Products.fromJson(jsonObj);
+      return product;
+    }
+    return Products();
+  }
+
+  Future<Home> getHomeData() async {
+    Uri uri = Uri.parse(ApiSettings.home);
+    var response = await http.get(uri, headers: {
+      HttpHeaders.acceptHeader: "application/json",
+      HttpHeaders.authorizationHeader:
+          SharedPrefController().getValueFor(key: PrefKeys.token.name),
+    });
+
+    if (response.statusCode == 200 || response.statusCode == 400) {
       var json = jsonDecode(response.body);
       return Home.fromJson(json["data"]);
     }

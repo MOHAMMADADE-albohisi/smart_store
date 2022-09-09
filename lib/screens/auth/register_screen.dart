@@ -8,7 +8,6 @@ import 'package:smart_store/helpers/contexe_extenssion.dart';
 import 'package:smart_store/model_api/api_response.dart';
 import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/screens/auth/verification/registration_verification_screen.dart';
-import 'package:smart_store/screens/auth/verification/verification_forget_screen.dart';
 import 'package:smart_store/widgets/AppTextField.dart';
 import 'package:smart_store/widgets/utils/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
