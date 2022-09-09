@@ -94,7 +94,7 @@ class smart_store extends StatelessWidget {
 
 
             '/favorite_screen': (context) => const favorite_screen(),
-            '/addresses_screen': (context) => const addresses_screen(),
+            '/addresses_screen': (context) =>  NewAddressScreen(),
             '/view_address_screen': (context) => const view_address_screen(),
             '/order_screen': (context) => const order_screen(),
             '/orderdetails_screen': (context) => const orderdetails_screen(),

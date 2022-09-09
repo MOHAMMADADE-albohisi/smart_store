@@ -1,48 +1,37 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_store/api/GetX/addres_Getx.dart';
 import 'package:smart_store/api/auth_api_controller.dart';
+import 'package:smart_store/helpers/contexe_extenssion.dart';
+import 'package:smart_store/model_api/addres.dart';
+import 'package:smart_store/model_api/api_response.dart';
 import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/widgets/textfilde.dart';
-import 'package:smart_store/widgets/utils/helpers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class addresses_screen extends StatefulWidget {
-  const addresses_screen({Key? key}) : super(key: key);
+class NewAddressScreen extends StatefulWidget {
+  NewAddressScreen({Key? key, this.address}) : super(key: key);
+
+  Address? address;
 
   @override
-  State<addresses_screen> createState() => _addresses_screenState();
+  State<NewAddressScreen> createState() => _NewAddressScreenState();
 }
 
-class _addresses_screenState extends State<addresses_screen> with Helpers {
-  late TextEditingController name;
-  late TextEditingController info;
-  late TextEditingController contact;
+class _NewAddressScreenState extends State<NewAddressScreen> {
+  late TextEditingController _addressNameTextController;
+  late TextEditingController _phoneNumberTextController;
+  late TextEditingController _addressInfoTextController;
+
   int? cityId;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    name = TextEditingController();
-    info = TextEditingController();
-    contact = TextEditingController();
-    _getCities();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-
-    name.dispose();
-    info.dispose();
-    contact.dispose();
-    super.dispose();
-  }
-
   List<City> list = [];
+
+  bool isDefault = false;
+
+  int? _selectedCityId;
+
 
   void _getCities() async {
     var apiResponse = await AuthApiController().getCities();
@@ -50,130 +39,168 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _getCities();
+    _addressNameTextController = TextEditingController()
+      ..text = widget.address != null ? widget.address!.name : "";
+    _phoneNumberTextController = TextEditingController()
+      ..text = widget.address != null ? widget.address!.contactNumber : "";
+    _addressInfoTextController = TextEditingController()
+      ..text = widget.address != null ? widget.address!.info : "";
+    _selectedCityId = widget.address != null ? widget.address!.cityId : null;
+  }
+
+  @override
+  void dispose() {
+    _addressNameTextController.dispose();
+    _phoneNumberTextController.dispose();
+    _addressInfoTextController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.grey,
       appBar: AppBar(
-        title: const Text('addresses'),
-        centerTitle: true,
+        title: const Text("New Address"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+      body: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: 16.w,
+          vertical: 20.h,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(21.r),
+        ),
         child: ListView(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 26.h),
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Text(
-                'ADD NEW ADDRESSE',
-                style: GoogleFonts.montserrat(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            SizedBox(height: 15.h),
             page_textfilde_widget(
-              hint: 'Name',
-              prefixIcon: Icons.drive_file_rename_outline,
+              hint: 'Name Address',
+              prefixIcon: (Icons.drive_file_rename_outline),
               keporderTybe: TextInputType.text,
-              controller: name,
+              controller: _addressNameTextController,
             ),
-            SizedBox(height: 15.h),
-            Row(
-              children: [
-                Expanded(
-                  child: page_textfilde_widget(
-                    hint: 'Info',
-                    prefixIcon: (Icons.info),
-                    keporderTybe: TextInputType.text,
-                    controller: info,
-                  ),
-                ),
-                SizedBox(width: 10.w),
-                Expanded(
-                  child: page_textfilde_widget(
-                    hint: 'count',
-                    prefixIcon: (Icons.numbers),
-                    keporderTybe: const TextInputType.numberWithOptions(
-                        signed: false, decimal: true),
-                    controller: contact,
-                  ),
-                ),
-              ],
+            SizedBox(
+              height: 20.h,
             ),
-            SizedBox(height: 15.h),
-            Container(
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                child: DropdownButton<int>(
-                  isExpanded: true,
-                  hint: Text(AppLocalizations.of(context)!.selectcountry),
-                  style: GoogleFonts.montserrat(
-                    color: Colors.black,
-                  ),
-                  onChanged: (int? value) {
-                    setState(() => cityId = value);
-                  },
-                  borderRadius: BorderRadius.circular(20),
-                  dropdownColor: Colors.grey.shade200,
-                  icon: const Icon(Icons.keyboard_arrow_down_sharp),
-                  itemHeight: 48,
-                  menuMaxHeight: 250,
-                  underline: const Divider(
-                    color: Colors.transparent,
-                  ),
-                  value: cityId,
-                  selectedItemBuilder: (BuildContext cotext) {
-                    return cityId != null
-                        ? list
-                            .map(
-                              (e) => Align(
-                                alignment: AlignmentDirectional.centerStart,
-                                child: Text(
-                                  list
-                                      .firstWhere(
-                                          (element) => element.id == cityId)
-                                      .nameAr,
-                                  style: GoogleFonts.montserrat(
-                                      color: Colors.black),
-                                ),
+            page_textfilde_widget(
+              hint: 'Info',
+              prefixIcon: (Icons.info),
+              keporderTybe: TextInputType.text,
+              controller: _addressInfoTextController,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            page_textfilde_widget(
+              hint: 'phone Number',
+              prefixIcon: (Icons.numbers),
+              keporderTybe: TextInputType.number,
+              controller: _phoneNumberTextController,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            FutureBuilder<ApiResponse<List<City>>>(
+              future: AuthApiController().getCities(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.r),
+                      border: Border.all(color: Colors.grey, width: 1),
+                    ),
+                    child: DropdownButton<int>(
+                      isExpanded: true,
+                      underline: const SizedBox(),
+                      hint: const Text('City'),
+                      style: GoogleFonts.nunitoSans(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey,
+                      ),
+                      onChanged: (int? value) {
+                        setState(() => _selectedCityId = value!);
+                      },
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () {
+                        print('Tapped');
+                      },
+                      dropdownColor: Colors.grey,
+                      elevation: 1,
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down_sharp,
+                        color: Colors.black54,
+                      ),
+                      value: _selectedCityId,
+                      items: [],
+                    ),
+                  );
+                } else {
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.r),
+                      border: Border.all(color: Colors.grey, width: 1),
+                    ),
+                    child: DropdownButton<int>(
+                      isExpanded: true,
+                      underline: const SizedBox(),
+                      hint: const Text('City'),
+                      style: GoogleFonts.nunitoSans(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey,
+                      ),
+                      onChanged: (int? value) {
+                        setState(() => _selectedCityId = value!);
+                      },
+                      borderRadius: BorderRadius.circular(10),
+                      onTap: () {
+                        print('Tapped');
+                      },
+                      dropdownColor: Colors.grey,
+                      elevation: 1,
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down_sharp,
+                        color: Colors.black54,
+                      ),
+                      value: _selectedCityId,
+                      items: snapshot.data!.data!.map(
+                            (city) {
+                          return DropdownMenuItem<int>(
+                            value: city.id,
+                            child: Text(
+                              city.nameAr,
+                              style: GoogleFonts.nunitoSans(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black,
                               ),
-                            )
-                            .toList()
-                        : [];
-                  },
-                  items: list.map(
-                    // ignore: non_constant_identifier_names
-                    (Countrysss) {
-                      return DropdownMenuItem<int>(
-                        value: Countrysss.id,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(Countrysss.nameAr),
-                            const Divider(
-                              thickness: 0.5,
-                              color: Colors.grey,
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ),
-              ),
+                            ),
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  );
+                }
+              },
             ),
-            SizedBox(height: 25.h),
+            SizedBox(
+              height: 30.w,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: ElevatedButton(
-                onPressed: () => performaLogin(),
+                onPressed: () => _performCreateAddress(),
                 child: Text(
                   'Save',
                   style: GoogleFonts.montserrat(
@@ -190,27 +217,58 @@ class _addresses_screenState extends State<addresses_screen> with Helpers {
     );
   }
 
-  void performaLogin() {
-    if (checkData()) {
-      login();
+  void _performCreateAddress() {
+    if (_checkData()) {
+      _createAddress();
     }
   }
 
-  bool checkData() {
-    if (name.text.isNotEmpty &&
-        info.text.isNotEmpty &&
-        contact.text.isNotEmpty) {
-      _controolervalue();
+  bool _checkData() {
+    if (_phoneNumberTextController.text.isNotEmpty &&
+        _addressInfoTextController.text.isNotEmpty &&
+        _addressInfoTextController.text.isNotEmpty &&
+        _selectedCityId != null) {
       return true;
     }
-
-    ShowSnakBar(context, messageerroe: 'Enter Required data ', error: true);
+    context.ShowSnakBar(message: 'Enter required data', error: true);
     return false;
   }
 
-  void _controolervalue() {}
-
-  void login() {
-    Navigator.pushNamed(context, '/view_address_screen');
+  void _createAddress() async {
+    final Apiresponse response;
+    var address = Address(
+      name: _addressNameTextController.text,
+      info: _addressInfoTextController.text,
+      contactNumber: _phoneNumberTextController.text,
+      cityId: _selectedCityId!,
+    );
+    if (widget.address == null) {
+      response = (await AddressGetController.to.createNewAddress(address));
+    } else {
+      address.id = widget.address!.id;
+      response = (await AddressGetController.to.updateAddress(address));
+    }
+    // ignore: use_build_context_synchronously
+    context.ShowSnakBar(message: response.message, error: !response.status);
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
   }
+}
+
+List<DropdownMenuItem<T>> toDropDownItemsList<T>(List<City> list) {
+  return list
+      .map(
+        (e) => DropdownMenuItem<T>(
+          value: e.id as T,
+          child: Text(
+            e.nameAr,
+            style: GoogleFonts.nunitoSans(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.normal,
+              color: Colors.black54,
+            ),
+          ),
+        ),
+      )
+      .toList();
 }
