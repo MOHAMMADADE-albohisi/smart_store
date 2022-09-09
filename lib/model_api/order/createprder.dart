@@ -21,18 +21,16 @@ class CreateOrder {
     return data;
   }
 
-List<Map<String, int>> _getCartDetails() {
-  List<Map<String, int>> cartList = [];
-  for (int i = 0; i < cart.length; i++) {
-    Map<String, int> map = {};
-    map["product_id"] = cart[i].productId;
-    map["quantity"] = cart[i].quantity;
-    cartList.add(map);
-  }
-  return cartList;
-}
-
-
+// List<Map<String, int>> _getCartDetails() {
+//   List<Map<String, int>> cartList = [];
+//   for (int i = 0; i < cart.length; i++) {
+//     Map<String, int> map = {};
+//     map["product_id"] = cart[i].productId;
+//     map["quantity"] = cart[i].quantity;
+//     cartList.add(map);
+//   }
+//   return cartList;
+// }
 }
 
 class CartObj {

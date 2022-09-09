@@ -1,9 +1,9 @@
-class Faq {
+class Faqs {
   final String question;
   final String answer;
   bool isExpanded;
 
-  Faq({
+  Faqs({
     required this.question,
     required this.answer,
     this.isExpanded = false,

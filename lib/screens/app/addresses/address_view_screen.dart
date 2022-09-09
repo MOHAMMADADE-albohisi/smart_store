@@ -50,74 +50,81 @@ class _view_address_screenState extends State<view_address_screen> {
                 return ListView.builder(
                   itemCount: list.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 90,
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 15.w,
-                        vertical: 10.h,
-                      ),
-                      padding:
-                          EdgeInsetsDirectional.only(start: 15.w, end: 5.w),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(0, 0),
-                              color: Colors.black54,
-                              blurRadius: 4,
-                            )
-                          ]),
-                      child: Stack(
-                        children: [
-                          Row(
+                    return GestureDetector(
+                        onTap: () {
+                          controller.setDefaultValue(list[index]);
+                        },
+                        child: Container(
+                          height: 90,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 15.w,
+                            vertical: 10.h,
+                          ),
+                          padding:
+                              EdgeInsetsDirectional.only(start: 15.w, end: 5.w),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(0, 0),
+                                  color: Colors.black54,
+                                  blurRadius: 4,
+                                )
+                              ]),
+                          child: Stack(
                             children: [
-                              const Icon(Icons.location_on_outlined),
-                              SizedBox(width: 15.w),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      list[index].name,
-                                      style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.sp,
-                                      ),
+                              Row(
+                                children: [
+                                  const Icon(Icons.location_on_outlined),
+                                  SizedBox(width: 15.w),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          list[index].name,
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                        SizedBox(height: 10.h),
+                                        Text(
+                                          list[index].info,
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 12.sp,
+                                            height: 1.0,
+                                          ),
+                                        ),
+                                        SizedBox(height: 10.h),
+                                        Text(
+                                          list[index].contactNumber,
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(height: 10.h),
-                                    Text(
-                                      list[index].info,
-                                      style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: 12.sp,
-                                        height: 1.0,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10.h),
-                                    Text(
-                                      list[index].contactNumber,
-                                      style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14.sp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  AddressGetController.to.deleteAddress(index);
-                                },
-                                icon: const Icon(Icons.clear),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      AddressGetController.to
+                                          .deleteAddress(index);
+                                    },
+                                    icon: const Icon(Icons.clear),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    );
+                        ));
                   },
                 );
               } else {

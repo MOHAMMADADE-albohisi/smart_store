@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_store/api/categories_api_controller.dart';
 import 'package:smart_store/model_api/api_response.dart';
+import 'package:smart_store/model_api/order/createprder.dart';
 import 'package:smart_store/model_api/productsDetails.dart';
+
+import '../orders/checkoute.dart';
 
 class Productdetails_screen extends StatefulWidget {
   Productdetails_screen({Key? key, required this.id}) : super(key: key);
@@ -27,6 +30,10 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData && snapshot.data!.data != null) {
+            var product = snapshot.data!;
+            List<CartObj> cartList = [
+              CartObj(productId: product.data!.id, quantity: 1)
+            ];
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
@@ -272,7 +279,12 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                             const Spacer(),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/mycards_screen');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CheckoutScreen(cart: cartList),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,

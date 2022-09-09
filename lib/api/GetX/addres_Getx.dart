@@ -20,9 +20,9 @@ class AddressGetController extends GetxController {
     _getAddressList();
   }
 
-  int get defaultAddressIndex {
-    return list
-        .indexWhere((element) => element.id == (defaultAddress!.id ?? 0));
+  void setDefaultValue(Address address){
+    defaultAddress = address;
+    update();
   }
 
   Future<Apiresponse> createNewAddress(Address address) async {
@@ -54,17 +54,12 @@ class AddressGetController extends GetxController {
     return res;
   }
 
-  void setDefaultValue(Address address) {
-    SharedPrefController().saveDefaultAddress(address);
-    defaultAddress = address;
-    update();
-  }
+
 
   void _getAddressList() async {
     isLoading = true;
     list = await _controller.getAddresses();
     isLoading = false;
-    defaultAddress = list[0];
     update();
   }
 }

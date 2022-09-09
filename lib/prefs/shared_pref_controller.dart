@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_store/model_api/addres.dart';
 import 'package:smart_store/model_api/login.dart';
+import 'package:smart_store/model_api/payment.dart';
 
 enum PrefKeys {
   loggedIn,
@@ -14,6 +15,14 @@ enum PrefKeys {
   token
 }
 
+enum PaymentPrefKeys {
+  cvv,
+  holderName,
+  id,
+  cardNumber,
+  expDate,
+  type,
+}
 enum AddressPrefKeys { name, info, id, contactNumber, cityId, cityName }
 
 class SharedPrefController {
@@ -37,6 +46,19 @@ class SharedPrefController {
     _sharedPreferences.setString(
         AddressPrefKeys.contactNumber.name, address.contactNumber);
     _sharedPreferences.setInt(AddressPrefKeys.cityId.name, address.cityId);
+  }
+
+
+
+  void saveDefaultPayment(Payment payment) {
+    _sharedPreferences.setInt(PaymentPrefKeys.id.name, payment.id!);
+    _sharedPreferences.setString(PaymentPrefKeys.cvv.name, payment.cvv);
+    _sharedPreferences.setString(
+        PaymentPrefKeys.cardNumber.name, payment.cardNumber);
+    _sharedPreferences.setString(
+        PaymentPrefKeys.holderName.name, payment.holderName);
+    _sharedPreferences.setString(PaymentPrefKeys.type.name, payment.type);
+    _sharedPreferences.setString(PaymentPrefKeys.expDate.name, payment.expDate);
   }
 
   void save(Login login) async {

@@ -12,9 +12,9 @@ class faqsscreen extends StatefulWidget {
 }
 
 class _faqsscreenState extends State<faqsscreen> {
-  final List<Faq> _faqs = <Faq>[
-    Faq(question: '1. How it will take to delivery?', answer: 'In enum justo, rhonchus ut, imperiled a, venerates vitae, justo. Nulls dictum fells eu peed mollies premium. Integer incident. Crass paribus. Vivas elementum sempre nisei.'),
-    Faq(question: '2. What is refund system?', answer: 'In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.'),
+  final List<Faqs> _faqs = <Faqs>[
+    Faqs(question: '1. How it will take to delivery?', answer: 'In enum justo, rhonchus ut, imperiled a, venerates vitae, justo. Nulls dictum fells eu peed mollies premium. Integer incident. Crass paribus. Vivas elementum sempre nisei.'),
+    Faqs(question: '2. What is refund system?', answer: 'In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.'),
 
   ];
 
