@@ -111,7 +111,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               } else {
                 return Container(
                   constraints: BoxConstraints(
-                    maxHeight: 110.h,
+                    maxHeight: 120.h,
                   ),
                   padding: EdgeInsets.symmetric(
                     horizontal: 15.w,
