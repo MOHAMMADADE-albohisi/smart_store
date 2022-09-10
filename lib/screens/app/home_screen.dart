@@ -61,7 +61,7 @@ class _home_screenState extends State<home_screen> {
                           constraints: const BoxConstraints(maxHeight: 150),
                           child: PageView.builder(
                               controller: _homeSlider,
-                              itemCount: 3,
+                              itemCount: home.slider.length,
                               scrollDirection: Axis.horizontal,
                               onPageChanged: (int pageIndex) {},
                               itemBuilder: (context, index) {
@@ -78,116 +78,112 @@ class _home_screenState extends State<home_screen> {
                         ),
                         SizedBox(height: 16.h),
                         Container(
-                            width: 327.w,
-                            height: 260.h,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFFFFFFF),
-                                borderRadius: BorderRadius.circular(10.r)),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 13.w, vertical: 13.h),
-                                    child: Center(
-                                      child: Text(
-                                        AppLocalizations.of(context)!.category,
-                                        style: GoogleFonts.nunitoSans(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18.sp,
-                                          color: const Color(0xFF36596A),
-                                        ),
+                          width: 327.w,
+                          height: 260.h,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFFFFFFF),
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 13.w, vertical: 13.h),
+                                  child: Center(
+                                    child: Text(
+                                      AppLocalizations.of(context)!.category,
+                                      style: GoogleFonts.nunitoSans(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.sp,
+                                        color: const Color(0xFF36596A),
                                       ),
                                     ),
                                   ),
-                                  ConstrainedBox(
-                                    constraints:
-                                        BoxConstraints(maxHeight: 155.h),
-                                    child: GridView.builder(
-                                      itemCount: home.latestProducts.length,
-                                      scrollDirection: Axis.horizontal,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                        mainAxisSpacing: 17.8,
-                                        crossAxisCount: 1,
-                                        childAspectRatio: 158 / 158,
-                                      ),
-                                      itemBuilder: (context, index) {
-                                        // var category = data.elementAt(index);
-                                        return TextButton(
-                                          onPressed: () {
-                                            Navigator.pushNamed(context,
-                                                '/subcategories_screen');
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: const Color(0xFFEBF0F7),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 28.4),
-                                              child: Column(
-                                                children: [
-                                                  const SizedBox(height: 10),
-                                                  SizedBox(
-                                                    width: 150,
-                                                    height: 80,
-                                                    child: Image.network(home
-                                                        .categories[index]
-                                                        .imageUrl),
+                                ),
+                                ConstrainedBox(
+                                  constraints: BoxConstraints(maxHeight: 155.h),
+                                  child: GridView.builder(
+                                    itemCount: home.latestProducts.length,
+                                    scrollDirection: Axis.horizontal,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                      mainAxisSpacing: 17.8,
+                                      crossAxisCount: 1,
+                                      childAspectRatio: 158 / 158,
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      // var category = data.elementAt(index);
+                                      return TextButton(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, '/subcategories_screen');
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: const Color(0xFFEBF0F7),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 28.4),
+                                            child: Column(
+                                              children: [
+                                                const SizedBox(height: 10),
+                                                SizedBox(
+                                                  width: 150,
+                                                  height: 80,
+                                                  child: Image.network(home
+                                                      .categories[index]
+                                                      .imageUrl),
+                                                ),
+                                                SizedBox(height: 10.h),
+                                                Text(
+                                                  home.categories[index].nameAr,
+                                                  style: GoogleFonts.nunitoSans(
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.bold,
+                                                    color:
+                                                        const Color(0xFF192F39),
                                                   ),
-                                                  SizedBox(height: 10.h),
-                                                  Text(
-                                                    home.categories[index]
-                                                        .nameAr,
-                                                    style:
-                                                        GoogleFonts.nunitoSans(
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: const Color(
-                                                          0xFF192F39),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                                )
+                                              ],
                                             ),
                                           ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, '/categories_screen');
+                                        ),
+                                      );
                                     },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.transparent,
-                                      elevation: 0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      minimumSize: const Size(
-                                        double.infinity,
-                                        25,
-                                      ),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, '/categories_screen');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.transparent,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    child: Text(
-                                      AppLocalizations.of(context)!.see_all,
-                                      style: GoogleFonts.nunitoSans(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: const Color(0xFF192F39)),
+                                    minimumSize: const Size(
+                                      double.infinity,
+                                      25,
                                     ),
                                   ),
-                                ],
-                              ),
-                            )),
+                                  child: Text(
+                                    AppLocalizations.of(context)!.see_all,
+                                    style: GoogleFonts.nunitoSans(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xFF192F39)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         SizedBox(height: 20.h),
                         Container(
                           width: 327.w,
@@ -307,8 +303,9 @@ class _home_screenState extends State<home_screen> {
                           width: 327.w,
                           height: 260.h,
                           decoration: BoxDecoration(
-                              color: const Color(0xFFFFFFFF),
-                              borderRadius: BorderRadius.circular(10.r)),
+                            color: const Color(0xFFFFFFFF),
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
