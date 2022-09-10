@@ -1,5 +1,4 @@
 // ignore_for_file: camel_case_types
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -217,59 +216,58 @@ class _categories_screenState extends State<categories_screen> {
               ],
             );
           } else {
-            return Container(
-                child: Column(
+            return Column(
               children: [
-                Container(
-                  width: 375.w,
-                  height: 100.h,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF96E5D1),
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(30.r),
-                      bottomLeft: Radius.circular(30.r),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 50.h),
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/bottomed_screen');
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(width: 15.w),
-                          Text(
-                            AppLocalizations.of(context)!.viewsupcategory,
-                            style: GoogleFonts.nunitoSans(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.h,
-                              color: const Color(0xFFFFFFFF),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+            Container(
+              width: 375.w,
+              height: 100.h,
+              decoration: BoxDecoration(
+                color: const Color(0xFF96E5D1),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.r),
+                  bottomLeft: Radius.circular(30.r),
                 ),
-                Center(
-                  child: Text(
-                    'NO DATA',
-                    style: GoogleFonts.poppins(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                )
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 50.h),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/bottomed_screen');
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(width: 15.w),
+                      Text(
+                        AppLocalizations.of(context)!.viewsupcategory,
+                        style: GoogleFonts.nunitoSans(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.h,
+                          color: const Color(0xFFFFFFFF),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Center(
+              child: Text(
+                'NO DATA',
+                style: GoogleFonts.poppins(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
+            )
               ],
-            ));
+            );
           }
         },
       ),

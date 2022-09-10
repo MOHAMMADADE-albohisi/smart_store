@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_store/api/categories_api_controller.dart';
-import 'package:smart_store/model_api/login.dart';
 import 'package:smart_store/model_api/DataSubCategore.dart';
 import 'package:smart_store/screens/app/prducts/prducts_screen.dart';
 
@@ -97,7 +96,6 @@ class _subcategoriesState extends State<subcategories> {
                                   itemBuilder: (context, index) {
                                     var DataSubCategore =
                                     snapshot.data!.data!.elementAt(index);
-                                    print('Test20: ${snapshot.data!.data!.length}');
                                     return Container(
                                       decoration: BoxDecoration(
                                         color: const Color(0xFFEBF0F7),
@@ -111,7 +109,7 @@ class _subcategoriesState extends State<subcategories> {
                                             width: double.infinity.w,
                                             height: 90.h,
                                             decoration: BoxDecoration(
-                                                color: Color(0xFF6AC6C5),
+                                                color: const Color(0xFF6AC6C5),
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                             child: Image.network(
@@ -132,7 +130,7 @@ class _subcategoriesState extends State<subcategories> {
                                               style: GoogleFonts.nunitoSans(
                                                   fontWeight: FontWeight.w700,
                                                   fontSize: 15.sp,
-                                                  color: Color(0xFF1D2445)),
+                                                  color: const Color(0xFF1D2445)),
                                             ),
                                           ),
                                           Center(

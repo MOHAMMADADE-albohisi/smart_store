@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:smart_store/api/addres_getX_controller.dart';
 import 'package:smart_store/model_api/addres.dart';
 import 'package:smart_store/model_api/api_response.dart';
-import 'package:smart_store/prefs/shared_pref_controller.dart';
 
 class AddressGetController extends GetxController {
   List<Address> list = [];
@@ -49,7 +48,9 @@ class AddressGetController extends GetxController {
     var res = await _controller.deleteAddress(id: id);
     if (res.status) {
       list.removeAt(index);
+
     }
+
     update();
     return res;
   }

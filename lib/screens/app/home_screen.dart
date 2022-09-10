@@ -1,12 +1,10 @@
 // ignore_for_file: camel_case_types
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_store/api/home_controller.dart';
 import 'package:smart_store/api/home_getx_controoler.dart';
-import 'package:smart_store/model_api/ImagePath.dart';
 import 'package:smart_store/widgets/seel_all.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,9 +16,8 @@ class home_screen extends StatefulWidget {
 }
 
 class _home_screenState extends State<home_screen> {
-  late PageController pageController;
-  bool _likes = false;
   late bool _likeproduct = true;
+  late PageController _homeSlider;
 
   @override
   void initState() {
@@ -28,12 +25,13 @@ class _home_screenState extends State<home_screen> {
     super.initState();
     _pageViewController = PageController(initialPage: 5);
     ProductsApiController().getHomeData();
-    pageController = PageController(viewportFraction: 0.7, initialPage: 2);
+    _homeSlider = PageController(viewportFraction: 0.7, initialPage: 1);
   }
 
+  @override
   void dispose() {
     // TODO: implement dispose
-    pageController.dispose();
+    _homeSlider.dispose();
     _pageViewController.dispose();
 
     super.dispose();
@@ -45,7 +43,7 @@ class _home_screenState extends State<home_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFBCBDBF),
+      backgroundColor: const Color(0xFF96E5D1),
       body: GetBuilder<HomeGetController>(
         init: HomeGetController(),
         builder: (controller) {
@@ -59,129 +57,137 @@ class _home_screenState extends State<home_screen> {
                     child: ListView(
                       shrinkWrap: true,
                       children: [
-                        Container(
-                          height: 180.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                          ),
-                          child: Container(
-                            height: 180.w,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            child: PageView(
-                                controller: _pageViewController,
-                                children: home.slider
-                                    .map(
-                                      (e) => Image.network(
-                                        e.imageUrl,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    )
-                                    .toList()),
-                          ),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxHeight: 150),
+                          child: PageView.builder(
+                              controller: _homeSlider,
+                              itemCount: 3,
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (int pageIndex) {},
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  margin: EdgeInsetsDirectional.only(
+                                      end: index != 2 ? 10 : 0),
+                                  color: index % 2 == 0
+                                      ? Colors.grey
+                                      : const Color(0xFFFFFFFF),
+                                  child: Image.network(
+                                      home.slider[index].imageUrl),
+                                );
+                              }),
                         ),
                         SizedBox(height: 16.h),
                         Container(
-                          width: 327.w,
-                          height: 260.h,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFFFFFFF),
-                              borderRadius: BorderRadius.circular(10.r)),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 13.w, vertical: 13.h),
-                                child: Text(
-                                  AppLocalizations.of(context)!.category,
-                                  style: GoogleFonts.nunitoSans(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.sp,
-                                    color: const Color(0xFF36596A),
+                            width: 327.w,
+                            height: 260.h,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFFFFF),
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 13.w, vertical: 13.h),
+                                    child: Center(
+                                      child: Text(
+                                        AppLocalizations.of(context)!.category,
+                                        style: GoogleFonts.nunitoSans(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.sp,
+                                          color: const Color(0xFF36596A),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              ConstrainedBox(
-                                constraints:
-                                    const BoxConstraints(maxHeight: 158),
-                                child: GridView.builder(
-                                  itemCount: home.latestProducts.length,
-                                  scrollDirection: Axis.horizontal,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    mainAxisSpacing: 17.8,
-                                    crossAxisCount: 1,
-                                    childAspectRatio: 158 / 158,
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    // var category = data.elementAt(index);
-                                    return TextButton(
-                                        onPressed: () {
-                                          Navigator.pushNamed(
-                                              context, '/subcategories_screen');
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: const Color(0xFFEBF0F7),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 28.4),
-                                            child: Column(
-                                              children: [
-                                                const SizedBox(height: 10),
-                                                Image.network(home
-                                                    .categories[index]
-                                                    .imageUrl),
-                                                const SizedBox(height: 8),
-                                                Text(
-                                                  home.categories[index].nameAr,
-                                                  style: GoogleFonts.nunitoSans(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.bold,
-                                                    color:
-                                                        const Color(0xFF192F39),
+                                  ConstrainedBox(
+                                    constraints:
+                                        BoxConstraints(maxHeight: 155.h),
+                                    child: GridView.builder(
+                                      itemCount: home.latestProducts.length,
+                                      scrollDirection: Axis.horizontal,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        mainAxisSpacing: 17.8,
+                                        crossAxisCount: 1,
+                                        childAspectRatio: 158 / 158,
+                                      ),
+                                      itemBuilder: (context, index) {
+                                        // var category = data.elementAt(index);
+                                        return TextButton(
+                                          onPressed: () {
+                                            Navigator.pushNamed(context,
+                                                '/subcategories_screen');
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: const Color(0xFFEBF0F7),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 28.4),
+                                              child: Column(
+                                                children: [
+                                                  const SizedBox(height: 10),
+                                                  SizedBox(
+                                                    width: 150,
+                                                    height: 80,
+                                                    child: Image.network(home
+                                                        .categories[index]
+                                                        .imageUrl),
                                                   ),
-                                                )
-                                              ],
+                                                  SizedBox(height: 10.h),
+                                                  Text(
+                                                    home.categories[index]
+                                                        .nameAr,
+                                                    style:
+                                                        GoogleFonts.nunitoSans(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: const Color(
+                                                          0xFF192F39),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                        ));
-                                  },
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, '/categories_screen');
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.transparent,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
+                                        );
+                                      },
+                                    ),
                                   ),
-                                  minimumSize: const Size(
-                                    double.infinity,
-                                    25,
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, '/categories_screen');
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.transparent,
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      minimumSize: const Size(
+                                        double.infinity,
+                                        25,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      AppLocalizations.of(context)!.see_all,
+                                      style: GoogleFonts.nunitoSans(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: const Color(0xFF192F39)),
+                                    ),
                                   ),
-                                ),
-                                child: Text(
-                                  AppLocalizations.of(context)!.see_all,
-                                  style: GoogleFonts.nunitoSans(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xFF192F39)),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
+                            )),
                         SizedBox(height: 20.h),
                         Container(
                           width: 327.w,
@@ -232,11 +238,12 @@ class _home_screenState extends State<home_screen> {
                                                   Navigator.pushNamed(context,
                                                       '/categories_screen');
                                                 },
-                                                child: Image.network(
-                                                  home.latestProducts[index]
-                                                      .imageUrl,
-                                                  width: double.infinity,
-                                                  height: double.infinity,
+                                                child: SizedBox(
+                                                  width: 150,
+                                                  height: 80,
+                                                  child: Image.network(home
+                                                      .latestProducts[index]
+                                                      .imageUrl),
                                                 ),
                                               ),
                                             ),
@@ -261,7 +268,7 @@ class _home_screenState extends State<home_screen> {
                                                   const Spacer(),
                                                   IconButton(
                                                     onPressed: () {
-                                                      print('object');
+                                                      //
                                                     },
                                                     icon: const Icon(Icons
                                                         .add_shopping_cart_outlined),
@@ -269,12 +276,20 @@ class _home_screenState extends State<home_screen> {
                                                 ],
                                               ),
                                             ),
-                                            Text(
-                                              home.latestProducts[index].nameAr,
-                                              style: GoogleFonts.montserrat(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500,
-                                                color: const Color(0xFF140F26),
+                                            SizedBox(
+                                              width: 150,
+                                              height: 45,
+                                              child: Center(
+                                                child: Text(
+                                                  home.latestProducts[index]
+                                                      .nameAr,
+                                                  style: GoogleFonts.montserrat(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w500,
+                                                    color:
+                                                        const Color(0xFF140F26),
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -423,7 +438,11 @@ class _home_screenState extends State<home_screen> {
               ),
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.black,
+              ),
+            );
           }
         },
       ),

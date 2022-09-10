@@ -7,12 +7,12 @@ import 'package:smart_store/api/order/order_controoler.dart';
 import 'package:smart_store/api/payment_getx_controller.dart';
 import 'package:smart_store/helpers/contexe_extenssion.dart';
 import 'package:smart_store/model_api/order/createprder.dart';
-import 'package:smart_store/model_api/paymebtCard.dart';
-import 'package:smart_store/widgets/apptext.dart';
 import 'package:smart_store/widgets/seel_all.dart';
 import 'package:smart_store/widgets/textfield.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../widgets/bootin.dart';
 
+// ignore: must_be_immutable
 class CheckoutScreen extends StatefulWidget {
   CheckoutScreen({Key? key, required this.cart}) : super(key: key);
 
@@ -28,17 +28,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       _expireDateTextController,
       _cvvTextController;
 
-  String _paymentRadioValue = "Visa Card";
+  final String _paymentRadioValue = "Visa Card";
 
   bool _rememberCard = true;
 
   String addressId = "";
-
-  List<PaymentCard> payments = [
-    PaymentCard(text: "Master Card", img: "test"),
-    PaymentCard(text: "Visa Card", img: "test"),
-    PaymentCard(text: "Cash", img: "test"),
-  ];
 
   @override
   void initState() {
@@ -47,10 +41,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     Get.put<PaymentGetController>(PaymentGetController());
     Get.put<AddressGetController>(AddressGetController());
     var payment = PaymentGetController.to.defaultPayment;
-    _cardNameTextController = TextEditingController()..text = payment != null ? payment.holderName : "";
-    _cardNumberTextController = TextEditingController()..text = payment != null ? payment.cardNumber : "";
-    _cvvTextController = TextEditingController()..text = payment != null ? payment.cvv : "";
-    _expireDateTextController = TextEditingController()..text = payment != null ? payment.expDate : "";
+    _cardNameTextController = TextEditingController()
+      ..text = payment != null ? payment.holderName : "";
+    _cardNumberTextController = TextEditingController()
+      ..text = payment != null ? payment.cardNumber : "";
+    _cvvTextController = TextEditingController()
+      ..text = payment != null ? payment.cvv : "";
+    _expireDateTextController = TextEditingController()
+      ..text = payment != null ? payment.expDate : "";
   }
 
   @override
@@ -68,7 +66,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Checkout"),
+        title: Text(
+          AppLocalizations.of(context)!.checkout,
+          style: GoogleFonts.poppins(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: const Color(0xFF96E5D1),
+          ),
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(
@@ -85,141 +90,94 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
         children: [
           see_all(
-            title: "Delivery Address",
-
+            title: AppLocalizations.of(context)!.delivery_address,
             onPressed: () =>
                 Navigator.pushNamed(context, '/view_address_screen'),
           ),
           SizedBox(
             height: 10.h,
           ),
-          GetBuilder<AddressGetController>(builder: (controller) {
-            if(controller.defaultAddress == null){
-              return Text('No Sdrees');
-            }else{
-              return Container(
-                constraints: BoxConstraints(
-                  maxHeight: 92.h,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15.w,
-                  vertical: 11.h,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  border: Border.all(
-                    color: Colors.red,
-                    width: 1.w,
+          GetBuilder<AddressGetController>(
+            builder: (controller) {
+              if (controller.defaultAddress == null) {
+                return Text(
+                  AppLocalizations.of(context)!.no_address,
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 20,
+                    color: Colors.grey,
                   ),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      constraints: BoxConstraints(
-                        maxHeight: 16.h,
-                        maxWidth: 16.w,
-                      ),
-                      margin: EdgeInsets.only(top: 4.h),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        border: Border.all(
-                          color:Colors.red,
-                          width: 2.w,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          controller.defaultAddress!.name,
-                          style: GoogleFonts.nunitoSans(
-                            height: 0,
-                            fontSize: 14.sp,
-                            color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 3.h,
-                        ),
-                        Text(
-                          controller.defaultAddress!.contactNumber,
-                          style: GoogleFonts.nunitoSans(
-                            height: 0,
-                            fontSize: 14.sp,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 3.h,
-                        ),
-                        Text(
-                          controller.defaultAddress!.info,
-                          style: GoogleFonts.nunitoSans(
-                            height: 0,
-                            fontSize: 14.sp,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                  ],
-                ),
-              );
-            }
-          },),
-          SizedBox(
-            height: 18.h,
-          ),
-          Text(
-            "Select payment system",
-            style: GoogleFonts.nunitoSans(
-              fontSize: 16.sp,
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-          SizedBox(
-            height: 18.h,
-          ),
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: 85.h,
-              maxWidth: 135.w,
-            ),
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                mainAxisSpacing: 20.w,
-                childAspectRatio: 85.h / 135.w,
-              ),
-              itemCount: 3,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return PaymentRadioButton(
-                  text: payments.elementAt(index).text,
-                  img: payments.elementAt(index).img,
-                  value: payments[index].text,
-                  groupValue: _paymentRadioValue,
-                  onChange: (String value) {
-                    setState(() => _paymentRadioValue = value);
-                  },
                 );
-              },
-            ),
+              } else {
+                return Container(
+                  constraints: BoxConstraints(
+                    maxHeight: 110.h,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 15.w,
+                    vertical: 15.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF96E5D1),
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1.w,
+                    ),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 30.w,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.defaultAddress!.name,
+                            style: GoogleFonts.nunitoSans(
+                              height: 0,
+                              fontSize: 15.sp,
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Text(
+                            controller.defaultAddress!.contactNumber,
+                            style: GoogleFonts.nunitoSans(
+                              height: 0,
+                              fontSize: 14.sp,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          Text(
+                            controller.defaultAddress!.info,
+                            style: GoogleFonts.nunitoSans(
+                              height: 0,
+                              fontSize: 14.sp,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                );
+              }
+            },
           ),
           SizedBox(
-            height: 26.h,
+            height: 50.h,
           ),
           Visibility(
             visible: _paymentRadioValue != "Cash",
@@ -228,14 +186,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               children: [
                 AppTextField(
                   textFiledController: _cardNameTextController,
-                  labelText: "Card Name",
+                  labelText: AppLocalizations.of(context)!.cart_name,
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
                 AppTextField(
                   textFiledController: _cardNumberTextController,
-                  labelText: "Card Number",
+                  labelText:  AppLocalizations.of(context)!.cart_number,
                   inputType: TextInputType.number,
                 ),
                 SizedBox(
@@ -247,7 +205,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     Expanded(
                       child: AppTextField(
                         textFiledController: _expireDateTextController,
-                        labelText: "Expiration Date",
+                        labelText: AppLocalizations.of(context)!.cart_expand,
                         inputType: TextInputType.datetime,
                       ),
                     ),
@@ -258,7 +216,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       child: AppTextField(
                         textFiledController: _cvvTextController,
                         inputType: TextInputType.number,
-                        labelText: "CVV",
+                        labelText: AppLocalizations.of(context)!.cvv,
                       ),
                     ),
                   ],
@@ -266,12 +224,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   activeColor: Colors.white,
-                  activeTrackColor: Colors.red,
-                  //************
-                  inactiveTrackColor: Colors.grey,
-                  inactiveThumbColor: Colors.red,
+                  activeTrackColor: const Color(0xFF96E5D1),
                   title: Text(
-                    'Remeber My Card Details',
+                    AppLocalizations.of(context)!.remember_cart,
                     style: GoogleFonts.nunitoSans(
                       fontSize: 16.sp,
                       height: 0,
@@ -288,9 +243,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
           ),
           AppButton(
-            backgroundColor: Colors.red,
+            backgroundColor: const Color(0xFF96E5D1),
             textColor: Colors.white,
-            content: "Pay Now",
+            content: AppLocalizations.of(context)!.pay_now,
             onPressed: () => _createOrder(),
           ),
         ],

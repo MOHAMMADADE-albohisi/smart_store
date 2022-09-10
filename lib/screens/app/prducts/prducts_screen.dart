@@ -7,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:smart_store/api/categories_api_controller.dart';
 import 'package:smart_store/model_api/api_response.dart';
 import 'package:smart_store/model_api/products.dart';
-import 'package:smart_store/model_api/productsDetails.dart';
 import 'package:smart_store/screens/app/prducts/Product_details_screen.dart';
 
 class prducts_screen extends StatefulWidget {
@@ -20,33 +19,54 @@ class prducts_screen extends StatefulWidget {
 
 bool _likeproduct = true;
 
+
 class _prducts_screenState extends State<prducts_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'PRODUCTS',
-          style: GoogleFonts.montserrat(
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-            color: Colors.black,
-          ),
-        ),
-      ),
+      backgroundColor: Colors.green.shade100,
       body: FutureBuilder<ApiResponse<List<Products>>>(
         future: CategoreApiContloller().getproducts(SubCategorieId: widget.id!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData && snapshot.data!.data!.isNotEmpty) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: ListView(
-                children: [
-                  const SizedBox(height: 15),
-                  ListView.builder(
+            return ListView(
+              children: [
+                Container(
+                  width: 375.w,
+                  height: 100.h,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF96E5D1),
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30.r),
+                      bottomLeft: Radius.circular(30.r),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 50.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.products,
+                            style: GoogleFonts.nunitoSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.h,
+                              color: Colors.black45,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: snapshot.data!.data!.length,
@@ -175,12 +195,11 @@ class _prducts_screenState extends State<prducts_screen> {
                       );
                     },
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           } else {
-            return Container(
-                child: Column(
+            return Column(
               children: [
                 Center(
                   child: Text(
@@ -192,7 +211,7 @@ class _prducts_screenState extends State<prducts_screen> {
                   ),
                 )
               ],
-            ));
+            );
           }
         },
       ),

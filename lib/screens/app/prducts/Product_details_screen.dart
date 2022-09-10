@@ -1,5 +1,4 @@
-// ignore_for_file: camel_case_types
-import 'package:carousel_slider/carousel_slider.dart';
+// ignore_for_file: camel_case_types, file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +10,7 @@ import 'package:smart_store/model_api/productsDetails.dart';
 
 import '../orders/checkoute.dart';
 
+// ignore: must_be_immutable
 class Productdetails_screen extends StatefulWidget {
   Productdetails_screen({Key? key, required this.id}) : super(key: key);
   String? id;
@@ -20,6 +20,21 @@ class Productdetails_screen extends StatefulWidget {
 }
 
 class _Productdetails_screenState extends State<Productdetails_screen> {
+  late PageController _homeSlider;
+
+  @override
+  void initState() {
+    super.initState();
+    _homeSlider = PageController(viewportFraction: 0.7, initialPage: 1);
+  }
+
+  @override
+  void dispose() {
+    _homeSlider.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,95 +49,75 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
             List<CartObj> cartList = [
               CartObj(productId: product.data!.id, quantity: 1)
             ];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                children: [
-                  Container(
-                    width: 375.w,
-                    height: 100.h,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF96E5D1),
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(30.r),
-                        bottomLeft: Radius.circular(30.r),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 50.h),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/prducts_screen');
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios_new,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(width: 15.w),
-                            Text(
-                              AppLocalizations.of(context)!.prductdetilse,
-                              style: GoogleFonts.nunitoSans(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.h,
-                                color: const Color(0xFFFFFFFF),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
+            return Column(
+              children: [
+                Container(
+                  width: 375.w,
+                  height: 100.h,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF96E5D1),
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(30.r),
+                      bottomLeft: Radius.circular(30.r),
                     ),
                   ),
-                  Expanded(
-                      child: Padding(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 50.h),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/prducts_screen');
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 15.w),
+                          Text(
+                            AppLocalizations.of(context)!.prductdetilse,
+                            style: GoogleFonts.nunitoSans(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.h,
+                              color: const Color(0xFFFFFFFF),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.h),
                     child: ListView(
                       children: [
-                        Container(
-                          height: 250,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.r),
-                          ),
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(maxHeight: 150.h),
-                            child: CarouselSlider(
-                              options: CarouselOptions(height: 400.h),
-                              items: [1, 2, 3].map(
-                                (i) {
-                                  return Builder(
-                                    builder: (BuildContext context) {
-                                      return Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 7.h),
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xFFD5F0DB),
-                                            borderRadius:
-                                                BorderRadius.circular(10.r),
-                                          ),
-                                          child: Image.network(
-                                           snapshot.data!.data!.imageUrl,fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ).toList(),
-                            ),
-                          ),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxHeight: 150),
+                          child: PageView.builder(
+                              controller: _homeSlider,
+                              itemCount: 3,
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (int pageIndex) {},
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  margin: EdgeInsetsDirectional.only(
+                                      end: index != 2 ? 10 : 0),
+                                  color: index % 2 == 0
+                                      ? Colors.grey
+                                      : const Color(0xFFFFFFFF),
+                                  child: Image.network(
+                                    snapshot.data!.data!.imageUrl,
+                                  ),
+                                );
+                              }),
                         ),
-                        SizedBox(height: 25.h),
+                        SizedBox(height: 40.h),
                         Text(
-                         snapshot.data!.data!.nameAr,
+                          snapshot.data!.data!.nameAr,
                           style: GoogleFonts.nunitoSans(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -137,19 +132,12 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                               height: 70.h,
                               child: Row(
                                 children: [
-                                  Text('${snapshot.data!.data!.price}\$',
-                                      style: GoogleFonts.nunitoSans(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18.sp,
-                                        color: const Color(0xFF16162E),
-                                      )),
-                                  const Spacer(),
                                   Text(
-                                    '${snapshot.data!.data!.offerPrice}',
+                                    '${snapshot.data!.data!.price}\$',
                                     style: GoogleFonts.nunitoSans(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 28.sp,
-                                      color: const Color(0xFF40AA54),
+                                      fontSize: 18.sp,
+                                      color: const Color(0xFF16162E),
                                     ),
                                   ),
                                 ],
@@ -216,21 +204,21 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                         ),
                         SizedBox(height: 18.h),
                         Text(
-                         snapshot.data!.data!.nameEn,
+                          snapshot.data!.data!.nameAr,
                           style: GoogleFonts.nunitoSans(
                             fontWeight: FontWeight.bold,
                             fontSize: 16.sp,
                             color: const Color(0xFF16162E),
                           ),
                         ),
-                        const SizedBox(height: 7),
+                        SizedBox(height: 7.h),
                         SizedBox(
                           width: 50.w,
                           height: 90.h,
                           child: ListView(
                             children: [
                               Text(
-                               snapshot.data!.data!.infoAr,
+                                snapshot.data!.data!.infoAr,
                                 style: GoogleFonts.nunitoSans(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16.sp,
@@ -282,7 +270,8 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => CheckoutScreen(cart: cartList),
+                                    builder: (context) =>
+                                        CheckoutScreen(cart: cartList),
                                   ),
                                 );
                               },
@@ -310,20 +299,18 @@ class _Productdetails_screenState extends State<Productdetails_screen> {
                         )
                       ],
                     ),
-                  ))
-                ],
-              ),
+                  ),
+                )
+              ],
             );
           } else {
-            return Container(
-              child: Center(
-                child: Text(
-                  'NO DATA',
-                  style: GoogleFonts.poppins(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                ),
+            return Center(
+              child: Text(
+                'NO DATA',
+                style: GoogleFonts.poppins(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
             );
           }

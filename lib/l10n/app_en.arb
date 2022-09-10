@@ -87,7 +87,19 @@
 "prductdetilse2": "AirPods are wireless headphones made by Apple marketed as of December 19, 2016.",
 "review": "Review",
 "buynow": "Buy Now",
-"loginerror": "Something went wrong,try again!"
+"loginerror": "Something went wrong,try again!",
+"no_address": "No No residential address",
+"remember_cart" : "Remember My Card Details",
+"pay_now": "Pay Now",
+"checkout": "Checkout",
+"delivery_address": "Delivery Address",
+"cart_name": "Card Name",
+"cart_number": "Cart Number",
+"cart_expand": "Expiration Date",
+"cvv": "CVV"
+
+
+
 
 
 
